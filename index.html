@@ -17,11 +17,6 @@
             color: #0056b3;
         }
 
-        h3 {
-            color: #0073e6;
-            margin-top: 30px;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -43,30 +38,55 @@
             background-color: #f9f9f9;
         }
 
-        tr:hover {
-            background-color: #f1f1f1;
+        img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        a {
-            text-decoration: none;
-            color: #0056b3;
+        /*img:hover {*/
+        /*    transform: scale(2);*/
+        /*}*/
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
-        a:hover {
-            text-decoration: underline;
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
         }
 
-        .overview {
-            margin-bottom: 30px;
-            padding: 10px;
-            background-color: #eef5ff;
-            border-left: 4px solid #0056b3;
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        @media (max-width: 600px) {
-            table {
-                font-size: 0.9em;
-            }
+        .close:hover {
+            color: #f2f2f2;
+        }
+
+        video {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -78,7 +98,7 @@
     Du finner også en kontaktlogg som dokumenterer kommunikasjon med Audi/Møller.
 </p>
 
-<h3>Oversikt over tabellene</h3>
+<h3>Oversikt</h3>
 <ul>
     <li><a href="#after-january-2">Feil som har dukket opp ETTER verkstedbesøk 2. januar</a></li>
     <li><a href="#after-december-13">Feil som har dukket opp etter 13. desember</a></li>
@@ -97,7 +117,7 @@
     <tr>
         <td>20250120</td>
         <td>head-up-displayet forsvant under kjøring igjen.</td>
-        <td><a href="20250120_IMG_7607.mp4"><img src="hud_1.png" width="40" height="40"></a></td>
+        <td><img src="hud_1.png" width="40" height="40" onclick="openModal('20250120_IMG_7607.mp4', 'video')"></td>
     </tr>
     <tr>
         <td>20250120</td>
@@ -107,14 +127,16 @@
             feile pga dette.
         </td>
         <td>
-            <a href="20250120_IMG_7605.jpg"><img src="20250120_IMG_7605.jpg" width="40" height="40"></a>
-            <a href="20250120_IMG_7606.jpg"><img src="20250120_IMG_7606.jpg" width="40" height="40"></a>
+            <img src="20250120_IMG_7605.jpg" width="40" height="40" onclick="openModal('20250120_IMG_7605.jpg', 'image')">
+            <img src="20250120_IMG_7606.jpg" width="40" height="40" onclick="openModal('20250120_IMG_7606.jpg', 'image')">
         </td>
     </tr>
     <tr>
         <td>20250119</td>
         <td>head-up-displayet forsvant under kjøring igjen.</td>
-        <td><a href="20250119_IMG_7600.mp4"><img src="hud_2.png" width="40" height="40"></a></td>
+        <td>
+            <img src="hud_2.png" width="40" height="40" onclick="openModal('20250119_IMG_7600.mp4', 'video')">
+        </td>
     </tr>
     <tr>
         <td>20250117</td>
@@ -123,11 +145,11 @@
             ned. Mer "alvorlig" ordlyd. Feilene forsvant ved omstart av bilen.
         </td>
         <td>
-            <a href="20250117_IMG_7579.jpg"><img src="20250117_IMG_7579.jpg" width="40" height="40"></a>
-            <a href="20250117_IMG_7580.jpg"><img src="20250117_IMG_7580.jpg" width="40" height="40"></a>
-            <a href="20250117_IMG_7581.jpg"><img src="20250117_IMG_7581.jpg" width="40" height="40"></a>
-            <a href="20250117_IMG_7584.jpg"><img src="20250117_IMG_7584.jpg" width="40" height="40"></a>
-            <a href="20250117_IMG_7585.jpg"><img src="20250117_IMG_7585.jpg" width="40" height="40"></a>
+            <img src="20250117_IMG_7579.jpg" width="40" height="40" onclick="openModal('20250117_IMG_7579.jpg', 'image')">
+            <img src="20250117_IMG_7580.jpg" width="40" height="40" onclick="openModal('20250117_IMG_7580.jpg', 'image')">
+            <img src="20250117_IMG_7581.jpg" width="40" height="40" onclick="openModal('20250117_IMG_7581.jpg', 'image')">
+            <img src="20250117_IMG_7584.jpg" width="40" height="40" onclick="openModal('20250117_IMG_7584.jpg', 'image')">
+            <img src="20250117_IMG_7585.jpg" width="40" height="40" onclick="openModal('20250117_IMG_7585.jpg', 'image')">
         </td>
     </tr>
     <tr>
@@ -136,9 +158,9 @@
             ugyldig svar". Det hjelper ikke å prøve igjen (som feilmeldingen sier).
         </td>
         <td>
-            <a href="app_igjen_igjen_1.jpg"><img src="app_igjen_igjen_1.jpg" width="40" height="40"></a>
-            <a href="app_igjen_igjen_2.jpg"><img src="app_igjen_igjen_2.jpg" width="40" height="40"></a>
-            <a href="app_igjen_igjen_3.jpg"><img src="app_igjen_igjen_3.jpg" width="40" height="40"></a>
+            <img src="app_igjen_igjen_1.jpg" width="40" height="40" onclick="openModal('app_igjen_igjen_1.jpg', 'image')">
+            <img src="app_igjen_igjen_2.jpg" width="40" height="40" onclick="openModal('app_igjen_igjen_2.jpg', 'image')">
+            <img src="app_igjen_igjen_3.jpg" width="40" height="40" onclick="openModal('app_igjen_igjen_3.jpg', 'image')">
         </td>
     </tr>
     <tr>
@@ -147,11 +169,11 @@
             hjelper ikke å prøve igjen (som feilmeldingen sier).
         </td>
         <td>
-            <a href="app_igjen_1.jpg"><img src="app_igjen_1.jpg" width="40" height="40"></a>
-            <a href="app_igjen_2.jpg"><img src="app_igjen_2.jpg" width="40" height="40"></a>
-            <a href="app_igjen_3.jpg"><img src="app_igjen_3.jpg" width="40" height="40"></a>
-            <a href="app_igjen_4.jpg"><img src="app_igjen_4.jpg" width="40" height="40"></a>
-            <a href="app_igjen_5.jpg"><img src="app_igjen_5.jpg" width="40" height="40"></a>
+            <img src="app_igjen_1.jpg" width="40" height="40" onclick="openModal('app_igjen_1.jpg', 'image')">
+            <img src="app_igjen_2.jpg" width="40" height="40" onclick="openModal('app_igjen_2.jpg', 'image')">
+            <img src="app_igjen_3.jpg" width="40" height="40" onclick="openModal('app_igjen_3.jpg', 'image')">
+            <img src="app_igjen_4.jpg" width="40" height="40" onclick="openModal('app_igjen_4.jpg', 'image')">
+            <img src="app_igjen_5.jpg" width="40" height="40" onclick="openModal('app_igjen_5.jpg', 'image')">
         </td>
     </tr>
     <tr>
@@ -171,7 +193,6 @@
             Ladingen (smartlading) ser imidlertid ut til å fungere som den skal.
         </td>
         <td>
-            <a href="ladeluke_2.jpg"><img src="ladeluke_2.jpg" width="40" height="40"></a>
         </td>
     </tr>
 
@@ -196,7 +217,7 @@
     <tr>
         <td>"Velkommen. Laster brukerinformasjon. Vent litt..." melding i MMI hele bilturen (20 min).</td>
         <td>
-            <a href="velkommen.jpg"><img src="velkommen.jpg" width="40" height="40"></a>
+            <img src="velkommen.jpg" width="40" height="40" onclick="openModal('velkommen.jpg', 'image')">
         </td>
     </tr>
     <tr>
@@ -205,9 +226,9 @@
             2 ganger.
         </td>
         <td>
-            <a href="online_1.jpg"><img src="online_1.jpg" width="40" height="40"></a>
-            <a href="online_2.jpg"><img src="online_2.jpg" width="40" height="40"></a>
-            <a href="online_3.jpg"><img src="online_3.jpg" width="40" height="40"></a>
+            <img src="online_1.jpg" width="40" height="40" onclick="openModal('online_1.jpg', 'image')">
+            <img src="online_2.jpg" width="40" height="40" onclick="openModal('online_2.jpg', 'image')">
+            <img src="online_3.jpg" width="40" height="40" onclick="openModal('online_3.jpg', 'image')">
         </td>
     </tr>
     <tr>
@@ -215,7 +236,7 @@
             oppdatering av klokke.
         </td>
         <td>
-            <a href="klokke.jpg"><img src="klokke.jpg" width="40" height="40"></a>
+            <img src="klokke.jpg" width="40" height="40" onclick="openModal('klokke.jpg', 'image')">
         </td>
     </tr>
     <tr>
@@ -223,25 +244,25 @@
             til gjestebruker".
         </td>
         <td>
-            <a href="sperre.jpg"><img src="sperre.jpg" width="40" height="40"></a>
+            <img src="sperre.jpg" width="40" height="40" onclick="openModal('sperre.jpg', 'image')">
         </td>
     </tr>
     <tr>
         <td>Fikk plutselig meldingen: "Rettighetskontroll pågår".</td>
         <td>
-            <a href="rettighetskontroll.jpg"><img src="rettighetskontroll.jpg" width="40" height="40"></a>
+            <img src="rettighetskontroll.jpg" width="40" height="40" onclick="openModal('rettighetskontroll.jpg', 'image')">
         </td>
     </tr>
     <tr>
         <td>Talekontrollen låst i "hva kan jeg hjelpe med" hele bilturen.</td>
         <td>
-            <a href="hva.mp4"><img src="hva.png" width="40" height="40"></a>
+            <img src="hva.png" width="40" height="40" onclick="openModal('hva.mp4', 'video')">
         </td>
     </tr>
     <tr>
         <td>Appen melder om "sikkerhetssytem: Feil" uten at det er noe mer info eller info i bilen om dette</td>
         <td>
-            <a href="feil.jpg"><img src="feil.jpg" width="40" height="40"></a>
+            <img src="feil.jpg" width="40" height="40" onclick="openModal('feil.jpg', 'image')">
         </td>
     </tr>
 </table>
@@ -258,9 +279,9 @@
             ganger.
         </td>
         <td>
-            <a href="head_1.mp4"><img src="head.png" width="40" height="40"></a>
-            <a href="head_2.mp4"><img src="head.png" width="40" height="40"></a>
-            <a href="head_3.mp4"><img src="head.png" width="40" height="40"></a>
+            <img src="head.png" width="40" height="40" onclick="openModal('head_1.mp4', 'video')">
+            <img src="head.png" width="40" height="40" onclick="openModal('head_2.mp4', 'video')">
+            <img src="head.png" width="40" height="40" onclick="openModal('head_3.mp4', 'video')">
         </td>
     </tr>
 </table>
@@ -274,23 +295,23 @@
     <tr>
         <td>Umulig å sette i gang varme fra myAudi APP-en (saksnummer 0003198748 hos "Audi Digitale Tjenester")</td>
         <td>
-            <a href="park_1.jpg"><img src="park_1.jpg" width="40" height="40"></a>
-            <a href="park_2.jpg"><img src="park_2.jpg" width="40" height="40"></a>
+            <img src="park_1.jpg" width="40" height="40" onclick="openModal('park_1.jpg', 'image')">
+            <img src="park_2.jpg" width="40" height="40" onclick="openModal('park_2.jpg', 'image')">
         </td>
     </tr>
     <tr>
         <td>Umulig å stille lademål fra myAudi APP-en (saksnummer 0003198748 hos "Audi Digitale Tjenester")</td>
         <td>
-            <a href="lade_1.jpg"><img src="lade_1.jpg" width="40" height="40"></a>
-            <a href="lade_2.jpg"><img src="lade_2.jpg" width="40" height="40"></a>
-            <a href="lade_3.jpg"><img src="lade_3.jpg" width="40" height="40"></a>
+            <img src="lade_1.jpg" width="40" height="40" onclick="openModal('lade_1.jpg', 'image')">
+            <img src="lade_2.jpg" width="40" height="40" onclick="openModal('lade_2.jpg', 'image')">
+            <img src="lade_3.jpg" width="40" height="40" onclick="openModal('lade_3.jpg', 'image')">
         </td>
     </tr>
     <tr>
         <td>Umulig å sende tidsur fra myAudi APP-en</td>
         <td>
-            <a href="tidsur_1.jpg"><img src="tidsur_1.jpg" width="40" height="40"></a>
-            <a href="tidsur_2.jpg"><img src="tidsur_2.jpg" width="40" height="40"></a>
+            <img src="tidsur_1.jpg" width="40" height="40" onclick="openModal('tidsur_1.jpg', 'image')">
+            <img src="tidsur_2.jpg" width="40" height="40" onclick="openModal('tidsur_2.jpg', 'image')">
         </td>
     </tr>
     <tr>
@@ -298,14 +319,14 @@
             som hovedbruker)
         </td>
         <td>
-            <a href="bruker_1.jpg"><img src="bruker_1.jpg" width="40" height="40"></a>
-            <a href="bruker_2.jpg"><img src="bruker_2.jpg" width="40" height="40"></a>
+            <img src="bruker_1.jpg" width="40" height="40" onclick="openModal('bruker_1.jpg', 'image')">
+            <img src="bruker_2.jpg" width="40" height="40" onclick="openModal('bruker_2.jpg', 'image')">
         </td>
     </tr>
     <tr>
         <td>Keyless virker ikke med mindre man nettopp har kjørt bilen.</td>
         <td>
-            <a href="door.mp4"><img src="door.png" width="40" height="40"></a>
+            <img src="door.png" width="40" height="40" onclick="openModal('door.mp4', 'video')">
         </td>
     </tr>
     <tr>
@@ -313,11 +334,11 @@
             ganger
         </td>
         <td>
-            <a href="ledning_1.jpg"><img src="ledning_1.jpg" width="40" height="40"></a>
-            <a href="ledning_2.jpg"><img src="ledning_2.jpg" width="40" height="40"></a>
-            <a href="ledning_3.jpg"><img src="ledning_3.jpg" width="40" height="40"></a>
-            <a href="ledning_4.jpg"><img src="ledning_4.jpg" width="40" height="40"></a>
-            <a href="ledning_5.jpg"><img src="ledning_5.jpg" width="40" height="40"></a>
+            <img src="ledning_1.jpg" width="40" height="40" onclick="openModal('ledning_1.jpg', 'image')">
+            <img src="ledning_2.jpg" width="40" height="40" onclick="openModal('ledning_2.jpg', 'image')">
+            <img src="ledning_3.jpg" width="40" height="40" onclick="openModal('ledning_3.jpg', 'image')">
+            <img src="ledning_4.jpg" width="40" height="40" onclick="openModal('ledning_4.jpg', 'image')">
+            <img src="ledning_5.jpg" width="40" height="40" onclick="openModal('ledning_5.jpg', 'image')">
         </td>
     </tr>
     <tr>
@@ -327,24 +348,24 @@
     <tr>
         <td>Appen sier stadig at “Lading ikke er mulig. Det har oppstått en teknisk feil”.</td>
         <td>
-            <a href="ladeapp_1.jpg"><img src="ladeapp_1.jpg" width="40" height="40"></a>
-            <a href="ladeapp_2.jpg"><img src="ladeapp_2.jpg" width="40" height="40"></a>
-            <a href="ladeapp_3.jpg"><img src="ladeapp_3.jpg" width="40" height="40"></a>
-            <a href="ladeapp_4.jpg"><img src="ladeapp_4.jpg" width="40" height="40"></a>
+            <img src="ladeapp_1.jpg" width="40" height="40" onclick="openModal('ladeapp_1.jpg', 'image')">
+            <img src="ladeapp_2.jpg" width="40" height="40" onclick="openModal('ladeapp_2.jpg', 'image')">
+            <img src="ladeapp_3.jpg" width="40" height="40" onclick="openModal('ladeapp_3.jpg', 'image')">
+            <img src="ladeapp_4.jpg" width="40" height="40" onclick="openModal('ladeapp_4.jpg', 'image')">
         </td>
     </tr>
     <tr>
         <td>Bilen sier "Ladesystem feil!"</td>
         <td>
-            <a href="ladebil_1.jpg"><img src="ladebil_1.jpg" width="40" height="40"></a>
-            <a href="ladebil_2.jpg"><img src="ladebil_2.jpg" width="40" height="40"></a>
+            <img src="ladebil_1.jpg" width="40" height="40" onclick="openModal('ladebil_1.jpg', 'image')">
+            <img src="ladebil_2.jpg" width="40" height="40" onclick="openModal('ladebil_2.jpg', 'image')">
         </td>
     </tr>
     <tr>
         <td>Feilen med ladeluka som stadig viser rødt lys uten at det er noe feil</td>
         <td>
-            <a href="ladeluke_1.jpg"><img src="ladeluke_1.jpg" width="40" height="40"></a>
-            <a href="ladeluke_2.jpg"><img src="ladeluke_2.jpg" width="40" height="40"></a>
+            <img src="ladeluke_1.jpg" width="40" height="40" onclick="openModal('ladeluke_1.jpg', 'image')">
+            <img src="ladeluke_2.jpg" width="40" height="40" onclick="openModal('ladeluke_2.jpg', 'image')">
         </td>
     </tr>
 </table>
@@ -451,5 +472,110 @@
         </td>
     </tr>
 </table>
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" style="display: none;">
+    <video class="modal-content" id="modalVideo" controls style="display: none;"></video>
+</div>
+<script>
+    let currentIndex = -1;
+    const mediaItems = [    ];
+
+    window.onload = function() {
+        const images = document.querySelectorAll('img[onclick]');
+
+        images.forEach(img => {
+            const onclickAttr = img.getAttribute('onclick');
+            if (onclickAttr.startsWith("openModal")) {
+                // Ekstrakter argumentene manuelt
+                const args = onclickAttr
+                    .replace("openModal(", "")
+                    .replace(")", "")
+                    .split(",")
+                    .map(arg => arg.trim().replace(/['"]/g, ""));
+
+                if (args.length === 2) {
+                    mediaItems.push({ src: args[0], type: args[1] });
+                }
+            }
+        });
+
+        // console.log('MediaItems dynamically generated:', mediaItems);
+    };
+
+    function openModal(src, type) {
+        const modal = document.getElementById('myModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalVideo = document.getElementById('modalVideo');
+
+        currentIndex = mediaItems.findIndex(item => item.src === src);
+
+        if (type === 'image') {
+            modalImage.style.display = 'block';
+            modalVideo.style.display = 'none';
+            modalImage.src = src;
+        } else if (type === 'video') {
+            modalVideo.style.display = 'block';
+            modalImage.style.display = 'none';
+            modalVideo.src = src;
+        }
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('myModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalVideo = document.getElementById('modalVideo');
+
+        modal.style.display = 'none';
+        modalImage.src = '';
+        modalVideo.src = '';
+    }
+
+    function navigateMedia(direction) {
+        if (currentIndex === -1) return;
+        currentIndex = (currentIndex + direction + mediaItems.length) % mediaItems.length;
+        const {src, type} = mediaItems[currentIndex];
+        openModal(src, type);
+    }
+
+    window.onclick = function (event) {
+        const modal = document.getElementById('myModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+
+    window.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        } else if (event.key === 'ArrowRight') {
+            navigateMedia(1);
+        } else if (event.key === 'ArrowLeft') {
+            navigateMedia(-1);
+        }
+    });
+
+    // Legg til touch-sveip for mobil
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.getElementById('myModal').addEventListener('touchstart', function(event) {
+        touchStartX = event.changedTouches[0].screenX;
+    });
+
+    document.getElementById('myModal').addEventListener('touchend', function(event) {
+        touchEndX = event.changedTouches[0].screenX;
+        handleSwipeGesture();
+    });
+
+    function handleSwipeGesture() {
+        if (touchEndX < touchStartX - 50) {
+            navigateMedia(1); // Sveip til venstre
+        } else if (touchEndX > touchStartX + 50) {
+            navigateMedia(-1); // Sveip til høyre
+        }
+    }
+</script>
 </body>
 </html>
