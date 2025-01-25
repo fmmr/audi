@@ -2,6 +2,7 @@
 
 # Katalog der bildene ligger
 DIR="/Users/fmr/Jottacloud/FMR_DOCS/202501_Audi_fail/docs"
+counter=0
 
 # Sjekk at katalogen eksisterer
 if [ ! -d "$DIR" ]; then
@@ -30,13 +31,14 @@ for img in "$DIR"/*.{jpg,jpeg,png,gif}; do
   # Sjekk om thumbnail allerede finnes
   thumb_file="$THUMB_DIR/$filename"
   if [ -f "$thumb_file" ]; then
-    echo "Thumbnail finnes allerede for $filename. Hopper over."
+    # echo "Thumbnail finnes allerede for $filename. Hopper over."
     continue
   fi
 
   # Lag thumbnail
   echo "Lager thumbnail for $filename..."
+  counter=$((counter+1))
   magick "$img" -resize 40x40^ -gravity center -extent 40x40 "$thumb_file"
 done
 
-echo "Ferdig! Alle thumbnails er lagret i $THUMB_DIR."
+echo "Ferdig! $counter thumbnails er lagret i $THUMB_DIR."
