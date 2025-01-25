@@ -21,7 +21,7 @@ THUMB_DIR="$DIR/thumbs"
 mkdir -p "$THUMB_DIR"
 
 # Iterer gjennom alle bildene i katalogen
-for img in "$DIR"/*.{jpg,jpeg,png,gif}; do
+for img in "$DIR"/*.{jpg,jpeg,gif}; do
   # Hopp over hvis ingen bilder matcher
   [ -e "$img" ] || continue
 
@@ -39,6 +39,26 @@ for img in "$DIR"/*.{jpg,jpeg,png,gif}; do
   echo "Lager thumbnail for $filename..."
   counter=$((counter+1))
   magick "$img" -resize 40x40^ -gravity center -extent 40x40 "$thumb_file"
+done
+
+for img in "$DIR"/*.png; do
+  # Hopp over hvis ingen bilder matcher
+  [ -e "$img" ] || continue
+
+  # Filnavn uten sti
+  filename=$(basename "$img")
+
+  # Sjekk om thumbnail allerede finnes
+  thumb_file="$THUMB_DIR/$filename"
+  if [ -f "$thumb_file" ]; then
+    # echo "Thumbnail finnes allerede for $filename. Hopper over."
+    continue
+  fi
+
+  # Lag thumbnail
+  echo "Lager thumbnail for $filename..."
+  counter=$((counter+1))
+  magick "$img" -resize 60x40^ -gravity center -extent 60x40 "$thumb_file"
 done
 
 echo "Ferdig! $counter thumbnails er lagret i $THUMB_DIR."
