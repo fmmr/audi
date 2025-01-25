@@ -2,29 +2,27 @@
 let currentIndex = -1;
 const mediaItems = [    ];
 
-window.onload = function() {
-    // Dynamisk generering av mediaItems for bilder og videoer
+window.onload = function () {
     document.querySelectorAll('img.thumbnail').forEach((img) => {
         const onclickAttr = img.getAttribute('onclick');
 
-        // Sjekk om `onclick` er spesifisert (f.eks. for videoer)
-        if (!onclickAttr) {
-            // Sett standard onclick for bilder
-            img.setAttribute('onclick', 'openModal(null, \'image\')');
-        }
-
-        // Legg til bildet eller videoen i mediaItems
-        if (onclickAttr && onclickAttr.includes("'video'")) {
-            const videoSrc = onclickAttr.match(/'([^']+)'/)[1];
+        if (onclickAttr) {
+            // Håndter videoer hvis `onclick` er eksplisitt satt
+            const videoSrc = onclickAttr.match(/'([^']+)'/)[1]; // Ekstraher videoens src
             mediaItems.push({ src: videoSrc, type: 'video' });
         } else {
+            // Håndter bilder hvis `onclick` ikke er satt
             const originalSrc = img.src.replace('thumbs/', '');
             mediaItems.push({ src: originalSrc, type: 'image' });
+
+            // Sett standard onclick for bilder
+            img.setAttribute('onclick', 'openModal(null, "image")');
         }
     });
 
     console.log('MediaItems dynamically generated:', mediaItems);
 };
+
 
 function openModal(element = null, type = 'video') {
     const modal = document.getElementById('myModal');
