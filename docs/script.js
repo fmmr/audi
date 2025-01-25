@@ -3,33 +3,48 @@ let currentIndex = -1;
 const mediaItems = [    ];
 
 window.onload = function() {
-    const images = document.querySelectorAll('img[onclick]');
-
-    images.forEach(img => {
+    // Dynamisk generering av mediaItems for bilder og videoer
+    document.querySelectorAll('img.thumbnail').forEach((img) => {
         const onclickAttr = img.getAttribute('onclick');
-        if (onclickAttr.startsWith("openModal")) {
-            // Ekstrakter argumentene manuelt
-            const args = onclickAttr
-                .replace("openModal(", "")
-                .replace(")", "")
-                .split(",")
-                .map(arg => arg.trim().replace(/['"]/g, ""));
 
-            if (args.length === 2) {
-                mediaItems.push({ src: args[0], type: args[1] });
-            }
+        // Sjekk om `onclick` er spesifisert (f.eks. for videoer)
+        if (!onclickAttr) {
+            // Sett standard onclick for bilder
+            img.setAttribute('onclick', 'openModal(null, \'image\')');
+        }
+
+        // Legg til bildet eller videoen i mediaItems
+        if (onclickAttr && onclickAttr.includes("'video'")) {
+            const videoSrc = onclickAttr.match(/'([^']+)'/)[1];
+            mediaItems.push({ src: videoSrc, type: 'video' });
+        } else {
+            const originalSrc = img.src.replace('thumbs/', '');
+            mediaItems.push({ src: originalSrc, type: 'image' });
         }
     });
 
-    // console.log('MediaItems dynamically generated:', mediaItems);
+    console.log('MediaItems dynamically generated:', mediaItems);
 };
 
-function openModal(src, type) {
+function openModal(element = null, type = 'video') {
     const modal = document.getElementById('myModal');
     const modalImage = document.getElementById('modalImage');
     const modalVideo = document.getElementById('modalVideo');
 
-    currentIndex = mediaItems.findIndex(item => item.src === src);
+    let src;
+    if (element === null) {
+        // Hvis element ikke er angitt, bruk `this` for å finne kildeelementet
+        const thumbnail = event.target; // `event.target` er elementet som ble klikket
+        src = thumbnail.src.replace('thumbs/', '');
+    }else if (typeof element === 'string') {
+        // For videoer der filnavn spesifiseres direkte
+        src = element;
+    } else {
+        // For bilder, hent fullstørrelsesfilnavnet fra thumbnail-filen
+        src = element.src.replace('thumbs/', '');
+    }
+
+    currentIndex = mediaItems.findIndex((item) => item.src === src);
 
     if (type === 'image') {
         modalImage.style.display = 'block';
@@ -40,6 +55,7 @@ function openModal(src, type) {
         modalImage.style.display = 'none';
         modalVideo.src = src;
     }
+
     modal.style.display = 'block';
 }
 
@@ -54,6 +70,7 @@ function closeModal() {
 }
 
 function navigateMedia(direction) {
+    console.log("direction: " + direction + ", current: " + currentIndex)
     if (currentIndex === -1) return;
     currentIndex = (currentIndex + direction + mediaItems.length) % mediaItems.length;
     const {src, type} = mediaItems[currentIndex];
