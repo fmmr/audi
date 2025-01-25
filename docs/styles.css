@@ -83,7 +83,6 @@ video {
 }
 
 .thumbnail {
-    max-width: 40px;
     max-height: 40px;
     object-fit: contain;
     display: inline-block;
