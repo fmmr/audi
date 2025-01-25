@@ -5,26 +5,43 @@ body {
     background-color: #f9f9f9;
     color: #333;
 }
+
 .header-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 20px;
+    flex-wrap: wrap; /* Gjør at innhold kan pakkes på små skjermer */
 }
 
 .intro {
     flex: 1;
     padding-right: 20px;
+    min-width: 300px; /* Sørg for at teksten har minimum bredde */
 }
 
 .car-image {
     flex: 0 0 auto;
-    width: 150px; /* Juster størrelsen på bildet */
-    height: 150px;
+    width: 300px; /* Juster størrelsen på bildet */
+    height: auto;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-left: 20px; /* Gir avstand mellom tekst og bilde */
 }
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column; /* Plasser bildet under teksten */
+        align-items: flex-start;
+    }
+
+    .car-image {
+        margin-left: 0; /* Fjern venstremargen */
+        margin-top: 20px; /* Legg til avstand over bildet */
+    }
+}
+
 h2 {
     color: #0056b3;
 }
