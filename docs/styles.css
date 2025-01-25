@@ -76,7 +76,6 @@ tr:nth-child(even) {
 img {
     border: 1px solid #ddd;
     border-radius: 4px;
-    cursor: pointer;
     transition: transform 0.2s;
 }
 
@@ -84,6 +83,7 @@ img {
     max-width: 100px;
     max-height: 100px;
     object-fit: contain;
+    cursor: pointer;
     display: inline-block;
 }
 
