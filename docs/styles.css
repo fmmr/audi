@@ -19,8 +19,8 @@ body {
 
 .car-image {
     flex: 0 0 auto;
-    width: 300px; /* Juster størrelsen på bildet */
-    height: 300px;
+    width: 150px; /* Juster størrelsen på bildet */
+    height: 150px;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
