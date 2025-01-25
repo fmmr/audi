@@ -1,3 +1,4 @@
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -6,46 +7,50 @@ body {
     color: #333;
 }
 
+/* Header Section */
 .header-container {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 20px;
-    flex-wrap: wrap; /* Gjør at innhold kan pakkes på små skjermer */
+    flex-wrap: wrap; /* Wrap content on smaller screens */
 }
 
 .intro {
     flex: 1;
     padding-right: 20px;
-    min-width: 300px; /* Sørg for at teksten har minimum bredde */
+    min-width: 300px; /* Ensure text has a minimum width */
 }
 
 .car-image {
     flex: 0 0 auto;
-    width: 300px; /* Juster størrelsen på bildet */
+    width: 300px; /* Fixed size for larger screens */
     height: auto;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-left: 20px; /* Gir avstand mellom tekst og bilde */
+    margin-left: 20px; /* Space between text and image */
 }
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     .header-container {
-        flex-direction: column; /* Plasser bildet under teksten */
+        flex-direction: column; /* Stack image and text vertically */
         align-items: flex-start;
     }
 
     .car-image {
-        margin-left: 0; /* Fjern venstremargen */
-        margin-top: 20px; /* Legg til avstand over bildet */
+        width: 80%; /* Responsive image width */
+        margin: 20px 0; /* Add spacing above and below */
     }
 }
 
+/* Typography */
 h2 {
     color: #0056b3;
 }
 
+/* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -67,6 +72,7 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+/* Image Styles */
 img {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -74,11 +80,14 @@ img {
     transition: transform 0.2s;
 }
 
-/*img:hover {*/
-/*    transform: scale(2);*/
-/*}*/
+.thumbnail {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+    display: inline-block;
+}
 
-/* Modal styles */
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -111,16 +120,10 @@ img {
     color: #f2f2f2;
 }
 
+/* Video Styles */
 video {
     display: block;
     margin: auto;
     max-width: 100%;
     height: auto;
-}
-
-.thumbnail {
-    max-width: 100px;
-    max-height: 100px;
-    object-fit: contain;
-    display: inline-block;
 }
