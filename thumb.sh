@@ -41,7 +41,7 @@ for img in "$DIR"/*.{jpg,jpeg,gif}; do
   magick "$img" -resize 40x40^ -gravity center -extent 40x40 "$thumb_file"
 done
 
-for img in "$DIR"/*.png; do
+for img in "$DIR"/*png; do
   # Hopp over hvis ingen bilder matcher
   [ -e "$img" ] || continue
 
