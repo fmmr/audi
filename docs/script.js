@@ -7,6 +7,9 @@
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Escape HTML + støtt markdown-lenker [tekst](url)
+const escLinks = (s) => esc(s).replace(/\[([^\]]+)\]\(([^)]+)\)/g,
+    (_, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`);
 
 // Kompakt fargekoding-linje øverst på undersidene
 function renderLegendBar() {
@@ -457,7 +460,7 @@ function renderTimelineItem(e) {
                 </div>
                 <h3>${esc(c.title)}</h3>
                 ${fromToLine}
-                <p>${esc(c.description)}</p>
+                <p>${escLinks(c.description)}</p>
                 ${c.link ? `<div style="margin-top:8px"><a href="${esc(c.link)}" target="_blank" rel="noopener">Åpne mail</a></div>` : ''}
             </div>
         </div>

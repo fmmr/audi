@@ -896,7 +896,7 @@ const RECURRING_FAULTS = [
 const CONTACTS = [
     { date: '2026-09-03', type: 'verksted',
       title: 'Verkstedbesøk - kabellås-feil funnet, softwareoppgradering',
-      description: 'Møtte 07:30, satt til ca 09:30. Verkstedet fant feil ved kabellåsen (kabelen låser seg ikke) - antas å være kilden til både AC- og DC-feilene. I tillegg kjørte de en softwareoppgradering som tok 4+ timer. Uklart om dette er samme oppgradering det tidligere ble sagt at ikke var tilgjengelig for denne bilen. Fikk leiebil mens bilen er på verksted.' },
+      description: 'Møtte 07:30, satt til ca 09:30. Verkstedet fant feil ved kabellåsen (kabelen låser seg ikke) - antas å være kilden til både AC- og DC-feilene. I tillegg kjørte de en softwareoppgradering som tok 4+ timer. Uklart om dette er samme oppgradering det tidligere ble sagt [at ikke var tilgjengelig for denne bilen](./mails/20260827_in_ref_bestilling_av_feilsoking_pa.txt). Fikk leiebil mens bilen er på verksted.' },
     { date: '2026-09-02', type: 'telefon',
       title: 'Møller ringte om kritisk ladefeil',
       description: 'Møller ringte og spurte om jeg kunne komme innom i morgen tidlig for en kikk på den kritiske ladefeilen. Avtalt oppmøte 07:30 den 3. september.' },
