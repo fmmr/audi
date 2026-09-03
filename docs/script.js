@@ -79,7 +79,7 @@ function renderStatus() {
         .sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
     if (featuredMails.length > 0) {
         rows.push('<h2>Uthevede e-poster</h2>');
-        rows.push('<p class="lead">De viktigste e-postene i saken akkurat nå. Full tekst er tilgjengelig via lenken på hvert kort.</p>');
+        rows.push('<p class="lead">Aktuelle e-poster i saken. Full tekst er tilgjengelig via lenken på hvert kort.</p>');
         featuredMails.forEach(mail => {
             const text = mail.summary || mail.description || '';
             const fromLine = mail.from
@@ -114,6 +114,7 @@ function renderStatus() {
                 <div class="meta">
                     <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
                     <span class="recurring-tag">Vedvarende</span>
+                    ${f.swFix ? '<span class="swfix-tag">Ventes SW-fikset</span>' : ''}
                 </div>
                 <h3>${esc(f.title)}</h3>
                 ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}

@@ -531,6 +531,18 @@ main {
     content: '⚠ ';
     font-weight: 700;
 }
+.swfix-tag {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    border: 1px solid #93c5fd;
+}
 .recurring-tag {
     display: inline-block;
     background: #fff7ed;
