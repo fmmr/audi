@@ -6,10 +6,10 @@
 // severity styrer farge: kritisk (rød) | høy (oransje) | middels (gul) | lav (blå/grå) | info (blå)
 // Sett STATUS = null for å skjule banneret helt.
 const STATUS = {
-    header:   'Kritisk pr 31. august 2026: AC-lading fungerer ikke',
-    body:     'Bilen lader ekstremt sakte (9% på 11 timer på 32A easee), ladelys blinker rødt/grønt, ladekabel sitter fast. Samme symptom på 2 forskjellige ladere på 2 lokasjoner - begge brukt siden bilen var ny. Verkstedtime avtalt 21. september 2026.',
-    severity: 'kritisk',
-    date:     '2026-08-31',
+    header:   'Bilen til verksted 3. september - kabellås-feil funnet',
+    body:     'Møller ringte 2. sep og tilbød time neste morgen. Møtte 07:30 den 3. sep. Verkstedet fant feil ved kabellåsen (kabelen låser seg ikke) - antas å være kilden til både AC- og DC-feilene. I tillegg kjøres en softwareoppgradering (4+ timer). Fikk leiebil. Fortsatt planlagt større verkstedtime 21. september for oppfølging av øvrige feil.',
+    severity: 'høy',
+    date:     '2026-09-03',
 };
 
 const CATEGORIES = {
@@ -42,7 +42,7 @@ const FAULTS = [
         date: '2026-09-02',
         category: 'klima', source: 'observation', severity: 'middels',
         title: 'Klimaanlegg gikk på med AC OFF - knallvarm bil i sola',
-        description: 'Bilen sto i sola og var knallvarm. Klima gikk på selv om AC var i OFF-stilling. Enda et eksempel på de "random klimainnstillingene" som er beskrevet under gjentagende feil.',
+        description: 'Bilen sto i sola og var knallvarm. Klima gikk på selv om AC var i OFF-stilling. Enda et eksempel på de "random klimainnstillingene" som er beskrevet under vedvarende feil.',
         images: [
             { thumb: 'thumbs/20260902_klima_IMG_3159.jpg', full: '20260902_klima_IMG_3159.jpg', type: 'image' }
         ]
@@ -157,7 +157,7 @@ const FAULTS = [
         date: '2026-08-16',
         category: 'klima', source: 'observation', severity: 'middels',
         title: 'Klimaanlegg gikk rett på Lo uten grunn',
-        description: 'Klimaanlegg gikk rett på Lo (Low) selv om det ikke var spesielt varmt i bilen. Konkret eksempel på de "random klimainnstillingene" som er beskrevet under gjentagende feil.',
+        description: 'Klimaanlegg gikk rett på Lo (Low) selv om det ikke var spesielt varmt i bilen. Konkret eksempel på de "random klimainnstillingene" som er beskrevet under vedvarende feil.',
         images: []
     },
     {
@@ -456,20 +456,6 @@ const FAULTS = [
         ]
     },
     {
-        date: 'div', displayDate: 'Diverse datoer',
-        category: 'klima', source: 'observation', severity: 'middels',
-        title: 'Setevarme førersiden fungerer inkonsekvent',
-        description: 'Setevarmen på førersiden fungerer inkonsekvent. Av og til er den svært varm på selv innstilling 1, men som regel fungerer den nesten ikke - selv på innstilling 3. Man merker at den står på, men bare så vidt. Skjer regelmessig. Setevarmen på passasjersiden fungerer som den skal.',
-        images: []
-    },
-    {
-        date: 'div', displayDate: 'Diverse datoer',
-        category: 'klima', source: 'observation', severity: 'lav',
-        title: 'Rattvarme svak',
-        description: 'Rattvarmen kunne vært varmere. Den tar bort det "iskalde" i rattet, men ikke noe mer. Sammenlignet med andre biler virker det som om denne ikke fungerer som den skal.',
-        images: []
-    },
-    {
         date: '2025-04-13',
         category: 'mmi', source: 'observation', severity: 'middels',
         title: '"Velkommen. Laster brukerinformasjon" hele turen',
@@ -676,32 +662,6 @@ const FAULTS = [
             { thumb: 'thumbs/app_igjen_5.jpg', full: 'app_igjen_5.jpg', type: 'image' }
         ]
     },
-    {
-        date: 'div', displayDate: 'Diverse datoer',
-        category: 'hud', source: 'observation', severity: 'middels',
-        title: 'Tjenester utilgjengelig - automatisk fjernlys, skiltgjenkjennelse',
-        description: 'Dette har skjedd til stadighet: en del tjenester er ikke tilgjengelig - automatisk fjernlys, skiltgjenkjennelse, osv, uten at det er noen åpenbar siktbegrensning som f.eks. foran sladrspeilet. Regner med at det har med sikten til sensorene å gjøre, men ganske gjør det vanskelig å vite hvor man skal fjerne is.',
-        images: []
-    },
-    {
-        date: 'div', displayDate: 'Diverse datoer',
-        category: 'hud', source: 'observation', severity: 'middels',
-        title: '"Lane change" fungerer ikke',
-        description: 'Funksjonen "lane change" fungerer ikke. Har prøvd mange ganger. Når jeg kjører inn på en motorvei så sier bilen at jeg er på en vei som har støttet "lane change", men pilene forblir grå. En bekjent har funnet ut at det viser seg at grunnen til dette er at grensen for aktivering er satt alt for høyt (150 km/time), mens det skal være 90 km/time iflg instruksjonsboka. Så fort har jeg imidlertid ikke kjørt for å bekrefte dette.',
-        images: [{ thumb: 'thumbs/lane_change.jpg', full: 'lane_change.jpg', type: 'image' }]
-    },
-    {
-        date: 'div', displayDate: 'Diverse datoer (jan-feb 2025)',
-        category: 'lading', source: 'observation', severity: 'middels',
-        title: 'Ladeluke rødt lys uten feil',
-        description: 'Feilen med ladeluka som stadig viser rødt lys uten at det er noe feil. Det er også feil fra app-en om at det er noe feil med ladingen. Ladingen (smartlading) ser imidlertid ut til å fungere som den skal. Har ikke bilder av alle ganger det er slike feil, men de forekommer daglig, og er med på å gi dårlig inntrykk.',
-        images: [
-            { thumb: 'thumbs/20250113_IMG_7496.jpg', full: '20250113_IMG_7496.jpg', type: 'image' },
-            { thumb: 'thumbs/20250117_IMG_7568.jpg', full: '20250117_IMG_7568.jpg', type: 'image' },
-            { thumb: 'thumbs/20250202_IMG_7761.jpg', full: '20250202_IMG_7761.jpg', type: 'image' }
-        ]
-    },
-
     // ============ 2024 (fra HTML "Feil etter 13. desember") ============
     {
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
@@ -890,7 +850,7 @@ const FAULTS = [
     },
 ];
 
-// Kontinuerlige/gjenntagende feil (fra mail 20260826 pkt 3 og oppsummering)
+// Kontinuerlige/vedvarende feil (fra mail 20260826 pkt 3 og oppsummering)
 // Valgfritt felt: note - vises som fremhevet "OBS"-boks under tittelen
 const RECURRING_FAULTS = [
     { category: 'hud', title: 'Filskifteassistent (lane change assist) virker ikke - IKKE forveksles med filholder',
@@ -910,14 +870,16 @@ const RECURRING_FAULTS = [
       description: 'Setevarmen på førersiden fungerer ikke - blir bare såvidt lunken.' },
     { category: 'app', title: 'Mister nettverket i bilen til stadighet',
       description: 'Mister nettverket i bilen til stadighet - selv i tettbygde strøk.' },
-    { category: 'lading', title: 'Forvirrende og motstridende meldinger om lading',
-      description: 'Fortsatt forvirrende og forskjellige meldinger vedr lading.' },
+    { category: 'lading', title: 'Forvirrende og motstridende meldinger vedr lading',
+      description: 'Bilen støtter smartlading (laderen bestemmer når det skal lades), men kommuniserer med bruker som om det er en feil - f.eks. rødt lys i ladeluka og diverse feilmeldinger i appen, selv når lading fungerer som normalt.' },
     { category: 'hud', title: 'Ønske om samme grensesnitt som 2025-modell for fartsvarsel',
       description: 'Ønske om å få samme grensesnitt som 2025-modellen vedr fartsvarsel: kunne tilordne fra hurtigtast, samt hyggeligere lydvarsel.' },
-    { category: 'klima', title: 'Rattvarmen er ikke god',
-      description: 'Rattvarmen er ikke god - blir bare så vidt lunken.' },
+    { category: 'klima', title: 'Rattvarme påfallende svak sammenlignet med andre biler',
+      description: 'Rattvarmen blir kun såvidt lunken selv på høyeste innstilling. Merkbart svakere enn rattvarme i andre biler jeg har testet.' },
     { category: 'klima', title: 'Klimatisering starter men slutter etter kort tid - iskald bil',
       description: 'Klimatisering starter men slutter etter kort tid - iskald bil.' },
+    { category: 'hud', title: 'Tjenester utilgjengelig - automatisk fjernlys, skiltgjenkjennelse',
+      description: 'En del tjenester er ikke tilgjengelig - automatisk fjernlys, skiltgjenkjennelse osv - uten at det er noen åpenbar siktbegrensning foran sladrspeilet. Antakelig sensorsikt-relatert, men gjør det vanskelig å vite hvor is bør fjernes.' },
 ];
 
 // Kontaktlogg (verksted, mail, telefon)

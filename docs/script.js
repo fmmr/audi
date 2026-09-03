@@ -104,16 +104,16 @@ function renderStatus() {
         });
     }
 
-    // Kontinuerlige feil
-    rows.push('<h2 style="margin-top:36px">Kontinuerlige / gjentagende feil</h2>');
-    rows.push('<p class="lead">Disse feilene opptrer regelmessig og er dokumentert i mailen 26. august 2026.</p>');
+    // Vedvarende feil
+    rows.push('<h2 style="margin-top:36px">Vedvarende feil</h2>');
+    rows.push('<p class="lead">Feil/bugs som er der hele tiden — ikke enkelthendelser. Dokumentert i mailen 26. august 2026.</p>');
     RECURRING_FAULTS.forEach(f => {
         const cat = CATEGORIES[f.category];
         rows.push(`
             <div class="card">
                 <div class="meta">
                     <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
-                    <span class="recurring-tag">Gjentagende</span>
+                    <span class="recurring-tag">Vedvarende</span>
                 </div>
                 <h3>${esc(f.title)}</h3>
                 ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
@@ -166,7 +166,7 @@ function renderSystems() {
             items.push(`
                 <div class="card card-fault">
                     <div class="meta">
-                        <span class="recurring-tag">Gjentagende</span>
+                        <span class="recurring-tag">Vedvarende</span>
                     </div>
                     <h3>${esc(f.title)}</h3>
                     ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
@@ -307,7 +307,7 @@ function renderTimeline() {
 function generateFaultList(fromISO, toISO) {
     const fromKey = fromISO ? fromISO.replace(/-/g, '') : '00000000';
     const toKey   = toISO   ? toISO.replace(/-/g, '')   : '99999999';
-    return FAULTS
+    const dated = FAULTS
         .map(f => ({
             key: sortKey(f.date).replace(/-/g, ''),
             date: f.date,
@@ -315,8 +315,15 @@ function generateFaultList(fromISO, toISO) {
         }))
         .filter(f => f.key !== '00000000' && f.key >= fromKey && f.key <= toKey)
         .sort((a, b) => a.key.localeCompare(b.key))
-        .map(f => `${f.key} - ${f.title}`)
-        .join('\n');
+        .map(f => `${f.key} - ${f.title}`);
+
+    const persistent = RECURRING_FAULTS.map(f => `- ${f.title}`);
+
+    let out = dated.join('\n');
+    if (persistent.length > 0) {
+        out += '\n\nVedvarende feil (bugs/mangler som er der hele tiden):\n' + persistent.join('\n');
+    }
+    return out;
 }
 
 function initMailGenerator() {
@@ -326,10 +333,10 @@ function initMailGenerator() {
     const status = $('#mailgen-status');
     if (!from || !out) return;
 
+    const countFaults = (text) => text.split('\n').filter(l => /^(\d{8} - |- )/.test(l)).length;
     const update = () => {
         out.value = generateFaultList(from.value, to.value);
-        const lines = out.value ? out.value.split('\n').length : 0;
-        status.textContent = `${lines} feil funnet`;
+        status.textContent = `${countFaults(out.value)} feil funnet`;
     };
 
     $('#mailgen-generate').addEventListener('click', update);
@@ -341,7 +348,7 @@ function initMailGenerator() {
         try {
             await navigator.clipboard.writeText(out.value);
             status.textContent = 'Kopiert til utklippstavlen ✓';
-            setTimeout(() => { status.textContent = `${out.value.split('\n').length} feil funnet`; }, 2000);
+            setTimeout(() => { status.textContent = `${countFaults(out.value)} feil funnet`; }, 2000);
         } catch (e) {
             out.select();
             document.execCommand('copy');
