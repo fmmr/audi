@@ -910,7 +910,8 @@ button { font-family: inherit; }
     /* Skjul UI-elementer som ikke gir mening på papir */
     .nav, .cat-nav, .timeline-controls, .mail-gen,
     .site-footer, .cat-collapse-btn, .legend-inline,
-    .modal, .thumb, .no-images, .thumbs { display: none !important; }
+    .modal, .thumb, .no-images, .thumbs,
+    .mail-link, .email-card .actions { display: none !important; }
 
     /* Vis alle kategoriseksjoner utvidet, uansett tilstand */
     .category-section.collapsed .category-body { display: block !important; }
@@ -937,6 +938,61 @@ button { font-family: inherit; }
     /* Kortkanter tydeligere for utskrift */
     .card { border: 1px solid #999 !important; box-shadow: none !important; }
     a { color: #000; text-decoration: underline; }
+
+    /* ---- Kompaktere layout ---- */
+
+    /* Krymp header */
+    .site-header { padding: 6px 12px !important; }
+    .site-header h1 { font-size: 1.1rem !important; margin: 0 !important; }
+    .site-header .subtitle { font-size: .8rem !important; margin: 4px 0 0 !important; }
+    .stat-row { display: none !important; }
+
+    /* Krymp main-padding og h2/lead */
+    main { padding: 8px 16px !important; }
+    .view h2 { font-size: 1.1rem !important; margin: 8px 0 4px !important; }
+    .view .lead { font-size: .8rem !important; margin: 0 0 8px !important; }
+
+    /* Tidslinje: fjern venstre-strek + prikker, spar plass */
+    .timeline { padding-left: 0 !important; }
+    .timeline::before { display: none !important; }
+    .timeline-item { margin-bottom: 4px !important; }
+    .timeline-item::before { display: none !important; }
+    .timeline-year {
+        position: static !important;
+        font-size: 1rem !important;
+        margin: 8px 0 4px !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    /* Kompakt kortlayout */
+    .card {
+        padding: 6px 10px !important;
+        margin-bottom: 4px !important;
+        border-radius: 4px !important;
+        break-inside: avoid;
+    }
+    .card h3 { font-size: .92rem !important; margin: 0 0 3px !important; line-height: 1.25; }
+    .card p { font-size: .82rem !important; margin: 0 !important; line-height: 1.35; }
+    .card .meta { margin-bottom: 3px !important; gap: 6px !important; font-size: .7rem !important; }
+    .card .card-fromto { font-size: .72rem !important; margin: 0 0 3px !important; padding: 0 0 3px !important; }
+    .badge { padding: 1px 5px !important; font-size: .62rem !important; }
+    .recurring-tag, .swfix-tag { padding: 1px 5px !important; font-size: .62rem !important; }
+    .fault-note { font-size: .75rem !important; padding: 4px 8px !important; margin: 3px 0 !important; }
+
+    /* Kategori-headers på Systemfeil-siden - kompakt */
+    .category-header { padding: 4px 8px !important; }
+    .category-header h3 { font-size: 1rem !important; }
+    .category-count { font-size: .7rem !important; padding: 1px 8px !important; }
+    .category-body { padding: 4px 6px !important; }
+
+    /* Alerts/statusbanner mer diskret */
+    .alert { padding: 6px 10px !important; margin-bottom: 8px !important; }
+    .alert h3 { font-size: .95rem !important; }
+    .alert p { font-size: .8rem !important; }
+    .alert .icon { display: none !important; }
+    .email-card { padding: 8px 12px !important; margin-bottom: 6px !important; }
+    .email-card h3 { font-size: .95rem !important; }
 }
 
 @media (max-width: 640px) {

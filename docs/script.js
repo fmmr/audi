@@ -488,7 +488,7 @@ function renderTimelineItem(e) {
                 <h3>${esc(c.title)}</h3>
                 ${fromToLine}
                 <p>${escLinks(c.description)}</p>
-                ${c.link ? `<div style="margin-top:8px"><a href="${esc(c.link)}" target="_blank" rel="noopener">Åpne mail</a></div>` : ''}
+                ${c.link ? `<div class="mail-link"><a href="${esc(c.link)}" target="_blank" rel="noopener">Åpne mail</a></div>` : ''}
             </div>
         </div>
     `;
