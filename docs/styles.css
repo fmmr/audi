@@ -905,6 +905,40 @@ img { max-width: 100%; height: auto; }
 button { font-family: inherit; }
 .hidden { display: none !important; }
 
+/* ============ PRINT ============ */
+@media print {
+    /* Skjul UI-elementer som ikke gir mening på papir */
+    .nav, .cat-nav, .timeline-controls, .mail-gen,
+    .site-footer, .cat-collapse-btn, .legend-inline,
+    .modal, .thumb, .no-images, .thumbs { display: none !important; }
+
+    /* Vis alle kategoriseksjoner utvidet, uansett tilstand */
+    .category-section.collapsed .category-body { display: block !important; }
+    .category-chevron { display: none; }
+    .category-header { cursor: default; }
+
+    /* Kort og seksjoner bør ikke deles over side-skift */
+    .card, .category-section { break-inside: avoid; page-break-inside: avoid; }
+    h2, h3 { break-after: avoid; page-break-after: avoid; }
+
+    /* Nøytrale utskriftsfarger */
+    body { background: #fff; color: #000; }
+    .site-header {
+        background: #fff !important;
+        color: #000 !important;
+        border-bottom: 2px solid #000;
+        padding: 12px 0;
+        box-shadow: none;
+    }
+    .site-header h1, .site-header .subtitle { color: #000 !important; }
+    .site-header .car-img { display: none; }
+    .stat { background: #fff !important; color: #000 !important; border-color: #999 !important; }
+
+    /* Kortkanter tydeligere for utskrift */
+    .card { border: 1px solid #999 !important; box-shadow: none !important; }
+    a { color: #000; text-decoration: underline; }
+}
+
 @media (max-width: 640px) {
     main { padding: 20px 14px 60px; }
     .site-header { padding: 22px 16px 18px; }
