@@ -152,9 +152,23 @@ function renderSystems() {
     const root = $('#view-systems');
     const rows = [];
 
-    rows.push(renderLegendBar());
     rows.push('<h2>Feil gruppert etter system</h2>');
-    rows.push('<p class="lead">For verksted: feilene er kategorisert etter berørt bilsystem for å hjelpe med diagnose av rotårsaker. Klikk på en kategori for å utvide/skjule.</p>');
+    rows.push('<p class="lead">For verksted: feilene er kategorisert etter berørt bilsystem for å hjelpe med diagnose av rotårsaker.</p>');
+
+    // Kategori-navigasjon (chips) - hopp til seksjon
+    const navChips = [];
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const cnt = FAULTS.filter(f => f.category === key).length
+                  + RECURRING_FAULTS.filter(f => f.category === key).length;
+        if (cnt === 0) return;
+        navChips.push(`<a href="#cat-${key}" class="cat-nav-chip cat-${key}">${esc(cat.short)} <span>${cnt}</span></a>`);
+    });
+    rows.push(`
+        <nav class="cat-nav">
+            ${navChips.join('')}
+            <button type="button" class="cat-collapse-btn" id="cat-collapse-btn">Slå sammen alle</button>
+        </nav>
+    `);
 
     // Sett opp per-kategori
     Object.entries(CATEGORIES).forEach(([key, cat]) => {
@@ -170,7 +184,9 @@ function renderSystems() {
             items.push(`
                 <div class="card card-fault">
                     <div class="meta">
+                        <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
                         <span class="recurring-tag">Vedvarende</span>
+                        ${f.swFix ? '<span class="swfix-tag">Ventes SW-fikset</span>' : ''}
                     </div>
                     <h3>${esc(f.title)}</h3>
                     ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
@@ -182,7 +198,7 @@ function renderSystems() {
         faults.forEach(f => items.push(renderFaultCard(f)));
 
         rows.push(`
-            <div class="category-section" style="--cat: ${cat.color}">
+            <div class="category-section" id="cat-${key}" style="--cat: ${cat.color}">
                 <div class="category-header" onclick="this.parentElement.classList.toggle('collapsed')">
                     <h3>${esc(cat.label)}</h3>
                     <span class="category-count">${totalCount}</span>
@@ -196,6 +212,17 @@ function renderSystems() {
     });
 
     root.innerHTML = rows.join('');
+
+    // Collapse-all-knapp
+    const btn = $('#cat-collapse-btn');
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const sections = $$('#view-systems .category-section');
+            const anyOpen = sections.some(s => !s.classList.contains('collapsed'));
+            sections.forEach(s => s.classList.toggle('collapsed', anyOpen));
+            btn.textContent = anyOpen ? 'Åpne alle' : 'Slå sammen alle';
+        });
+    }
 }
 
 function renderFaultCard(f) {

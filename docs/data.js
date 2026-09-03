@@ -19,6 +19,7 @@ const CATEGORIES = {
     app:     { label: 'App & Tilkobling',      color: '#10b981', short: 'App' },
     klima:   { label: 'Klima & Komfort',       color: '#06b6d4', short: 'Klima' },
     nokkel:  { label: 'Nøkkel & Adgang',       color: '#a855f7', short: 'Nøkkel' },
+    tilkobling: { label: 'Nettverk & tilkobling', color: '#0891b2', short: 'Nett' },
     diverse: { label: 'Diverse (motor, ledningsnett m.m.)', color: '#737373', short: 'Diverse' },
 };
 
@@ -72,7 +73,7 @@ const FAULTS = [
     },
     {
         date: '2026-08-30', displayDate: '30. august 2026 (i mail som "20240830")',
-        category: 'app', source: 'mail-20260831', severity: 'middels',
+        category: 'tilkobling', source: 'mail-20260831', severity: 'middels',
         title: 'Mangler dataforbindelse - Høvik, Bærum',
         description: 'Mangler dataforbindelse på hovedvei ved Høvik i Bærum.',
         images: [{ thumb: 'thumbs/20260830_IMG_3099.jpg', full: '20260830_IMG_3099.jpg', type: 'image' }]
@@ -93,7 +94,7 @@ const FAULTS = [
     },
     {
         date: '2026-08-30', displayDate: '30. august 2026 (i mail som "20240830")',
-        category: 'app', source: 'mail-20260831', severity: 'middels',
+        category: 'tilkobling', source: 'mail-20260831', severity: 'middels',
         title: 'Mangler dataforbindelse - Hurum',
         description: 'Mangler dataforbindelse på hovedvei på Hurum.',
         images: [{ thumb: 'thumbs/20260830_IMG_3110.jpg', full: '20260830_IMG_3110.jpg', type: 'image' }]
@@ -131,7 +132,7 @@ const FAULTS = [
     },
     {
         date: '2026-08-27', displayDate: '27. august 2026 (i mail som "20240827")',
-        category: 'app', source: 'mail-20260827', severity: 'middels',
+        category: 'tilkobling', source: 'mail-20260827', severity: 'middels',
         title: 'Mangler dataforbindelse - E-134',
         description: 'Mangler dataforbindelse på hovedvei (E-134).',
         images: [{ thumb: 'thumbs/20260827_IMG_3079.jpg', full: '20260827_IMG_3079.jpg', type: 'image' }]
@@ -162,7 +163,7 @@ const FAULTS = [
     },
     {
         date: '2026-08-24',
-        category: 'app', source: 'observation', severity: 'middels',
+        category: 'tilkobling', source: 'observation', severity: 'middels',
         title: 'Kan ikke opprette dataforbindelse - Tofteveien, Hurum',
         description: 'MMI: "Kan ikke opprette dataforbindelse" på hovedvei (Tofteveien, Hurum).',
         images: []
@@ -183,7 +184,7 @@ const FAULTS = [
     },
     {
         date: '2026-08-01',
-        category: 'app', source: 'mail-20260826', severity: 'middels',
+        category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Mangler dataforbindelse på hovedvei',
         description: 'Mangler dataforbindelse på hovedvei.',
         images: [{ thumb: 'thumbs/20260801_IMG_2713.jpg', full: '20260801_IMG_2713.jpg', type: 'image' }]
@@ -247,7 +248,7 @@ const FAULTS = [
     },
     {
         date: '2026-06-14',
-        category: 'app', source: 'observation', severity: 'middels',
+        category: 'tilkobling', source: 'observation', severity: 'middels',
         title: 'Bluetooth: kan ikke opprette forbindelse',
         description: 'Bluetooth: kan ikke opprette forbindelse.',
         images: []
@@ -282,7 +283,7 @@ const FAULTS = [
     },
     {
         date: '2026-03-25',
-        category: 'app', source: 'mail-20260826', severity: 'middels',
+        category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Mangler dataforbindelse på hovedvei',
         description: 'Mangler dataforbindelse på hovedvei.',
         images: []
@@ -396,7 +397,7 @@ const FAULTS = [
     },
     {
         date: '2025-08-23',
-        category: 'app', source: 'mail-20260826', severity: 'middels',
+        category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Bluetooth: kan ikke opprette forbindelse',
         description: 'Bluetooth: kan ikke opprette noen bluetooth-forbindelse.',
         images: []
@@ -410,7 +411,7 @@ const FAULTS = [
     },
     {
         date: '2025-07-14',
-        category: 'app', source: 'mail-20260826', severity: 'middels',
+        category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Mangler dataforbindelse på hovedvei',
         description: 'Mangler dataforbindelse på hovedvei.',
         images: []
@@ -424,7 +425,7 @@ const FAULTS = [
     },
     {
         date: '2025-05-24',
-        category: 'app', source: 'mail-20260826', severity: 'middels',
+        category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Mangler dataforbindelse på hovedvei',
         description: 'Mangler dataforbindelse på hovedvei.',
         images: []
@@ -478,7 +479,7 @@ const FAULTS = [
     },
     {
         date: '2025-03-21',
-        category: 'app', source: 'observation', severity: 'lav',
+        category: 'tilkobling', source: 'observation', severity: 'lav',
         title: 'Lang kø ikke registrert i navigasjonssystemet',
         description: 'Lang kø (15 min forsinkelse, 3 km) uten at den er registrert i navigasjonssystemet. Som regel er bilen flink til å varsle om dette, men ikke i dette tilfelle. Samtidig viste Google Maps stillestående kø i området.',
         images: [
@@ -488,7 +489,7 @@ const FAULTS = [
     },
     {
         date: '2025-03-18', displayDate: '2025-03-18 (og mange datoer i jan-apr 2025)',
-        category: 'app', source: 'observation', severity: 'høy',
+        category: 'tilkobling', source: 'observation', severity: 'høy',
         title: 'Stadig bortfall av nettilgang - selv i tettbygde strøk',
         description: 'Stadig bortfall av nettilgang, selv i tettbygde strøk, f.eks. Oslo Sentrum, rundt Sandvika, utenfor Møller Billingstad, langs E16, langs E6, langs RV3. Skjer så og si på hver eneste biltur av en viss varighet. Noen ganger fra start, andre ganger etter hvert. Nettilgangen kommer typisk omsider tilbake. Har skjedd mange ganger, som f.eks.: 20250122, 20250124, 20250129, 20250130, 20250206, 20250208, 20250214, 20250215, 20250218, 20250222, 20250222, 20250225, 20250228, 20250316, 20250318, 20250411 og 20250414.',
         images: [
@@ -778,7 +779,7 @@ const FAULTS = [
     },
     {
         date: '2024-11-28', displayDate: 'Meldt i mail 28. november 2024',
-        category: 'app', source: 'mail-20241128', severity: 'middels',
+        category: 'mmi', source: 'mail-20241128', severity: 'middels',
         title: 'Umulig å sette hovedbruker på bilen',
         description: 'Umulig å sette hovedbruker på bilen (feilsøkt live med "Audi Digitale Tjenester"). (audi.com & app har meg som hovedbruker.)',
         images: [
@@ -873,7 +874,7 @@ const RECURRING_FAULTS = [
       description: 'Displayet slukker uten forvarsel og lar seg ikke slå på igjen via MMI - må starte bilen på nytt. Minst 17 dokumenterte tilfeller siden desember 2024 (se tidslinjen for datoer).' },
     { category: 'klima', title: 'Setevarme førersiden fungerer ikke',
       description: 'Setevarmen på førersiden fungerer ikke - blir bare såvidt lunken.' },
-    { category: 'app', title: 'Mister nettverket i bilen til stadighet',
+    { category: 'tilkobling', title: 'Mister nettverket i bilen til stadighet',
       description: 'Mister nettverket i bilen til stadighet - selv i tettbygde strøk.' },
     { category: 'lading', title: 'Forvirrende og motstridende meldinger vedr lading',
       description: 'Bilen støtter smartlading (laderen bestemmer når det skal lades), men kommuniserer med bruker som om det er en feil - f.eks. rødt lys i ladeluka og diverse feilmeldinger i appen, selv når lading fungerer som normalt.' },
