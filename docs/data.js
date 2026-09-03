@@ -30,10 +30,12 @@ const FAULTS = [
         date: '2026-09-02',
         category: 'lading', source: 'observation', severity: 'kritisk',
         title: 'DC-lading-feil fra 10.-26. aug er tilbake',
-        description: 'Feilmeldingen "DC-lading ikke mulig" fra 10.-26. august er tilbake. Kjørt 4 små turer i dag - varselet var på under 3 av dem, men ikke på den siste lille turen.',
+        description: 'Feilmeldingen "DC-lading ikke mulig" fra 10.-26. august er tilbake. 2. sep: kjørt 4 små turer, varselet på under 3 av dem, ikke på den siste. 3. sep: feilmeldinger dukket opp igjen.',
         images: [
             { thumb: 'thumbs/20260902_lading_IMG_3160.jpg', full: '20260902_lading_IMG_3160.jpg', type: 'image' },
-            { thumb: 'thumbs/20260902_lading_IMG_3161.jpg', full: '20260902_lading_IMG_3161.jpg', type: 'image' }
+            { thumb: 'thumbs/20260902_lading_IMG_3161.jpg', full: '20260902_lading_IMG_3161.jpg', type: 'image' },
+            { thumb: 'thumbs/20260903_lading_IMG_3175.jpg', full: '20260903_lading_IMG_3175.jpg', type: 'image' },
+            { thumb: 'thumbs/20260903_lading_IMG_3176.jpg', full: '20260903_lading_IMG_3176.jpg', type: 'image' }
         ]
     },
     {
@@ -48,14 +50,17 @@ const FAULTS = [
     {
         date: '2026-09-02',
         category: 'lading', source: 'observation', severity: 'kritisk',
-        title: 'Lading tar unormalt lang tid - 1,09 kW i snitt',
-        description: 'Koblet til på 64% (1. sep 22:36) til 80% (2. sep 13:27) - ca 15 timer for 16% (13,97 kWh). Snittladeeffekt 1,09 kW. Bilen ble ikke ferdig ladet innen fastsatt tid i Tibber, så smartlading var av i perioden.',
+        title: 'AC-lading feiler flere netter på rad',
+        description: 'Natt 1-2. sep: koblet til på 64% (1. sep 22:36) til 80% (2. sep 13:27) - ca 15 timer for 16% (13,97 kWh), snittladeeffekt 1,09 kW. Natt 2-3. sep: ny mislykket ladeøkt. Bilen sto med melding "lading startes" i timevis (skal normalt kun vises i 30 sek mens lading initialiseres). Smartlading var av fordi bilen ikke rakk fastsatt tid i Tibber.',
         images: [
             { thumb: 'thumbs/20260902_IMG_3140.jpg', full: '20260902_IMG_3140.jpg', type: 'image' },
             { thumb: 'thumbs/20260902_IMG_3141.jpg', full: '20260902_IMG_3141.jpg', type: 'image' },
             { thumb: 'thumbs/20260902_IMG_3144.jpg', full: '20260902_IMG_3144.jpg', type: 'image' },
             { thumb: 'thumbs/20260902_lading_IMG_3157.jpg', full: '20260902_lading_IMG_3157.jpg', type: 'image' },
-            { thumb: 'thumbs/20260902_lading_IMG_3158.jpg', full: '20260902_lading_IMG_3158.jpg', type: 'image' }
+            { thumb: 'thumbs/20260902_lading_IMG_3158.jpg', full: '20260902_lading_IMG_3158.jpg', type: 'image' },
+            { thumb: 'thumbs/20260903_lading_IMG_3170.png', full: '20260903_lading_IMG_3170.png', type: 'image' },
+            { thumb: 'thumbs/20260903_lading_IMG_3171.png', full: '20260903_lading_IMG_3171.png', type: 'image' },
+            { thumb: 'thumbs/20260903_lading_IMG_3172.png', full: '20260903_lading_IMG_3172.png', type: 'image' }
         ]
     },
     {
@@ -919,8 +924,8 @@ const RECURRING_FAULTS = [
 // Se feltbeskrivelse under CONTACTS-arrayet - alle mailer er nå eksportert fra Mail.app
 const CONTACTS = [
     { date: '2026-09-03', type: 'verksted',
-      title: 'Innom Møller for kikk på kritisk ladefeil (planlagt)',
-      description: 'Avtalt at jeg leverer bilen 07:30 for at verkstedet skal se på den kritiske ladefeilen (bilen tar ikke til seg lading).' },
+      title: 'Verkstedbesøk - kabellås-feil funnet, softwareoppgradering',
+      description: 'Møtte 07:30, satt til ca 09:30. Verkstedet fant feil ved kabellåsen (kabelen låser seg ikke) - antas å være kilden til både AC- og DC-feilene. I tillegg kjørte de en softwareoppgradering som tok 4+ timer. Uklart om dette er samme oppgradering det tidligere ble sagt at ikke var tilgjengelig for denne bilen. Fikk leiebil mens bilen er på verksted.' },
     { date: '2026-09-02', type: 'telefon',
       title: 'Møller ringte om kritisk ladefeil',
       description: 'Møller ringte og spurte om jeg kunne komme innom i morgen tidlig for en kikk på den kritiske ladefeilen. Avtalt oppmøte 07:30 den 3. september.' },
