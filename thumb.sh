@@ -43,6 +43,68 @@ fi
 
 mkdir -p "$THUMB_DIR"
 
+# ---------- Optimalisering av store originalbilder ----------
+# Filer > 500 KB krympes til maks 2000 px lang side og JPEG-kvalitet 78.
+# Hvis resultatet ikke er mindre, beholdes original (sikkerhetsnett).
+# Skjer bare på bilder rett i docs/, ikke i thumbs/.
+OPT_SIZE_LIMIT=$((500 * 1024))    # 500 KB
+OPT_MAX_EDGE=2000
+OPT_QUALITY=78
+optimized=0
+shopt -s nullglob nocaseglob
+for img in "$DIR"/*.{jpg,jpeg,png}; do
+  filesize=$(stat -f%z "$img")
+  [ "$filesize" -le "$OPT_SIZE_LIMIT" ] && continue
+
+  filename=$(basename "$img")
+  tmp="/tmp/_opt_$$_$filename"
+  magick "$img" -auto-orient -resize "${OPT_MAX_EDGE}x${OPT_MAX_EDGE}>" -quality "$OPT_QUALITY" "$tmp" 2>/dev/null || continue
+
+  if [ -f "$tmp" ]; then
+    new_size=$(stat -f%z "$tmp")
+    # Krev minst 20% reduksjon - ellers behold original (unngår kvalitetstap
+    # ved gjentatte kjøringer på allerede optimaliserte filer)
+    threshold=$((filesize * 80 / 100))
+    if [ "$new_size" -lt "$threshold" ]; then
+      mv "$tmp" "$img"
+      optimized=$((optimized+1))
+      echo "  optimalisert: $filename  ($((filesize/1024)) KB → $((new_size/1024)) KB)"
+      rm -f "$THUMB_DIR/$filename"
+    else
+      rm -f "$tmp"
+    fi
+  fi
+done
+
+# Videoer > 10 MB reencodes hvis ffmpeg finnes
+VID_SIZE_LIMIT=$((10 * 1024 * 1024))
+VID_MAX_WIDTH=1280
+if [ $HAS_FFMPEG -eq 1 ]; then
+  for vid in "$DIR"/*.{mp4,mov}; do
+    filesize=$(stat -f%z "$vid")
+    [ "$filesize" -le "$VID_SIZE_LIMIT" ] && continue
+
+    filename=$(basename "$vid")
+    tmp="/tmp/_optvid_$$_$filename"
+    ffmpeg -y -i "$vid" -vf "scale='min($VID_MAX_WIDTH,iw)':-2" -c:v libx264 -crf 28 -preset fast -c:a aac -b:a 96k "$tmp" > /dev/null 2>&1 || continue
+
+    if [ -f "$tmp" ]; then
+      new_size=$(stat -f%z "$tmp")
+      threshold=$((filesize * 80 / 100))
+      if [ "$new_size" -lt "$threshold" ]; then
+        mv "$tmp" "$vid"
+        optimized=$((optimized+1))
+        echo "  optimalisert (video): $filename  ($((filesize/1024/1024)) MB → $((new_size/1024/1024)) MB)"
+        rm -f "$THUMB_DIR/${filename%.*}.png"
+      else
+        rm -f "$tmp"
+      fi
+    fi
+  done
+fi
+shopt -u nullglob nocaseglob
+[ $optimized -gt 0 ] && echo "  ($optimized filer optimalisert)"
+
 # ---------- Bilder (jpg/jpeg/png/gif) ----------
 shopt -s nullglob nocaseglob
 for img in "$DIR"/*.{jpg,jpeg,png,gif}; do
