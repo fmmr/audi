@@ -1,0 +1,16 @@
+Date: Saturday, 13 April 2024 at 13:04:25
+From: Fredrik
+To: Møller;
+Subject: Hm. (Smart)lading funker ikke
+
+Hei. Jeg er vant til å lade e-golf med smartlading. Har easee charge. På Audi q4 og det funker ikke. 
+
+A. Hvis easee er i smartladingsmodus (og ikke aktivt lader nå) sier bilen at det er noe feil, og lyser rødt og låser opp kabelen. Iom at den er låst opp vil den ikke lade når smartladingen setter inn. 
+
+B. Hvis easee har pauset smartlading (dvs det er aktivt strøm i kabelen) (eller smartladingen er aktiv nå) så fungerer alt. Også pausing/stopp/start av smartlading. 
+
+Hm. A. Er jo normalsituasjonen for oss. Smartlading er jo som regel midt på natta. Men vi er altså nødt til å sørge for at bilen tar i mot lading før vi kan sette tilbake til smartlading. Hele poenget med smartlading er å slippe å styre med app-er og tenke/trykke. "Smart" delen av ladingen er jo borte. 
+
+Er dette et kjent problem for denne bilen, hva er løsningen?
+
+Fredrik

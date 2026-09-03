@@ -1,0 +1,86 @@
+Date: Thursday, 27 August 2026 at 10:18:59
+From: Møller
+To: fredrik;
+Subject: Sv: Ref bestilling av feilsøking på EH8XXXX
+
+Hei,
+
+Jeg har sendt deg en ny signering som er gyldig i 24 timer 🙂
+
+Har også oppdatert ordre internt her.
+
+Det eksisterer ingen nyere software til din bil som ikke allerede er installert.
+
+Med vennlig hilsen
+ 
+Møller
+Kundesentermedarbeider
+Møller Bil Asker og Bærum
+ 
+￼
+ 
+￼
+
+
+Fra: Fredrik på vegne av Fredrik
+Sendt: onsdag 26. august 2026 11:11
+Til: Verkstedbestilling 040
+Kopi: Mona
+Emne: Ref bestilling av feilsøking på EH8XXXX
+ 
+[You don't often get email from fredrik. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+
+1. Linken for signering jeg fikk på SMS er ikke gyldig - kan dere sjekke opp dette?
+
+2. Jeg håper virkelig at det er mulig å få oppdatert softwaren på bilen som andre Q4 2024 har fått siden mars i år.  Det løser forhåpentligvis noen av problemene under.
+
+3. “Kontinuerlige feil”
+- Hvis iPhone/car play er koblet til går det ikke ann å velge favoritter i MMI.  Den hopper rett tilbake til carplay
+- Klimaannlegg kommer på i random innstilling - ofte helt av.  Det burde komme på enten på siste innstilte; en fast innstilling eller en fornuftig innstilling iht til klima her-og-nå.
+- fartsoverskridelse varsling 1: hvis man skal still hastigheten for varsling hopper den tilbake til 3km/t første gang.  Man må gjøre det to ganger.
+- fartsoverskridelse varsling 2: burde være mulig å bruke hurtigknappen på rattet til å skru av denne i stedet for å ble i menyer.
+- filskifteassistent virker ikke, selv på veier som støtter det (feks e18 Sandvika). Jeg mistenker at den er stilt inn på feil hastighet, og at man må gkjøre 90 miles-pr-hour i stedet for 90 km-i-timen som instruksjonsboka sier.
+
+4. Vi ble enige om at jeg skulle liste opp konkrete feil siden forrige verkstedsbesøk så dere har mer å gå etter:
+20250522 - app feiler: kan ikke sette lademål
+20250524 - mangler dataforbindelse på hovedvei
+20250712 - app feiler: kan ikke starte klimatisering
+20250714 - mangler dataforbindelse på hovedvei
+20250823 - bluetooth: kan ikke opprette noen bluetooth forbindelse
+20250827 - MMI kortslutter helt - innstillinger mistet (favoritter)
+20251017 - HUD forsvinner under kjøring
+20251221 - HUD forsvinner under kjøring
+20251226 - Nødstoppassistent ikke tilgjengelig
+20251227 - HUD forsvinner under kjøring
+20251227 - Klima/AC-anlegg: umulig å stille - låst
+20251231 - Nødstoppassistent ikke tilgjengelig
+20260112 - app feiler: kan ikke sette lademål
+20260208 - MMI kortslutter helt - innstillinger mistet (favoritter)
+20260208 - HUD forsvinner under kjøring
+20260320 - HUD forsvinner under kjøring
+20260321 - app feiler: kan ikke lese status fra bil
+20260325 - HUD forsvinner under kjøring
+20260325 - mangler dataforbindelse på hovedvei
+20260327 - HUD forsvinner under kjøring
+20260208 - MMI kortslutter helt - umulig å nullstill - står “velkommen Fredrik" hele kjøreturen
+20260614 - mangler dataforbindelse på hovedvei
+20260614 - keyless fungerer ikke
+20260621-20260630 - app feiler: “midlertidig deaktivert”
+20260713 - MMI kortslutter helt - innstillinger mistet (favoritter)
+20260716 - app feiler: kan ikke starte klimatisering
+20260801 - MMI: privatsfære melding - må logge på på nytt. Alle innstillinger mistet, må stille språk etc.
+20260801 - app feiler: “1000” pushmeldinger om at det har oppstått en feil
+20260801 - mangler dataforbindelse på hovedvei
+20260810 - ladekabel sitter fast.  Fikk den løs ved å dra i spaken i bagasjerommet
+20260810 - bagasjerommet åpner når man trykker på lås opp (2 ganger)
+20260815 - ladelys veksler mellom rødt og grønt under lading
+20260810-20260826  feilmelding om aDC-lading ikke mulig
+
+Som dere kanskje skjønner er jeg ikke veldig imponert over denne bilen, og ønsker at den blir fikset så den slutter å feil så mye.
+
+
+Mvh,
+
+Fredrik
+
+

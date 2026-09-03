@@ -1,0 +1,51 @@
+Date: Tuesday, 16 April 2024 at 16:01:03
+From: Møller
+To: fredrik;
+Subject: Sv: Hm. (Smart)lading funker ikke
+
+Hei, Fredrik 
+
+Beklager sent svar fra meg, da jeg har vært borte og opptatt store deler av denne uken. 
+
+Problemet du beskriver til meg er ikke kjent for verkstedet når jeg tar det opp med dem, men hvis bilen din lader når du setter i kabelen og ikke har aktivert smart lading. Så kan det være at bilen rekker å gå i dvale når smartlading er aktivert, som gjør at ladingen ikke vil starte ettersom laderen ikke klarer å "vekke" bilen. 
+
+Det du kan prøve er å sette inn ladetidspunkt i bilen mellom kl: 21-06 (når det somregel er billig strøm) for å se om bilen vekkes når ladeboksen begynner å gi strøm. 
+
+Jeg har også sendt inn spørsmål vedrørende dette til produkt teamet i Audi Norge for eventuelle svar. 
+
+
+Med vennlig hilsen
+ 
+Møller
+Salgskonsulent Audi
+￼
++ 47 905 74 513
+Møller
+ 
+￼
+ 
+ Billingstadsletta 2, 1396 Asker
++ 47 24 03 25 00
+mollerbil.no/aogb
+facebook.com/mollerbilaogb
+
+
+Fra: Fredrik
+Sendt: lørdag 13. april 2024 13:04
+Til: Møller
+Emne: Hm. (Smart)lading funker ikke
+ 
+CAUTION: This email originated from outside of the organization. Do not click links or open attachments unless you recognize the sender and know the content is safe.
+
+
+Hei. Jeg er vant til å lade e-golf med smartlading. Har easee charge. På Audi q4 og det funker ikke.
+
+A. Hvis easee er i smartladingsmodus (og ikke aktivt lader nå) sier bilen at det er noe feil, og lyser rødt og låser opp kabelen. Iom at den er låst opp vil den ikke lade når smartladingen setter inn.
+
+B. Hvis easee har pauset smartlading (dvs det er aktivt strøm i kabelen) (eller smartladingen er aktiv nå) så fungerer alt. Også pausing/stopp/start av smartlading.
+
+Hm. A. Er jo normalsituasjonen for oss. Smartlading er jo som regel midt på natta. Men vi er altså nødt til å sørge for at bilen tar i mot lading før vi kan sette tilbake til smartlading. Hele poenget med smartlading er å slippe å styre med app-er og tenke/trykke. "Smart" delen av ladingen er jo borte.
+
+Er dette et kjent problem for denne bilen, hva er løsningen?
+
+Fredrik

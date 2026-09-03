@@ -1,0 +1,39 @@
+Date: Friday, 28 August 2026 at 09:51:48
+From: Fredrik
+To: Møller;[Møller verkstedbestilling];
+Subject: Re: Ref bestilling av feilsøking på EH8XXXX
+
+
+
+On 27 Aug 2026, at 10:18, Møller wrote:
+
+Hei,
+
+Jeg har sendt deg en ny signering som er gyldig i 24 timer 🙂
+
+Har også oppdatert ordre internt her.
+
+Det eksisterer ingen nyere software til din bil som ikke allerede er installert.
+
+Med vennlig hilsen
+Møller
+
+OK - da håper jeg dere får fikset feilene på en annen måte.  Jeg kan ikke ha en bil med alle disse feilene.
+
+Nye feil siden sist:
+
+20240827 - app sender 53!!! Pushmeldinger mens jeg kjører.  Tekst: “Det har oppstått en feil: Batteriladingen prioriteres”
+20240827 - mangler dataforbindelse på hovedvei (E-134)
+
+Til info; 
+- jeg har bilder av alle de feilene som er nevnt her og i den forrige mailen.  si i fra hvis dere trenger noen av bildene ifm feilsøking.
+- det har vært en rekke flere feil en de jeg har listet, men jeg har kun bilder av der jeg kjører selv.  Bilen har flere andre sjåfører, som ikke logger feilene.
+- http://audi.rodland.no <http://audi.rodland.no/> beskriver feilene før 20250522
+
+
+Kontrakten er nå signert.
+
+Mvh,
+
+Fredrik
+

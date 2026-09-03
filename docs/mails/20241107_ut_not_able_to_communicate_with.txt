@@ -1,0 +1,36 @@
+Date: Thursday, 7 November 2024 at 10:53:09
+From: Fredrik
+To: [Audi Digital Support];
+Subject: Not able to communicate with car from app
+
+Hi.
+
+I am not able to send actions from the myAudi app to my car 
+
+Audi Q4 Norwegian regno: EH8XXXX, vin: WAUZZZFZXRP056133
+
+I’ve tried many days and at least three different locations which have not been a problem in the past.
+
+I’m not able to send neither “start climatization” nor “set charging target”.
+
+I’ve sent you multiple emails in the past, but not got any answers.  The only thing I’ve got back from you is to send the same pictures/info already given in this email.
+
+I’m using the latest version of the myAudi app (4.28)
+
+Attached are the two errors I get in the myAudi app when trying to send commands to my car.  All screen dumps are from this morning.
+
+
+
+Regards,
+
+Fredrik Rødland
+
+
+
+
+--
+
+Fredrik Rødland               Cell:    +47 99 21 98 17
+Maisen Pedersens vei 1        Twitter: <at>fredrikr
+NO-1363 Høvik, NORWAY         http://rodland.no
+
