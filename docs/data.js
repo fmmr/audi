@@ -42,8 +42,8 @@ const FAULTS = [
     {
         date: '2026-09-02',
         category: 'klima', source: 'observation', severity: 'middels',
-        title: 'Klimaanlegg gikk på med AC OFF - knallvarm bil i sola',
-        description: 'Bilen sto i sola og var knallvarm. Klima gikk på selv om AC var i OFF-stilling. Enda et eksempel på de "random klimainnstillingene" som er beskrevet under vedvarende feil.',
+        title: 'Klimaanlegg gikk på med AC OFF - sterkt oppvarmet kupé i sola',
+        description: 'Bilen sto i sola og var kraftig oppvarmet. Klima gikk på selv om AC var i OFF-stilling. Enda et eksempel på de tilfeldige klimainnstillingene som er beskrevet under vedvarende feil.',
         images: [
             { thumb: 'thumbs/20260902_klima_IMG_3159.jpg', full: '20260902_klima_IMG_3159.jpg', type: 'image' }
         ]
@@ -125,7 +125,7 @@ const FAULTS = [
         date: '2026-08-27', displayDate: '27. august 2026 (i mail som "20240827")',
         category: 'app', source: 'mail-20260827', severity: 'høy',
         title: 'App sender 53 pushmeldinger under kjøring',
-        description: 'App sender 53(!) pushmeldinger mens jeg kjører. Tekst: "Det har oppstått en feil: Batteriladingen prioriteres".',
+        description: 'App sender 53 pushmeldinger i løpet av én kjøretur. Tekst: "Det har oppstått en feil: Batteriladingen prioriteres".',
         images: [
             { thumb: 'thumbs/20260827_IMG_3080.jpg', full: '20260827_IMG_3080.jpg', type: 'image' },
             { thumb: 'thumbs/20260827_IMG_3082.jpg', full: '20260827_IMG_3082.jpg', type: 'image' }
@@ -159,7 +159,7 @@ const FAULTS = [
         date: '2026-08-16',
         category: 'klima', source: 'observation', severity: 'middels',
         title: 'Klimaanlegg gikk rett på Lo uten grunn',
-        description: 'Klimaanlegg gikk rett på Lo (Low) selv om det ikke var spesielt varmt i bilen. Konkret eksempel på de "random klimainnstillingene" som er beskrevet under vedvarende feil.',
+        description: 'Klimaanlegg gikk rett på Lo (Low) selv om det ikke var spesielt varmt i bilen. Konkret eksempel på de tilfeldige klimainnstillingene som er beskrevet under vedvarende feil.',
         images: []
     },
     {
@@ -863,7 +863,7 @@ const RECURRING_FAULTS = [
       description: 'Hvis iPhone/CarPlay er koblet til går det ikke an å velge favoritter i MMI. Den hopper rett tilbake til CarPlay.',
       swFix: true },
     { category: 'klima', title: 'Klimaanlegg kommer på i tilfeldig innstilling - ofte helt av',
-      description: 'Klimaanlegg kommer på i random innstilling - ofte helt av. Det burde komme på enten på siste innstilte, en fast innstilling, eller en fornuftig innstilling iht klima her-og-nå.',
+      description: 'Klimaanlegg kommer på i tilfeldig innstilling - ofte helt av. Det burde komme på enten på siste innstilte, en fast innstilling, eller en fornuftig innstilling iht klima her-og-nå.',
       swFix: true },
     { category: 'hud', title: 'Fartsoverskridelse-varsling: må stille to ganger',
       description: 'Fartsoverskridelse-varsling 1: hvis man skal stille hastigheten for varsling hopper den tilbake til 3 km/t første gang. Man må gjøre det to ganger.',
@@ -893,12 +893,33 @@ const RECURRING_FAULTS = [
       swFix: true, fixed: '2026-09-04' },
 ];
 
+// Programvareversjoner dokumentert på bilder over tid.
+// Nyttig for å se hva som faktisk ble endret ved store hendelser (verkstedbesøk, oppdateringer).
+// Fyll ut `versions`-feltet manuelt hvis/når du leser av tallene fra bildene.
+const SOFTWARE_VERSIONS = [
+    { date: '2025-01-02', car: 'Lånebil (2025-modell)', version: '4325', note: 'Ifm verkstedbesøk 2. januar 2025',
+      images: [
+          { thumb: 'thumbs/20250102_IMG_7391.jpg', full: '20250102_IMG_7391.jpg', type: 'image' },
+          { thumb: 'thumbs/20250102_IMG_7392.jpg', full: '20250102_IMG_7392.jpg', type: 'image' }
+      ] },
+    { date: '2025-01-13', car: 'Min bil (EH8XXXX)', version: '4145', note: 'Egen bil før oppdateringen',
+      images: [
+          { thumb: 'thumbs/20250113_IMG_7502.jpg', full: '20250113_IMG_7502.jpg', type: 'image' },
+          { thumb: 'thumbs/20250113_IMG_7503.jpg', full: '20250113_IMG_7503.jpg', type: 'image' }
+      ] },
+    { date: '2026-09-04', car: 'Min bil (EH8XXXX)', version: '4373', note: 'Etter storoppdatering under verkstedbesøket 3./4. september',
+      images: [
+          { thumb: 'thumbs/20260904_IMG_3190.jpg', full: '20260904_IMG_3190.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_IMG_3191.jpg', full: '20260904_IMG_3191.jpg', type: 'image' }
+      ] },
+];
+
 // Kontaktlogg (verksted, mail, telefon)
 // Se feltbeskrivelse under CONTACTS-arrayet - alle mailer er nå eksportert fra Mail.app
 const CONTACTS = [
     { date: '2026-09-04', type: 'refleksjon',
       title: 'Refleksjon: Positiv utbedring og håp om en varig løsning',
-      description: 'Det er utrolig godt å se at verkstedbesøket 3.–4. september ga så konkrete resultater. At kabellåsen ble byttet og at programvareoppdateringen beviselig har løst flere langvarige irritasjonsmomenter – som aktiv filskifteassistent og manuell batteriforvarming – gir grunn til optimisme.\n\nJeg ønsker genuint at denne storoppdateringen også bringer den generelle systemstabiliteten MMI og bilens øvrige elektronikk har manglet. Målet har hele tiden vært å ha en fungerende, trygg og forutsigbar bil i hverdagen – ikke å havne i en juridisk konflikt.\n\nDersom bilen nå forblir feilfri og stabil i tiden fremover, legger jeg mer enn gjerne denne krevende saken bak meg en gang for alle. Nå gjenstår det bare å observere bilen i normal bruk og håpe at dette var det endelige vendepunktet.' },
+      description: 'Det er utrolig godt å se at verkstedbesøket 3.-4. september ga så konkrete resultater. At kabellåsen ble byttet og at programvareoppdateringen beviselig har løst flere langvarige irritasjonsmomenter - som aktiv filskifteassistent og manuell batteriforvarming - gir grunn til optimisme.\n\nJeg ønsker genuint at denne storoppdateringen også bringer den generelle systemstabiliteten MMI og bilens øvrige elektronikk har manglet. Målet har hele tiden vært å ha en fungerende, trygg og forutsigbar bil i hverdagen - ikke å havne i en juridisk konflikt.\n\nDersom bilen nå forblir feilfri og stabil i tiden fremover, legger jeg mer enn gjerne denne krevende saken bak meg en gang for alle. Nå gjenstår det bare å observere bilen i normal bruk og håpe at dette var det endelige vendepunktet.' },
     { date: '2026-09-01', type: 'refleksjon',
       title: 'Refleksjon: siste sjanse før forberedelse av rettslige skritt',
       description: 'E-posten samme dag ble sendt i en periode der troen på at bilen skulle bli varig stabil, var betydelig svekket. Etter over 111 registrerte feil og tilbakevendende ladeproblemer ble det forestående verkstedbesøket i praksis opplevd som en siste sjanse.\n\nHenvisningen til forbrukerkjøpsloven og muligheten for heving eller omlevering var ment som en saklig tydeliggjøring - ikke som en trussel. Skulle heller ikke denne runden gi en stabil bil, sto jeg innstilt på å ta saken videre via bilforsikringens rettshjelpsdekning, med sikte på å heve kjøpet.' },
@@ -937,7 +958,7 @@ const CONTACTS = [
       to: 'Møller',
       link: './mails/20260831_ut_ref_bestilling_av_feilsoking_pa.txt',
       critical: true,
-      summary: 'Kritisk melding: bilen lader ekstremt sakte (9% på 11 timer på 32A easee-lader), ladelys blinker mellom rødt og grønt, ladekabel sitter fast. Samme symptom på 2 forskjellige ladere på 2 lokasjoner. Nye feil de siste dagene: MMI krasjer, mangler dataforbindelse (Høvik, Hurum), bilen kun marginalt ladet.' },
+      summary: 'Kritisk melding: bilen lader svært sakte (9% på 11 timer på 32A easee-lader), ladelys blinker mellom rødt og grønt, ladekabel sitter fast. Samme symptom på 2 forskjellige ladere på 2 lokasjoner. Nye feil de siste dagene: MMI krasjer, mangler dataforbindelse (Høvik, Hurum), bilen kun marginalt ladet.' },
     { date: '2026-08-28', type: 'mail-in',
       title: 'Sv: Ref bestilling av feilsøking på EH8XXXX',
       description: 'Hei, Har vedlagt nettsiden og informasjonen til ordren, har også oppdatert mekaniker på saken. Mekaniker får tatt en titt på saken og korrelere informasjonen som du har lagt opp...',

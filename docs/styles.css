@@ -244,6 +244,45 @@ main {
     opacity: .82;
 }
 
+.sw-versions { margin-top: 12px; overflow-x: auto; }
+.sw-version-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: .92rem;
+}
+.sw-version-table th,
+.sw-version-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+.sw-version-table tr:last-child td { border-bottom: none; }
+.sw-version-table thead th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    font-size: .78rem;
+}
+.sw-version-table .sw-date { white-space: nowrap; font-weight: 600; }
+.sw-version-table .sw-version {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--brand, #1e40af);
+    white-space: nowrap;
+}
+.sw-version-table .sw-version-missing { color: var(--text-subtle); font-weight: 400; }
+.sw-version-table .sw-note { color: var(--text-muted); font-size: .88rem; }
+.sw-version-table .thumbs { display: flex; gap: 6px; flex-wrap: wrap; }
+.sw-version-table .thumb { width: 72px; height: 72px; }
+
 /* Badges */
 .badge {
     display: inline-flex;

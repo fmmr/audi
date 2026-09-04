@@ -164,6 +164,33 @@ function renderStatus() {
         `);
     }
 
+    // Programvareversjoner - liten tabell nederst
+    if (typeof SOFTWARE_VERSIONS !== 'undefined' && SOFTWARE_VERSIONS.length > 0) {
+        const sorted = [...SOFTWARE_VERSIONS].sort((a, b) => a.date.localeCompare(b.date));
+        rows.push(`
+            <h2 style="margin-top:48px">Programvareversjoner dokumentert</h2>
+            <p class="lead">Bilder som viser programvareversjoner på ulike tidspunkter - nyttig for å se hva som faktisk ble endret ved verkstedbesøk og oppdateringer.</p>
+            <div class="sw-versions">
+                <table class="sw-version-table">
+                    <thead>
+                        <tr><th>Dato</th><th>Bil</th><th>Versjon</th><th>Notat</th><th>Bilder</th></tr>
+                    </thead>
+                    <tbody>
+                        ${sorted.map(v => `
+                            <tr>
+                                <td class="sw-date">${esc(formatDate(v.date))}</td>
+                                <td>${esc(v.car)}</td>
+                                <td class="sw-version">${v.version ? esc(v.version) : '<span class="sw-version-missing">–</span>'}</td>
+                                <td class="sw-note">${esc(v.note || '')}</td>
+                                <td>${renderThumbs(v.images)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `);
+    }
+
     root.innerHTML = rows.join('');
 }
 
