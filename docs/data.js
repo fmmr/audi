@@ -9,7 +9,7 @@ const STATUS = {
     header:   'Bilen tilbake fra verksted 4. september - flere feil løst',
     body:     'Verkstedet har byttet kabel-låsemekanismen (forventet fiks for AC/DC-ladefeil) og gjennomført en omfattende programvareoppdatering. Flere vedvarende programvaremangler (bl.a. aktiv filskifteassistent og manuell batteriforvarming) er bekreftet løst. Servicen ble utført samtidig, slik at timen 21. september utgår. Bilen observeres nå for å verifisere total stabilitet.',
     severity: 'ok',
-    date:     '2026-09-04',
+    date:     '2026-09-04'
 };
 
 const CATEGORIES = {
@@ -21,6 +21,8 @@ const CATEGORIES = {
     nokkel:  { label: 'Nøkkel & Adgang',       color: '#a855f7', short: 'Nøkkel' },
     tilkobling: { label: 'Nettverk & tilkobling', color: '#0891b2', short: 'Nett' },
     diverse: { label: 'Diverse (motor, ledningsnett m.m.)', color: '#737373', short: 'Diverse' },
+    versjon: { label: 'Programvareversjoner',  color: '#7c3aed', short: 'Versjon' },
+    fix:     { label: 'Verksted-fikser (3./4. sept 2026)', color: '#16a34a', short: 'Fix' }
 };
 
 // Alle bilde-referanser peker mot filnavn under docs/. Videoer åpnes via video-parameter.
@@ -33,8 +35,6 @@ const FAULTS = [
         title: 'DC-lading-feil fra 10.-26. aug er tilbake',
         description: 'Feilmeldingen "DC-lading ikke mulig" fra 10.-26. august er tilbake. 2. sep: kjørt 4 små turer, varselet på under 3 av dem, ikke på den siste. 3. sep: feilmeldinger dukket opp igjen.',
         images: [
-            { thumb: 'thumbs/20260902_lading_IMG_3160.jpg', full: '20260902_lading_IMG_3160.jpg', type: 'image' },
-            { thumb: 'thumbs/20260902_lading_IMG_3161.jpg', full: '20260902_lading_IMG_3161.jpg', type: 'image' },
             { thumb: 'thumbs/20260903_lading_IMG_3175.jpg', full: '20260903_lading_IMG_3175.jpg', type: 'image' },
             { thumb: 'thumbs/20260903_lading_IMG_3176.jpg', full: '20260903_lading_IMG_3176.jpg', type: 'image' }
         ]
@@ -43,101 +43,62 @@ const FAULTS = [
         date: '2026-09-02',
         category: 'klima', source: 'observation', severity: 'middels',
         title: 'Klimaanlegg gikk på med AC OFF - sterkt oppvarmet kupé i sola',
-        description: 'Bilen sto i sola og var kraftig oppvarmet. Klima gikk på selv om AC var i OFF-stilling. Enda et eksempel på de tilfeldige klimainnstillingene som er beskrevet under vedvarende feil.',
-        images: [
-            { thumb: 'thumbs/20260902_klima_IMG_3159.jpg', full: '20260902_klima_IMG_3159.jpg', type: 'image' }
-        ]
-    },
+        description: 'Bilen sto i sola og var kraftig oppvarmet. Klima gikk på selv om AC var i OFF-stilling. Enda et eksempel på de tilfeldige klimainnstillingene som er beskrevet under vedvarende feil.'},
     {
         date: '2026-09-02',
         category: 'lading', source: 'observation', severity: 'kritisk',
         title: 'AC-lading feiler flere netter på rad',
         description: 'Natt 1-2. sep: koblet til på 64% (1. sep 22:36) til 80% (2. sep 13:27) - ca 15 timer for 16% (13,97 kWh), snittladeeffekt 1,09 kW. Natt 2-3. sep: ny mislykket ladeøkt. Bilen sto med melding "lading startes" i timevis (skal normalt kun vises i 30 sek mens lading initialiseres). Smartlading var av fordi bilen ikke rakk fastsatt tid i Tibber.',
         images: [
-            { thumb: 'thumbs/20260902_IMG_3140.jpg', full: '20260902_IMG_3140.jpg', type: 'image' },
-            { thumb: 'thumbs/20260902_IMG_3141.jpg', full: '20260902_IMG_3141.jpg', type: 'image' },
-            { thumb: 'thumbs/20260902_IMG_3144.jpg', full: '20260902_IMG_3144.jpg', type: 'image' },
-            { thumb: 'thumbs/20260902_lading_IMG_3157.jpg', full: '20260902_lading_IMG_3157.jpg', type: 'image' },
-            { thumb: 'thumbs/20260902_lading_IMG_3158.jpg', full: '20260902_lading_IMG_3158.jpg', type: 'image' },
             { thumb: 'thumbs/20260903_lading_IMG_3170.png', full: '20260903_lading_IMG_3170.png', type: 'image' },
             { thumb: 'thumbs/20260903_lading_IMG_3171.png', full: '20260903_lading_IMG_3171.png', type: 'image' },
-            { thumb: 'thumbs/20260903_lading_IMG_3172.png', full: '20260903_lading_IMG_3172.png', type: 'image' },
-            { thumb: 'thumbs/20260902_lading_IMG_3165.jpg', full: '20260902_lading_IMG_3165.jpg', type: 'image' }
-        ]
+            { thumb: 'thumbs/20260903_lading_IMG_3172.png', full: '20260903_lading_IMG_3172.png', type: 'image' }]
     },
     {
         date: '2026-09-01',
         category: 'lading', source: 'observation', severity: 'høy',
         title: 'Ladelyset blinker rødt/grønt + tilhørende app-feil',
-        description: 'Ladelyset på bilen blinker rødt/grønt (video), med tilhørende feilmelding i myAudi-appen. Samme symptom som tidligere ladefeil (bl.a. 15. august, 30. august).',
-        images: []
-    },
+        description: 'Ladelyset på bilen blinker rødt/grønt (video), med tilhørende feilmelding i myAudi-appen. Samme symptom som tidligere ladefeil (bl.a. 15. august, 30. august).'},
     {
         date: '2026-08-30', displayDate: '30. august 2026 (i mail som "20240830")',
         category: 'tilkobling', source: 'mail-20260831', severity: 'middels',
         title: 'Mangler dataforbindelse - Høvik, Bærum',
-        description: 'Mangler dataforbindelse på hovedvei ved Høvik i Bærum.',
-        images: [{ thumb: 'thumbs/20260830_IMG_3099.jpg', full: '20260830_IMG_3099.jpg', type: 'image' }]
-    },
+        description: 'Mangler dataforbindelse på hovedvei ved Høvik i Bærum.'},
     {
         date: '2026-08-30', displayDate: '30. august 2026 (i mail som "20240830")',
         category: 'lading', source: 'mail-20260831', severity: 'kritisk',
         title: 'Ladekabel sitter fast på Hurum - kun marginalt ladet',
-        description: 'Ladekabel sitter fast på Hurum, bilen kun ladet marginalt på 5 timer. Ladelys blinker rødt/grønt (video).',
-        images: [
-            { thumb: 'thumbs/20260830_IMG_3108.png', full: '20260830_IMG_3108.mp4', type: 'video' },
-            { thumb: 'thumbs/20260830_IMG_3111.jpg', full: '20260830_IMG_3111.jpg', type: 'image' },
-            { thumb: 'thumbs/20260830_IMG_3112.jpg', full: '20260830_IMG_3112.jpg', type: 'image' },
-            { thumb: 'thumbs/20260830_IMG_3113.jpg', full: '20260830_IMG_3113.jpg', type: 'image' },
-            { thumb: 'thumbs/20260830_IMG_3114.jpg', full: '20260830_IMG_3114.jpg', type: 'image' },
-            { thumb: 'thumbs/20260830_IMG_3115.jpg', full: '20260830_IMG_3115.jpg', type: 'image' }
-        ]
-    },
+        description: 'Ladekabel sitter fast på Hurum, bilen kun ladet marginalt på 5 timer. Ladelys blinker rødt/grønt (video).'},
     {
         date: '2026-08-30', displayDate: '30. august 2026 (i mail som "20240830")',
         category: 'tilkobling', source: 'mail-20260831', severity: 'middels',
         title: 'Mangler dataforbindelse - Hurum',
-        description: 'Mangler dataforbindelse på hovedvei på Hurum.',
-        images: [{ thumb: 'thumbs/20260830_IMG_3110.jpg', full: '20260830_IMG_3110.jpg', type: 'image' }]
-    },
+        description: 'Mangler dataforbindelse på hovedvei på Hurum.'},
     {
         date: '2026-08-31', displayDate: '31. august 2026 (morgen, natt 30.-31.)',
         category: 'lading', source: 'mail-20260831', severity: 'kritisk',
         title: 'Bilen kun ladet 9% på 11 timer (32A)',
-        description: 'Natt til 31. august: bilen kun ladet marginalt på 11 timer (9% på 32A easee-lader). Tredje ladeforsøk på under et døgn med samme symptom - se også Høvik morgen 30. aug (~6t/~2%) og Hurum midt på dagen 30. aug (5t/marginalt).',
-        images: []
-    },
+        description: 'Natt til 31. august: bilen kun ladet marginalt på 11 timer (9% på 32A easee-lader). Tredje ladeforsøk på under et døgn med samme symptom - se også Høvik morgen 30. aug (~6t/~2%) og Hurum midt på dagen 30. aug (5t/marginalt).'},
     {
         date: '2026-08-30', displayDate: '30. august 2026 (morgen)',
         category: 'lading', source: 'mail-20260831', severity: 'kritisk',
         title: 'Ladekabel sitter fast på Høvik - ladet svært lite',
-        description: 'Ladekabel satt fast på Høvik om morgenen. Bilen var plugget i ca 6 timer men ladet kun et par prosent. Easee-appen viste ca 1 kW - samme symptom som senere samme dag på Hurum og påfølgende natt (11t/9%).',
-        images: []
-    },
+        description: 'Ladekabel satt fast på Høvik om morgenen. Bilen var plugget i ca 6 timer men ladet kun et par prosent. Easee-appen viste ca 1 kW - samme symptom som senere samme dag på Hurum og påfølgende natt (11t/9%).'},
     {
         date: '2026-08-29',
         category: 'lading', source: 'observation', severity: 'høy',
         title: 'Ladekabel sitter fast',
-        description: 'Ladekabel sitter fast i ladeport. Video av ladeport med kabel.',
-        images: []
-    },
+        description: 'Ladekabel sitter fast i ladeport. Video av ladeport med kabel.'},
     {
         date: '2026-08-27', displayDate: '27. august 2026 (i mail som "20240827")',
         category: 'app', source: 'mail-20260827', severity: 'høy',
         title: 'App sender 53 pushmeldinger under kjøring',
-        description: 'App sender 53 pushmeldinger i løpet av én kjøretur. Tekst: "Det har oppstått en feil: Batteriladingen prioriteres".',
-        images: [
-            { thumb: 'thumbs/20260827_IMG_3080.jpg', full: '20260827_IMG_3080.jpg', type: 'image' },
-            { thumb: 'thumbs/20260827_IMG_3082.jpg', full: '20260827_IMG_3082.jpg', type: 'image' }
-        ]
-    },
+        description: 'App sender 53 pushmeldinger i løpet av én kjøretur. Tekst: "Det har oppstått en feil: Batteriladingen prioriteres".'},
     {
         date: '2026-08-27', displayDate: '27. august 2026 (i mail som "20240827")',
         category: 'tilkobling', source: 'mail-20260827', severity: 'middels',
         title: 'Mangler dataforbindelse - E-134',
-        description: 'Mangler dataforbindelse på hovedvei (E-134).',
-        images: [{ thumb: 'thumbs/20260827_IMG_3079.jpg', full: '20260827_IMG_3079.jpg', type: 'image' }]
-    },
+        description: 'Mangler dataforbindelse på hovedvei (E-134).'},
     {
         date: '2026-08-10..2026-08-26', displayDate: '10.-26. august 2026',
         category: 'lading', source: 'mail-20260826', severity: 'kritisk',
@@ -152,419 +113,306 @@ const FAULTS = [
         date: '2026-08-15',
         category: 'lading', source: 'mail-20260826', severity: 'høy',
         title: 'Ladelys veksler mellom rødt og grønt under lading',
-        description: 'Ladelys veksler mellom rødt og grønt under lading.',
-        images: []
-    },
+        description: 'Ladelys veksler mellom rødt og grønt under lading.'},
     {
         date: '2026-08-16',
         category: 'klima', source: 'observation', severity: 'middels',
         title: 'Klimaanlegg gikk rett på Lo uten grunn',
-        description: 'Klimaanlegg gikk rett på Lo (Low) selv om det ikke var spesielt varmt i bilen. Konkret eksempel på de tilfeldige klimainnstillingene som er beskrevet under vedvarende feil.',
-        images: []
-    },
+        description: 'Klimaanlegg gikk rett på Lo (Low) selv om det ikke var spesielt varmt i bilen. Konkret eksempel på de tilfeldige klimainnstillingene som er beskrevet under vedvarende feil.'},
     {
         date: '2026-08-24',
         category: 'tilkobling', source: 'observation', severity: 'middels',
         title: 'Kan ikke opprette dataforbindelse - Tofteveien, Hurum',
-        description: 'MMI: "Kan ikke opprette dataforbindelse" på hovedvei (Tofteveien, Hurum).',
-        images: []
-    },
+        description: 'MMI: "Kan ikke opprette dataforbindelse" på hovedvei (Tofteveien, Hurum).'},
     {
         date: '2026-08-11',
         category: 'nokkel', source: 'mail-20260826', severity: 'middels',
         title: 'Bagasjerommet åpner ved trykk på lås opp',
-        description: 'Bagasjerommet åpner når man trykker på lås opp (2 ganger).',
-        images: []
-    },
+        description: 'Bagasjerommet åpner når man trykker på lås opp (2 ganger).'},
     {
         date: '2026-08-10',
         category: 'lading', source: 'mail-20260826', severity: 'høy',
         title: 'Ladekabel sitter fast',
-        description: 'Ladekabel sitter fast. Fikk den løs ved å dra i spaken i bagasjerommet.',
-        images: []
-    },
+        description: 'Ladekabel sitter fast. Fikk den løs ved å dra i spaken i bagasjerommet.'},
     {
         date: '2026-08-01',
         category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Mangler dataforbindelse på hovedvei',
-        description: 'Mangler dataforbindelse på hovedvei.',
-        images: [{ thumb: 'thumbs/20260801_IMG_2713.jpg', full: '20260801_IMG_2713.jpg', type: 'image' }]
-    },
+        description: 'Mangler dataforbindelse på hovedvei.'},
     {
         date: '2026-08-01',
         category: 'app', source: 'mail-20260826', severity: 'høy',
         title: 'App feiler: mange pushmeldinger om feil',
-        description: 'App feiler: mange pushmeldinger om at det har oppstått en feil.',
-        images: [{ thumb: 'thumbs/20260801_IMG_2709.jpg', full: '20260801_IMG_2709.jpg', type: 'image' }]
-    },
+        description: 'App feiler: mange pushmeldinger om at det har oppstått en feil.'},
     {
         date: '2026-08-01',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvinner under kjøring',
-        description: 'Head-up-display forsvinner under kjøring.',
-        images: []
-    },
+        description: 'Head-up-display forsvinner under kjøring.'},
     {
         date: '2026-08-01',
         category: 'mmi', source: 'mail-20260826', severity: 'høy',
         title: 'MMI privatsfære - må logge på på nytt, alle innstillinger mistet',
-        description: 'MMI: privatsfære-melding - må logge på på nytt. Alle innstillinger mistet, må stille språk (hard restart). Etterpå mangler flere av de vanlige knappene/favorittene.',
-        images: []
-    },
+        description: 'MMI: privatsfære-melding - må logge på på nytt. Alle innstillinger mistet, må stille språk (hard restart). Etterpå mangler flere av de vanlige knappene/favorittene.'},
     {
         date: '2026-07-16',
         category: 'app', source: 'mail-20260826', severity: 'middels',
         title: 'App feiler: kan ikke starte klimatisering',
-        description: 'App feiler: kan ikke starte klimatisering.',
-        images: []
-    },
+        description: 'App feiler: kan ikke starte klimatisering.'},
     {
         date: '2026-07-13',
         category: 'mmi', source: 'mail-20260826', severity: 'høy',
         title: 'MMI krasjer - innstillinger mistet (favoritter)',
-        description: 'MMI krasjer - innstillinger mistet (favoritter).',
-        images: []
-    },
+        description: 'MMI krasjer - innstillinger mistet (favoritter).'},
     {
         date: '2026-06-21..2026-06-30', displayDate: '21.-30. juni 2026',
         category: 'app', source: 'mail-20260826', severity: 'høy',
         title: 'App feiler: "midlertidig deaktivert"',
         description: 'App feiler: "midlertidig deaktivert" (pågikk 21.-30. juni).',
         images: [
-            { thumb: 'thumbs/20260621_IMG_1676.jpg', full: '20260621_IMG_1676.jpg', type: 'image' },
-            { thumb: 'thumbs/20260628_IMG_1737.jpg', full: '20260628_IMG_1737.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_IMG_1767.jpg', full: '20260630_IMG_1767.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_IMG_1768.jpg', full: '20260630_IMG_1768.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_IMG_1769.jpg', full: '20260630_IMG_1769.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_IMG_1770.jpg', full: '20260630_IMG_1770.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_IMG_1771.jpg', full: '20260630_IMG_1771.jpg', type: 'image' }
+            { thumb: 'thumbs/20260621_app_IMG_1676.jpg', full: '20260621_app_IMG_1676.jpg', type: 'image' },
+            { thumb: 'thumbs/20260628_app_IMG_1737.jpg', full: '20260628_app_IMG_1737.jpg', type: 'image' },
+            { thumb: 'thumbs/20260630_app_IMG_1767.jpg', full: '20260630_app_IMG_1767.jpg', type: 'image' },
+            { thumb: 'thumbs/20260630_app_IMG_1768.jpg', full: '20260630_app_IMG_1768.jpg', type: 'image' },
+            { thumb: 'thumbs/20260630_app_IMG_1769.jpg', full: '20260630_app_IMG_1769.jpg', type: 'image' },
+            { thumb: 'thumbs/20260630_app_IMG_1770.jpg', full: '20260630_app_IMG_1770.jpg', type: 'image' },
+            { thumb: 'thumbs/20260630_app_IMG_1771.jpg', full: '20260630_app_IMG_1771.jpg', type: 'image' }
         ]
     },
     {
         date: '2026-06-17',
         category: 'nokkel', source: 'mail-20260826', severity: 'høy',
         title: 'Keyless fungerer ikke',
-        description: 'Keyless fungerer ikke. Video fra 17. juni: nøkkel foran dør i regn, opplåsing feiler.',
-        images: []
-    },
+        description: 'Keyless fungerer ikke. Video fra 17. juni: nøkkel foran dør i regn, opplåsing feiler.'},
     {
         date: '2026-06-14',
         category: 'tilkobling', source: 'observation', severity: 'middels',
         title: 'Bluetooth: kan ikke opprette forbindelse',
-        description: 'Bluetooth: kan ikke opprette forbindelse.',
-        images: []
-    },
+        description: 'Bluetooth: kan ikke opprette forbindelse.'},
     {
         date: '2026-03-27',
         category: 'hud', source: 'mail-20260826', severity: 'høy',
         title: 'HUD forsvinner under kjøring',
-        description: 'Head-up-display forsvinner under kjøring.',
-        images: []
-    },
+        description: 'Head-up-display forsvinner under kjøring.'},
     {
         date: '2026-05-02',
         category: 'mmi', source: 'observation', severity: 'høy',
         title: 'MMI krasjer - "Velkommen Fredrik" hele kjøreturen',
-        description: 'MMI viser "Velkommen Fredrik. Laster inn brukerinformasjon. Vent litt..." under hele kjøreturen. To bilder tatt kl 17:08 og 17:25 illustrerer at MMI er stuck i minst 17 minutter.',
-        images: []
-    },
+        description: 'MMI viser "Velkommen Fredrik. Laster inn brukerinformasjon. Vent litt..." under hele kjøreturen. To bilder tatt kl 17:08 og 17:25 illustrerer at MMI er stuck i minst 17 minutter.'},
     {
         date: '2026-07-28',
         category: 'app', source: 'observation', severity: 'middels',
         title: 'App: kan ikke starte parkeringsklimatisering',
-        description: 'App melder "Parkeringsklimatisering kunne ikke startes. Bilen din er eventuelt på et sted med utilstrekkelig internettforbindelse" (feilkode E:CV.PA.34). Bilen sto et sted hvor det vanligvis er full dekning.',
-        images: []
-    },
+        description: 'App melder "Parkeringsklimatisering kunne ikke startes. Bilen din er eventuelt på et sted med utilstrekkelig internettforbindelse" (feilkode E:CV.PA.34). Bilen sto et sted hvor det vanligvis er full dekning.'},
     {
         date: '2026-08-02',
         category: 'app', source: 'observation', severity: 'lav',
         title: 'App: status utdatert (3 timer siden), ingen data',
-        description: 'App viser at data er "for 3 timer siden". Km og % vises som "--". Bilen sto et sted hvor det vanligvis er full dekning.',
-        images: []
-    },
+        description: 'App viser at data er "for 3 timer siden". Km og % vises som "--". Bilen sto et sted hvor det vanligvis er full dekning.'},
     {
         date: '2026-03-25',
         category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Mangler dataforbindelse på hovedvei',
-        description: 'Mangler dataforbindelse på hovedvei.',
-        images: []
-    },
+        description: 'Mangler dataforbindelse på hovedvei.'},
     {
         date: '2026-03-25',
         category: 'hud', source: 'mail-20260826', severity: 'høy',
         title: 'HUD forsvinner under kjøring',
-        description: 'Head-up-display forsvinner under kjøring.',
-        images: []
-    },
+        description: 'Head-up-display forsvinner under kjøring.'},
     {
         date: '2026-03-21',
         category: 'app', source: 'mail-20260826', severity: 'middels',
         title: 'App feiler: kan ikke lese status fra bil (pågikk i flere dager)',
-        description: 'App feiler: kan ikke lese status fra bil. Feilen pågikk i flere dager.',
-        images: []
-    },
+        description: 'App feiler: kan ikke lese status fra bil. Feilen pågikk i flere dager.'},
     {
         date: '2026-03-20',
         category: 'hud', source: 'mail-20260826', severity: 'høy',
         title: 'HUD forsvinner under kjøring',
-        description: 'Head-up-display forsvinner under kjøring.',
-        images: []
-    },
+        description: 'Head-up-display forsvinner under kjøring.'},
     {
         date: '2026-02-08',
         category: 'mmi', source: 'mail-20260826', severity: 'høy',
         title: 'MMI krasjer - "velkommen Fredrik" hele turen',
-        description: 'MMI krasjer - umulig å nullstille - står "velkommen Fredrik" hele kjøreturen.',
-        images: []
-    },
+        description: 'MMI krasjer - umulig å nullstille - står "velkommen Fredrik" hele kjøreturen.'},
     {
         date: '2026-02-08',
         category: 'hud', source: 'mail-20260826', severity: 'høy',
         title: 'HUD forsvinner under kjøring',
-        description: 'Head-up-display forsvinner under kjøring.',
-        images: []
-    },
+        description: 'Head-up-display forsvinner under kjøring.'},
     {
         date: '2026-02-08',
         category: 'mmi', source: 'mail-20260826', severity: 'høy',
         title: 'MMI krasjer - favoritter mistet',
-        description: 'MMI krasjer - innstillinger mistet (favoritter).',
-        images: []
-    },
+        description: 'MMI krasjer - innstillinger mistet (favoritter).'},
     {
         date: '2026-02-08',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'Adaptiv kjøreassistent: prediktiv regulering ikke tilgjengelig',
-        description: '"Adaptiv kjøreassistent: prediktiv regulering ikke tilgjengelig nå. Se instruksjonsbok". Skjer av og til i tunnel, men også langs europavei.',
-        images: []
-    },
+        description: '"Adaptiv kjøreassistent: prediktiv regulering ikke tilgjengelig nå. Se instruksjonsbok". Skjer av og til i tunnel, men også langs europavei.'},
     {
         date: '2026-01-12',
         category: 'app', source: 'mail-20260826', severity: 'middels',
         title: 'App feiler: kan ikke sette lademål',
-        description: 'App feiler: kan ikke sette lademål.',
-        images: []
-    },
+        description: 'App feiler: kan ikke sette lademål.'},
 
     // ============ 2025 (fra mail 20260826) ============
     {
         date: '2025-12-31',
         category: 'hud', source: 'mail-20260826', severity: 'kritisk',
         title: 'Flere sikkerhetsassistanser ute samtidig - "sensorsikt begrenset"',
-        description: '40-54 km/t, -4,0°C, kl 11:20-11:21. To samtidige feilmeldinger: (1) Audi pre sense: for tiden begrenset - sensorsikt begrenset pga. forholdene, (2) Nødstoppassistent: ikke tilgjengelig for øyeblikket. Bilen skylder på forholdene, men ingen åpenbar hindring foran sensorene.',
-        images: []
-    },
+        description: '40-54 km/t, -4,0°C, kl 11:20-11:21. To samtidige feilmeldinger: (1) Audi pre sense: for tiden begrenset - sensorsikt begrenset pga. forholdene, (2) Nødstoppassistent: ikke tilgjengelig for øyeblikket. Bilen skylder på forholdene, men ingen åpenbar hindring foran sensorene.'},
     {
         date: '2025-12-27',
         category: 'klima', source: 'mail-20260826', severity: 'høy',
         title: 'Klima: SYNC-knappen fungerer ikke',
-        description: 'SYNC-knappen på klimaanlegget reagerer ikke - kan ikke synkronisere temperatur mellom fører- og passasjerside. Se video.',
-        images: []
-    },
+        description: 'SYNC-knappen på klimaanlegget reagerer ikke - kan ikke synkronisere temperatur mellom fører- og passasjerside. Se video.'},
     {
         date: '2025-12-27',
         category: 'hud', source: 'mail-20260826', severity: 'høy',
         title: 'HUD forsvinner under kjøring',
-        description: 'Head-up-display forsvinner under kjøring.',
-        images: []
-    },
+        description: 'Head-up-display forsvinner under kjøring.'},
     {
         date: '2025-12-26',
         category: 'hud', source: 'mail-20260826', severity: 'kritisk',
         title: 'Flere sikkerhetsassistanser ute samtidig - "sensorsikt begrenset"',
-        description: '75 km/t, -3,5°C, kl 17:53. Tre samtidige feilmeldinger: (1) Nødstoppassistent: ikke tilgjengelig for øyeblikket, (2) Audi pre sense: for tiden begrenset - sensorsikt begrenset pga. forholdene, (3) Kjørefeltassistanse: ikke tilgjengelig - sensorsikt begrenset pga. forholdene. Bilen skylder på forholdene, men ingen åpenbar hindring foran sensorene.',
-        images: []
-    },
+        description: '75 km/t, -3,5°C, kl 17:53. Tre samtidige feilmeldinger: (1) Nødstoppassistent: ikke tilgjengelig for øyeblikket, (2) Audi pre sense: for tiden begrenset - sensorsikt begrenset pga. forholdene, (3) Kjørefeltassistanse: ikke tilgjengelig - sensorsikt begrenset pga. forholdene. Bilen skylder på forholdene, men ingen åpenbar hindring foran sensorene.'},
     {
         date: '2025-12-21',
         category: 'hud', source: 'mail-20260826', severity: 'høy',
         title: 'HUD forsvinner under kjøring',
-        description: 'Head-up-display forsvinner under kjøring.',
-        images: []
-    },
+        description: 'Head-up-display forsvinner under kjøring.'},
     {
         date: '2025-10-17',
         category: 'hud', source: 'mail-20260826', severity: 'høy',
         title: 'HUD forsvinner under kjøring',
-        description: 'Head-up-display forsvinner under kjøring.',
-        images: []
-    },
+        description: 'Head-up-display forsvinner under kjøring.'},
     {
         date: '2025-08-27',
         category: 'mmi', source: 'mail-20260826', severity: 'høy',
         title: 'MMI krasjer - favoritter mistet',
-        description: 'MMI krasjer - innstillinger mistet (favoritter).',
-        images: []
-    },
+        description: 'MMI krasjer - innstillinger mistet (favoritter).'},
     {
         date: '2025-08-23',
         category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Bluetooth: kan ikke opprette forbindelse',
-        description: 'Bluetooth: kan ikke opprette noen bluetooth-forbindelse.',
-        images: []
-    },
+        description: 'Bluetooth: kan ikke opprette noen bluetooth-forbindelse.'},
     {
         date: '2025-07-21',
         category: 'app', source: 'observation', severity: 'middels',
         title: 'App: kan ikke stille lademål (100→80/90)',
-        description: 'Forsøkte å endre lademål fra 100% til 80/90% via appen, men det var ikke mulig. Bildet viser app-status (90% ladet, "Oppdatert for 2 Timer siden") som illustrasjon.',
-        images: []
-    },
+        description: 'Forsøkte å endre lademål fra 100% til 80/90% via appen, men det var ikke mulig. Bildet viser app-status (90% ladet, "Oppdatert for 2 Timer siden") som illustrasjon.'},
     {
         date: '2025-07-14',
         category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Mangler dataforbindelse på hovedvei',
-        description: 'Mangler dataforbindelse på hovedvei.',
-        images: []
-    },
+        description: 'Mangler dataforbindelse på hovedvei.'},
     {
         date: '2025-07-12',
         category: 'app', source: 'mail-20260826', severity: 'middels',
         title: 'App feiler: kan ikke starte klimatisering',
-        description: 'App feiler: kan ikke starte klimatisering.',
-        images: []
-    },
+        description: 'App feiler: kan ikke starte klimatisering.'},
     {
         date: '2025-05-24',
         category: 'tilkobling', source: 'mail-20260826', severity: 'middels',
         title: 'Mangler dataforbindelse på hovedvei',
-        description: 'Mangler dataforbindelse på hovedvei.',
-        images: []
-    },
+        description: 'Mangler dataforbindelse på hovedvei.'},
     {
         date: '2025-05-22',
         category: 'app', source: 'mail-20260826', severity: 'middels',
         title: 'App feiler: data lastes ikke inn (E:BFF.9999)',
-        description: 'Ca 07:53: "Feil ved innlasting - connect-tjenestene for denne bilen kunne ikke eller kun delvis lastes inn". Feilkoder: E:BFF.9999, E:BFF.4001. Inkluderer at man ikke får satt lademål fra app.',
-        images: []
-    },
+        description: 'Ca 07:53: "Feil ved innlasting - connect-tjenestene for denne bilen kunne ikke eller kun delvis lastes inn". Feilkoder: E:BFF.9999, E:BFF.4001. Inkluderer at man ikke får satt lademål fra app.'},
 
     // ============ 2025 (fra opprinnelig HTML - "Feil etter verkstedbesøk 2. januar") ============
     {
         date: '2025-05-06',
         category: 'nokkel', source: 'observation', severity: 'høy',
         title: 'Keyless fungerer ikke - må bruke nøkkel',
-        description: 'Keyless fungerer plutselig ikke. Må bruke nøkkelen for å åpne bilen. Låsing fungerer men opplåsing fungerer ikke.',
-        images: [{ thumb: 'thumbs/20250506_IMG_8581.png', full: '20250506_IMG_8581.mp4', type: 'video' }]
-    },
+        description: 'Keyless fungerer plutselig ikke. Må bruke nøkkelen for å åpne bilen. Låsing fungerer men opplåsing fungerer ikke.'},
     {
         date: '2025-04-12',
         category: 'diverse', source: 'observation', severity: 'kritisk',
         title: '"Motor: Feil! Oppsøk verksted" - cruise control ute',
         description: '"Motor: Feil! Oppsøk verksted" kommer i displayet hver gang bilen brukes. Denne feilen går ikke bort. Det går fint an å kjøre med bilen, men adaptiv kjøreassistent/cruise control virker ikke. (Fikset hos Møller Rud 20250428.)',
         images: [
-            { thumb: 'thumbs/20250412_IMG_8287.jpg', full: '20250412_IMG_8287.jpg', type: 'image' },
-            { thumb: 'thumbs/20250413_IMG_8294.jpg', full: '20250413_IMG_8294.jpg', type: 'image' }
+            { thumb: 'thumbs/20250413_diverse_IMG_8294.jpg', full: '20250413_diverse_IMG_8294.jpg', type: 'image' }
         ]
     },
     {
         date: '2025-04-13',
         category: 'mmi', source: 'observation', severity: 'middels',
         title: '"Velkommen. Laster brukerinformasjon" hele turen',
-        description: '"Velkommen. Laster brukerinformasjon. Vent litt..." melding i MMI hele bilturen (20 min).',
-        images: [{ thumb: 'thumbs/20250413_IMG_8295.jpg', full: '20250413_IMG_8295.jpg', type: 'image' }]
-    },
+        description: '"Velkommen. Laster brukerinformasjon. Vent litt..." melding i MMI hele bilturen (20 min).'},
     {
         date: '2025-03-28',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/20250328_IMG_8142.jpg', full: '20250328_IMG_8142.jpg', type: 'image' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-03-22',
         category: 'mmi', source: 'observation', severity: 'middels',
         title: '"Sperren for registrerte brukeren ikke opphevet"',
-        description: 'Fikk plutselig meldingen: "Sperren for den registrerte brukeren er ikke opphevet ennå. Forbereder bytte til gjestebrukeren."',
-        images: [{ thumb: 'thumbs/20250322_IMG_8109.jpg', full: '20250322_IMG_8109.jpg', type: 'image' }]
-    },
+        description: 'Fikk plutselig meldingen: "Sperren for den registrerte brukeren er ikke opphevet ennå. Forbereder bytte til gjestebrukeren."'},
     {
         date: '2025-03-21',
         category: 'tilkobling', source: 'observation', severity: 'lav',
         title: 'Lang kø ikke registrert i navigasjonssystemet',
-        description: 'Lang kø (15 min forsinkelse, 3 km) uten at den er registrert i navigasjonssystemet. Som regel er bilen flink til å varsle om dette, men ikke i dette tilfelle. Samtidig viste Google Maps stillestående kø i området.',
-        images: [
-            { thumb: 'thumbs/20250321_IMG_8101.jpg', full: '20250321_IMG_8101.jpg', type: 'image' },
-            { thumb: 'thumbs/20250321_IMG_8102.jpg', full: '20250321_IMG_8102.jpg', type: 'image' }
-        ]
-    },
+        description: 'Lang kø (15 min forsinkelse, 3 km) uten at den er registrert i navigasjonssystemet. Som regel er bilen flink til å varsle om dette, men ikke i dette tilfelle. Samtidig viste Google Maps stillestående kø i området.'},
     {
         date: '2025-03-18', displayDate: '2025-03-18 (og mange datoer i jan-apr 2025)',
         category: 'tilkobling', source: 'observation', severity: 'høy',
         title: 'Stadig bortfall av nettilgang - selv i tettbygde strøk',
         description: 'Stadig bortfall av nettilgang, selv i tettbygde strøk, f.eks. Oslo Sentrum, rundt Sandvika, utenfor Møller Billingstad, langs E16, langs E6, langs RV3. Skjer så og si på hver eneste biltur av en viss varighet. Noen ganger fra start, andre ganger etter hvert. Nettilgangen kommer typisk omsider tilbake. Har skjedd mange ganger, som f.eks.: 20250122, 20250124, 20250129, 20250130, 20250206, 20250208, 20250214, 20250215, 20250218, 20250222, 20250222, 20250225, 20250228, 20250316, 20250318, 20250411 og 20250414.',
         images: [
-            { thumb: 'thumbs/20250122_IMG_7623.jpg', full: '20250122_IMG_7623.jpg', type: 'image' },
-            { thumb: 'thumbs/20250122_IMG_7630.jpg', full: '20250122_IMG_7630.jpg', type: 'image' },
-            { thumb: 'thumbs/20250124_IMG_7658.jpg', full: '20250124_IMG_7658.jpg', type: 'image' },
-            { thumb: 'thumbs/20250129_IMG_7701.jpg', full: '20250129_IMG_7701.jpg', type: 'image' },
-            { thumb: 'thumbs/20250130_IMG_7704.jpg', full: '20250130_IMG_7704.jpg', type: 'image' },
-            { thumb: 'thumbs/20250206_IMG_7784.jpg', full: '20250206_IMG_7784.jpg', type: 'image' },
-            { thumb: 'thumbs/20250208_IMG_7794.jpg', full: '20250208_IMG_7794.jpg', type: 'image' },
-            { thumb: 'thumbs/20250214_IMG_7857.jpg', full: '20250214_IMG_7857.jpg', type: 'image' },
-            { thumb: 'thumbs/20250215_IMG_7872.jpg', full: '20250215_IMG_7872.jpg', type: 'image' },
-            { thumb: 'thumbs/20250218_IMG_7889.jpg', full: '20250218_IMG_7889.jpg', type: 'image' },
-            { thumb: 'thumbs/20250222_IMG_7912.jpg', full: '20250222_IMG_7912.jpg', type: 'image' },
-            { thumb: 'thumbs/20250222_IMG_7913.jpg', full: '20250222_IMG_7913.jpg', type: 'image' },
-            { thumb: 'thumbs/20250225_IMG_7960.jpg', full: '20250225_IMG_7960.jpg', type: 'image' },
-            { thumb: 'thumbs/20250228_IMG_7973.jpg', full: '20250228_IMG_7973.jpg', type: 'image' },
-            { thumb: 'thumbs/20250316_IMG_4261.jpg', full: '20250316_IMG_4261.jpg', type: 'image' },
-            { thumb: 'thumbs/20250318_IMG_8083.jpg', full: '20250318_IMG_8083.jpg', type: 'image' },
-            { thumb: 'thumbs/20250411_IMG_8269.jpg', full: '20250411_IMG_8269.jpg', type: 'image' },
-            { thumb: 'thumbs/20250414_IMG_8315.jpg', full: '20250414_IMG_8315.jpg', type: 'image' }
+            { thumb: 'thumbs/20250122_tilkobling_IMG_7623.jpg', full: '20250122_tilkobling_IMG_7623.jpg', type: 'image' },
+            { thumb: 'thumbs/20250122_tilkobling_IMG_7630.jpg', full: '20250122_tilkobling_IMG_7630.jpg', type: 'image' },
+            { thumb: 'thumbs/20250124_tilkobling_IMG_7658.jpg', full: '20250124_tilkobling_IMG_7658.jpg', type: 'image' },
+            { thumb: 'thumbs/20250129_tilkobling_IMG_7701.jpg', full: '20250129_tilkobling_IMG_7701.jpg', type: 'image' },
+            { thumb: 'thumbs/20250130_tilkobling_IMG_7704.jpg', full: '20250130_tilkobling_IMG_7704.jpg', type: 'image' },
+            { thumb: 'thumbs/20250206_tilkobling_IMG_7784.jpg', full: '20250206_tilkobling_IMG_7784.jpg', type: 'image' },
+            { thumb: 'thumbs/20250208_tilkobling_IMG_7794.jpg', full: '20250208_tilkobling_IMG_7794.jpg', type: 'image' },
+            { thumb: 'thumbs/20250214_tilkobling_IMG_7857.jpg', full: '20250214_tilkobling_IMG_7857.jpg', type: 'image' },
+            { thumb: 'thumbs/20250215_tilkobling_IMG_7872.jpg', full: '20250215_tilkobling_IMG_7872.jpg', type: 'image' },
+            { thumb: 'thumbs/20250218_tilkobling_IMG_7889.jpg', full: '20250218_tilkobling_IMG_7889.jpg', type: 'image' },
+            { thumb: 'thumbs/20250222_tilkobling_IMG_7912.jpg', full: '20250222_tilkobling_IMG_7912.jpg', type: 'image' },
+            { thumb: 'thumbs/20250222_tilkobling_IMG_7913.jpg', full: '20250222_tilkobling_IMG_7913.jpg', type: 'image' },
+            { thumb: 'thumbs/20250225_tilkobling_IMG_7960.jpg', full: '20250225_tilkobling_IMG_7960.jpg', type: 'image' },
+            { thumb: 'thumbs/20250228_tilkobling_IMG_7973.jpg', full: '20250228_tilkobling_IMG_7973.jpg', type: 'image' },
+            { thumb: 'thumbs/20250316_tilkobling_IMG_4261.jpg', full: '20250316_tilkobling_IMG_4261.jpg', type: 'image' },
+            { thumb: 'thumbs/20250411_tilkobling_IMG_8269.jpg', full: '20250411_tilkobling_IMG_8269.jpg', type: 'image' },
+            { thumb: 'thumbs/20250414_tilkobling_IMG_8315.jpg', full: '20250414_tilkobling_IMG_8315.jpg', type: 'image' }
         ]
     },
     {
         date: '2025-03-02',
         category: 'mmi', source: 'observation', severity: 'middels',
         title: 'Klokkeslett i MMI feil og umulig å stille',
-        description: 'Klokkeslett i MMI er feil og ikke mulig å stille manuelt. Dette innvirker også da på navigasjonstidspunkter. Klokke i skjermen på dashboardet er riktig på samme tid. Klokka var ca 10:10, men viste ca 09:01. Neste gang jeg brukte bilen var klokka riktig.',
-        images: [
-            { thumb: 'thumbs/20250302_IMG_7985.jpg', full: '20250302_IMG_7985.jpg', type: 'image' },
-            { thumb: 'thumbs/20250302_IMG_7986.jpg', full: '20250302_IMG_7986.jpg', type: 'image' },
-            { thumb: 'thumbs/20250302_IMG_7988.jpg', full: '20250302_IMG_7988.jpg', type: 'image' }
-        ]
-    },
+        description: 'Klokkeslett i MMI er feil og ikke mulig å stille manuelt. Dette innvirker også da på navigasjonstidspunkter. Klokke i skjermen på dashboardet er riktig på samme tid. Klokka var ca 10:10, men viste ca 09:01. Neste gang jeg brukte bilen var klokka riktig.'},
     {
         date: '2025-02-28',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/20250228_IMG_7974.png', full: '20250228_IMG_7974.mp4', type: 'video' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-02-25',
         category: 'mmi', source: 'observation', severity: 'høy',
         title: 'MMI ble resatt midt under langtur',
-        description: 'Midt under en langtur ble MMI resatt. MMI ble borte i ca 1 minutt. Tekst: "Velkommen Fredrik...". Etter at den kom tilbake var en del av innstillingene helt borte, f.eks. favorittene på radioen. Bilen husket fortsatt andre ting, f.eks. navigeringsruten jeg var i gang med, samt favorittene under både bil og navigasjon.',
-        images: [
-            { thumb: 'thumbs/20250225_IMG_7958.jpg', full: '20250225_IMG_7958.jpg', type: 'image' },
-            { thumb: 'thumbs/20250225_IMG_7959.jpg', full: '20250225_IMG_7959.jpg', type: 'image' }
-        ]
-    },
+        description: 'Midt under en langtur ble MMI resatt. MMI ble borte i ca 1 minutt. Tekst: "Velkommen Fredrik...". Etter at den kom tilbake var en del av innstillingene helt borte, f.eks. favorittene på radioen. Bilen husket fortsatt andre ting, f.eks. navigeringsruten jeg var i gang med, samt favorittene under både bil og navigasjon.'},
     {
         date: '2025-02-25',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/20250225_IMG_7961.png', full: '20250225_IMG_7961.mp4', type: 'video' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-02-21',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/20250221_IMG_7903.jpg', full: '20250221_IMG_7903.jpg', type: 'image' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-02-10',
         category: 'klima', source: 'observation', severity: 'høy',
         title: 'Klimatisering fra app fungerte ikke - iskald bil ved avreise',
         description: 'ca 07:30: Satt avreisetid i app-en (klimatisering) til 08:15. ca 07:50: Sjekket at klimatiseringen startet. Da jeg kom ut til bilen 08:14 gikk ikke klimatiseringen, rutene var ikke tint, og bilen var iskald. Bildene av rutene er tatt 08:14.',
         images: [
-            { thumb: 'thumbs/20250210_IMG_7819.jpg', full: '20250210_IMG_7819.jpg', type: 'image' },
-            { thumb: 'thumbs/20250210_IMG_7821.jpg', full: '20250210_IMG_7821.jpg', type: 'image' },
-            { thumb: 'thumbs/20250210_IMG_7822.jpg', full: '20250210_IMG_7822.jpg', type: 'image' },
             { thumb: 'thumbs/times.jpg', full: 'times.jpg', type: 'image' }
         ]
     },
@@ -572,74 +420,47 @@ const FAULTS = [
         date: '2025-02-07',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/20250207_hud.png', full: '20250207_IMG_7790.mp4', type: 'video' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-02-02',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/20250202_hud.png', full: '20250202_IMG_7754.mp4', type: 'video' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-02-02',
         category: 'klima', source: 'observation', severity: 'middels',
         title: 'Klimatisering fra app slo seg av etter 10 min',
-        description: 'Starta klimatisering fra myAudi-appen og sjekket at den startet som den skulle. Da jeg sjekket 10 minutter senere hadde den skrudd seg av av seg selv.',
-        images: [{ thumb: 'thumbs/20250202_IMG_7753.jpg', full: '20250202_IMG_7753.jpg', type: 'image' }]
-    },
+        description: 'Starta klimatisering fra myAudi-appen og sjekket at den startet som den skulle. Da jeg sjekket 10 minutter senere hadde den skrudd seg av av seg selv.'},
     {
         date: '2025-01-31',
         category: 'klima', source: 'observation', severity: 'middels',
         title: 'Klimatisering fra app - iskaldt etter 20 min',
-        description: 'Starta klimatisering ca 12:00 fra myAudi-appen. Ingen feilmelding i appen, men da jeg gikk inn i bilen 20 minutter etter start var det iskaldt og varmen var ikke på.',
-        images: []
-    },
+        description: 'Starta klimatisering ca 12:00 fra myAudi-appen. Ingen feilmelding i appen, men da jeg gikk inn i bilen 20 minutter etter start var det iskaldt og varmen var ikke på.'},
     {
         date: '2025-01-25',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/hud_3.png', full: '20250125_IMG_7667.mp4', type: 'video' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-01-20',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/hud_1.png', full: '20250120_IMG_7607.mp4', type: 'video' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-01-20',
         category: 'lading', source: 'observation', severity: 'middels',
         title: 'Pushmelding: "Det har oppstått en feil ladenettet"',
-        description: 'Pushmelding i app-en: "Det har oppstått en feil ladenettet" (sic) med tilhørende feil i app-en. Disse kommer nesten daglig, og stammer nok fra at vi bruker smartlading, så det ikke nødvendigvis er strøm i ladekabelen når vi plugger den i. Dette er jo imidlertid ikke en feil - det er helt normalt, og bilen/app-en bør ikke feile pga dette.',
-        images: [
-            { thumb: 'thumbs/20250120_IMG_7605.jpg', full: '20250120_IMG_7605.jpg', type: 'image' },
-            { thumb: 'thumbs/20250120_IMG_7606.jpg', full: '20250120_IMG_7606.jpg', type: 'image' }
-        ]
-    },
+        description: 'Pushmelding i app-en: "Det har oppstått en feil ladenettet" (sic) med tilhørende feil i app-en. Disse kommer nesten daglig, og stammer nok fra at vi bruker smartlading, så det ikke nødvendigvis er strøm i ladekabelen når vi plugger den i. Dette er jo imidlertid ikke en feil - det er helt normalt, og bilen/app-en bør ikke feile pga dette.'},
     {
         date: '2025-01-19',
         category: 'hud', source: 'observation', severity: 'høy',
         title: 'HUD forsvant under kjøring',
-        description: 'Head-up-displayet forsvant under kjøring igjen.',
-        images: [{ thumb: 'thumbs/hud_2.png', full: '20250119_IMG_7600.mp4', type: 'video' }]
-    },
+        description: 'Head-up-displayet forsvant under kjøring igjen.'},
     {
         date: '2025-01-17',
         category: 'mmi', source: 'observation', severity: 'høy',
         title: 'Mange feilmeldinger om verksted/systemfeil',
-        description: 'Mange feilmeldinger om å kontakte verksted/systemfeil. Ikke samme ordlyd som de som dukker opp ved dårlig sikt lenger ned. Mer "alvorlig" ordlyd. Feilene forsvant ved omstart av bilen.',
-        images: [
-            { thumb: 'thumbs/20250117_IMG_7579.jpg', full: '20250117_IMG_7579.jpg', type: 'image' },
-            { thumb: 'thumbs/20250117_IMG_7580.jpg', full: '20250117_IMG_7580.jpg', type: 'image' },
-            { thumb: 'thumbs/20250117_IMG_7581.jpg', full: '20250117_IMG_7581.jpg', type: 'image' },
-            { thumb: 'thumbs/20250117_IMG_7584.jpg', full: '20250117_IMG_7584.jpg', type: 'image' },
-            { thumb: 'thumbs/20250117_IMG_7585.jpg', full: '20250117_IMG_7585.jpg', type: 'image' }
-        ]
-    },
+        description: 'Mange feilmeldinger om å kontakte verksted/systemfeil. Ikke samme ordlyd som de som dukker opp ved dårlig sikt lenger ned. Mer "alvorlig" ordlyd. Feilene forsvant ved omstart av bilen.'},
     {
         date: '2025-01-17',
         category: 'app', source: 'observation', severity: 'middels',
@@ -669,16 +490,12 @@ const FAULTS = [
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
         category: 'mmi', source: 'observation', severity: 'middels',
         title: 'MMI husker ikke favoritter som hurtigvalg',
-        description: 'MMI: Husker ikke at vi vil ha favoritter i stedet for media som hurtigvalg. Blir resatt hver gang vi kjører bilen.',
-        images: []
-    },
+        description: 'MMI: Husker ikke at vi vil ha favoritter i stedet for media som hurtigvalg. Blir resatt hver gang vi kjører bilen.'},
     {
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
         category: 'mmi', source: 'observation', severity: 'lav',
         title: 'Kart husker ikke innstillinger (zoom, auto-zoom)',
-        description: 'Kart: Husker ikke innstillinger, som for eksempel zoom-nivå eller auto-zoom av.',
-        images: []
-    },
+        description: 'Kart: Husker ikke innstillinger, som for eksempel zoom-nivå eller auto-zoom av.'},
     {
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
         category: 'mmi', source: 'observation', severity: 'middels',
@@ -812,12 +629,7 @@ const FAULTS = [
         date: '2024-09-05', displayDate: 'ca 5. september 2024',
         category: 'diverse', source: 'mail-20241128', severity: 'kritisk',
         title: 'Beskjed om alvorlig feil - må stoppe (2-3 ganger)',
-        description: 'Vi har fått beskjed om at det er noe alvorlig feil med bilen og at vi må stoppe med en gang 2-3 ganger.',
-        images: [
-            { thumb: 'thumbs/20240905_IMG_6106.jpg', full: '20240905_IMG_6106.jpg', type: 'image' },
-            { thumb: 'thumbs/20240905_IMG_6107.jpg', full: '20240905_IMG_6107.jpg', type: 'image' }
-        ]
-    },
+        description: 'Vi har fått beskjed om at det er noe alvorlig feil med bilen og at vi må stoppe med en gang 2-3 ganger.'},
     {
         date: '2024-11-28', displayDate: 'Meldt i mail 28. november 2024',
         category: 'lading', source: 'mail-20241128', severity: 'høy',
@@ -827,7 +639,13 @@ const FAULTS = [
             { thumb: 'thumbs/ladeapp_1.jpg', full: 'ladeapp_1.jpg', type: 'image' },
             { thumb: 'thumbs/ladeapp_2.jpg', full: 'ladeapp_2.jpg', type: 'image' },
             { thumb: 'thumbs/ladeapp_3.jpg', full: 'ladeapp_3.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_4.jpg', full: 'ladeapp_4.jpg', type: 'image' }
+            { thumb: 'thumbs/ladeapp_4.jpg', full: 'ladeapp_4.jpg', type: 'image' },
+            { thumb: 'thumbs/ladeapp_5.jpg', full: 'ladeapp_5.jpg', type: 'image' },
+            { thumb: 'thumbs/ladeapp_6.jpg', full: 'ladeapp_6.jpg', type: 'image' },
+            { thumb: 'thumbs/ladeapp_7.jpg', full: 'ladeapp_7.jpg', type: 'image' },
+            { thumb: 'thumbs/ladeapp_8.jpg', full: 'ladeapp_8.jpg', type: 'image' },
+            { thumb: 'thumbs/ladeapp_9.jpg', full: 'ladeapp_9.jpg', type: 'image' },
+            { thumb: 'thumbs/ladeapp_10.jpg', full: 'ladeapp_10.jpg', type: 'image' }
         ]
     },
     {
@@ -837,7 +655,8 @@ const FAULTS = [
         description: 'Bilen sier "Ladesystem feil!"',
         images: [
             { thumb: 'thumbs/ladebil_1.jpg', full: 'ladebil_1.jpg', type: 'image' },
-            { thumb: 'thumbs/ladebil_2.jpg', full: 'ladebil_2.jpg', type: 'image' }
+            { thumb: 'thumbs/ladebil_2.jpg', full: 'ladebil_2.jpg', type: 'image' },
+            { thumb: 'thumbs/ladebil_3.jpg', full: 'ladebil_3.jpg', type: 'image' }
         ]
     },
     {
@@ -849,7 +668,7 @@ const FAULTS = [
             { thumb: 'thumbs/ladeluke_1.jpg', full: 'ladeluke_1.jpg', type: 'image' },
             { thumb: 'thumbs/ladeluke_2.jpg', full: 'ladeluke_2.jpg', type: 'image' }
         ]
-    },
+    }
 ];
 
 // Kontinuerlige/vedvarende feil (fra mail 20260826 pkt 3 og oppsummering)
@@ -858,7 +677,8 @@ const RECURRING_FAULTS = [
     { category: 'hud', title: 'Filskifteassistent (lane change assist) virker ikke - IKKE forveksles med filholder',
       description: 'Filskifteassistenten aktiveres ved å slå på blinklys på flerfeltsvei - bilen skal da selv skifte fil. Symptom: pilene i displayet forblir grå selv på veier bilen sier støtter funksjonen (f.eks. E18 Sandvika, E16, E6). En bekjent har funnet ut at grensen for aktivering kan være satt alt for høyt (150 km/h), mens instruksjonsboka sier 90 km/h.',
       note: 'OBS: dette gjelder AKTIV filskifteassistent (bilen skifter fil på kommando via blinklys), IKKE filholderfunksjonen ("lane keep assist") under adaptiv cruise control. Verkstedet har tidligere misforstått dette.',
-      swFix: true, fixed: '2026-09-04' },
+      swFix: true, fixed: '2026-09-04',
+      images: [{ thumb: 'thumbs/lane_change.jpg', full: 'lane_change.jpg', type: 'image' }] },
     { category: 'mmi', title: 'CarPlay overtar - kan ikke velge favoritter i MMI',
       description: 'Hvis iPhone/CarPlay er koblet til går det ikke an å velge favoritter i MMI. Den hopper rett tilbake til CarPlay.',
       swFix: true },
@@ -890,7 +710,7 @@ const RECURRING_FAULTS = [
       description: 'En del tjenester er ikke tilgjengelig - automatisk fjernlys, skiltgjenkjennelse osv - uten at det er noen åpenbar siktbegrensning foran sladrspeilet. Antakelig sensorsikt-relatert, men gjør det vanskelig å vite hvor is bør fjernes.' },
     { category: 'lading', title: 'Batteriforvarming mangler egen funksjon - må fakes via navigasjon',
       description: 'For å få batteriforvarming før hurtiglading må man legge ladestopp i navigasjonssystemet. Burde vært en eksplisitt funksjon man kan starte når man vet at det er ca 15 min igjen til lading. Nå må man "fake" en ladestopp omtrent der man tror man skal lade, og det blir ofte feil.',
-      swFix: true, fixed: '2026-09-04' },
+      swFix: true, fixed: '2026-09-04' }
 ];
 
 // Programvareversjoner dokumentert på bilder over tid.
@@ -899,19 +719,19 @@ const RECURRING_FAULTS = [
 const SOFTWARE_VERSIONS = [
     { date: '2025-01-02', car: 'Lånebil (2025-modell)', version: '4325', note: 'Ifm verkstedbesøk 2. januar 2025',
       images: [
-          { thumb: 'thumbs/20250102_IMG_7391.jpg', full: '20250102_IMG_7391.jpg', type: 'image' },
-          { thumb: 'thumbs/20250102_IMG_7392.jpg', full: '20250102_IMG_7392.jpg', type: 'image' }
+          { thumb: 'thumbs/20250102_versjon_IMG_7391.jpg', full: '20250102_versjon_IMG_7391.jpg', type: 'image' },
+          { thumb: 'thumbs/20250102_versjon_IMG_7392.jpg', full: '20250102_versjon_IMG_7392.jpg', type: 'image' }
       ] },
     { date: '2025-01-13', car: 'Min bil (EH8XXXX)', version: '4145', note: 'Egen bil før oppdateringen',
       images: [
-          { thumb: 'thumbs/20250113_IMG_7502.jpg', full: '20250113_IMG_7502.jpg', type: 'image' },
-          { thumb: 'thumbs/20250113_IMG_7503.jpg', full: '20250113_IMG_7503.jpg', type: 'image' }
+          { thumb: 'thumbs/20250113_versjon_IMG_7502.jpg', full: '20250113_versjon_IMG_7502.jpg', type: 'image' },
+          { thumb: 'thumbs/20250113_versjon_IMG_7503.jpg', full: '20250113_versjon_IMG_7503.jpg', type: 'image' }
       ] },
     { date: '2026-09-04', car: 'Min bil (EH8XXXX)', version: '4373', note: 'Etter storoppdatering under verkstedbesøket 3./4. september',
       images: [
-          { thumb: 'thumbs/20260904_IMG_3190.jpg', full: '20260904_IMG_3190.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_IMG_3191.jpg', full: '20260904_IMG_3191.jpg', type: 'image' }
-      ] },
+          { thumb: 'thumbs/20260904_versjon_IMG_3190.jpg', full: '20260904_versjon_IMG_3190.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_versjon_IMG_3191.jpg', full: '20260904_versjon_IMG_3191.jpg', type: 'image' }
+      ] }
 ];
 
 // Kontaktlogg (verksted, mail, telefon)
@@ -930,12 +750,12 @@ const CONTACTS = [
       title: 'Bilen tilbake fra verksted - fikser og service utført',
       description: 'Verkstedet har (1) byttet låsemekanismen for ladekabelen, som forventes å løse både AC- og DC-ladefeilene, (2) tatt service (planlagt time 21. september utgår derfor), og (3) kjørt en softwareoppgradering. Flere av de vedvarende feilene er verifisert løst etter oppgraderingen. Bildene dokumenterer nye software-versjoner og verifiserte fikser (manuell batteriforvarming, fartsvarsel-hurtigknapp, filskifteassistent).',
       images: [
-          { thumb: 'thumbs/20260904_IMG_3190.jpg', full: '20260904_IMG_3190.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_IMG_3191.jpg', full: '20260904_IMG_3191.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_IMG_3192.jpg', full: '20260904_IMG_3192.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_IMG_3193.jpg', full: '20260904_IMG_3193.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_IMG_3195.jpg', full: '20260904_IMG_3195.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_IMG_3197.jpg', full: '20260904_IMG_3197.jpg', type: 'image' }
+          { thumb: 'thumbs/20260904_versjon_IMG_3190.jpg', full: '20260904_versjon_IMG_3190.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_versjon_IMG_3191.jpg', full: '20260904_versjon_IMG_3191.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_fix_IMG_3192.jpg', full: '20260904_fix_IMG_3192.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_fix_IMG_3193.jpg', full: '20260904_fix_IMG_3193.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_fix_IMG_3195.jpg', full: '20260904_fix_IMG_3195.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_fix_IMG_3197.jpg', full: '20260904_fix_IMG_3197.jpg', type: 'image' }
       ] },
     { date: '2026-09-03', type: 'verksted',
       title: 'Verkstedbesøk - kabellås-feil funnet, softwareoppgradering',
@@ -1402,7 +1222,7 @@ const CONTACTS = [
     { date: '2024-11-20', type: 'telefon', title: 'Telefon til Audi support + videofeilsøking',
       description: 'Telefon til Audi support om fremgang. Forsøkt feilsøkt uten hell med support over videotelefon (0003198748).' },
     { date: '2024-08-15', displayDate: 'Sensommer 2024', type: 'telefon', title: 'Første kontakt med Audi Digitale Tjenester',
-      description: 'Første kontakt pr mail og telefon til "Audi Digitale Tjenester" om feilende kommunikasjon mellom app og bil. Løst over telefon.' },
+      description: 'Første kontakt pr mail og telefon til "Audi Digitale Tjenester" om feilende kommunikasjon mellom app og bil. Løst over telefon.' }
 ];
 
 // (RECENT_EMAILS er slått sammen med CONTACTS - kontaktoppføringer med `featured: true`
@@ -1457,17 +1277,19 @@ function _collectManuallyClaimed() {
 let _manualClaimsSnapshot = null;
 
 function autoDiscoverImages(fault) {
-    if (fault.images && fault.images.length > 0) return fault.images;
-    if (typeof IMAGE_MANIFEST === 'undefined') return [];
+    if (typeof IMAGE_MANIFEST === 'undefined') return fault.images || [];
     // Ingen dato-range støtte: range-faults må sette images manuelt.
     const date = String(fault.date || '');
-    if (!date || date === 'div' || date.includes('..')) return [];
+    if (!date || date === 'div' || date.includes('..')) return fault.images || [];
     const dateKey = date.replace(/-/g, '');
     const catSlugs = Object.keys(CATEGORIES);
+    // "claimed" = filer manuelt satt på ANDRE faults, som ikke skal shotgun-attaches hit
     const claimed = _manualClaimsSnapshot || _collectManuallyClaimed();
+    const ownManual = new Set((fault.images || []).map(i => i.full));
 
-    return IMAGE_MANIFEST
-        .filter(f => !claimed.has(f))
+    const discovered = IMAGE_MANIFEST
+        .filter(f => !claimed.has(f) || ownManual.has(f))
+        .filter(f => !ownManual.has(f)) // egne manuelle beholdes via .concat under
         .filter(f => f.startsWith(dateKey + '_'))
         .filter(f => {
             const rest = f.slice(dateKey.length + 1).toLowerCase();
@@ -1485,17 +1307,18 @@ function autoDiscoverImages(fault) {
                 type:  isVideo ? 'video' : 'image'
             };
         });
+
+    // Manuelle først (bevarer eksplisitt rekkefølge), så auto-discovered
+    return [...(fault.images || []), ...discovered];
 }
 
-// Kjøres én gang ved oppstart (fra script.js) - fyller inn f.images på alle feil
-// som ikke allerede har bilder satt manuelt.
+// Kjøres én gang ved oppstart (fra script.js) - fyller inn f.images på alle feil.
+// Manuelle images beholdes; auto-discovered bilder legges til.
 function applyAutoDiscovery() {
     if (typeof IMAGE_MANIFEST === 'undefined') return;
     _manualClaimsSnapshot = _collectManuallyClaimed();
     FAULTS.forEach(f => {
-        if (!f.images || f.images.length === 0) {
-            f.images = autoDiscoverImages(f);
-        }
+        f.images = autoDiscoverImages(f);
     });
     _manualClaimsSnapshot = null;
 }

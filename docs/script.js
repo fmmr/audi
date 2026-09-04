@@ -145,6 +145,7 @@ function renderStatus() {
                 <h3>${esc(f.title)}</h3>
                 ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
                 <p>${esc(f.description)}</p>
+                ${(f.images && f.images.length) ? renderThumbs(f.images) : ''}
             </div>
         `;
     };
@@ -245,6 +246,7 @@ function renderSystems() {
             <h3>${esc(f.title)}</h3>
             ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
             <p>${esc(f.description)}</p>
+            ${(f.images && f.images.length) ? renderThumbs(f.images) : ''}
         </div>
     `;
 
@@ -622,6 +624,15 @@ function renderGallery() {
         }));
     });
 
+    // 1b) RECURRING_FAULTS - kategori kommer fra feilen
+    if (typeof RECURRING_FAULTS !== 'undefined') {
+        RECURRING_FAULTS.forEach(f => {
+            (f.images || []).forEach(img => push(f.category, {
+                ...img, title: f.title, date: f.fixed ? 'Fikset ' + formatDate(f.fixed) : 'Vedvarende'
+            }));
+        });
+    }
+
     // 2) CONTACTS - kategori fra filnavn-prefix eller diverse
     if (typeof CONTACTS !== 'undefined') {
         CONTACTS.forEach(c => {
@@ -634,7 +645,7 @@ function renderGallery() {
     // 3) SOFTWARE_VERSIONS
     if (typeof SOFTWARE_VERSIONS !== 'undefined') {
         SOFTWARE_VERSIONS.forEach(v => {
-            (v.images || []).forEach(img => push('diverse', {
+            (v.images || []).forEach(img => push(_catFromFilename(img.full) || 'versjon', {
                 ...img, title: `Programvareversjon${v.version ? ' ' + v.version : ''} (${v.car})`, date: formatDate(v.date)
             }));
         });
