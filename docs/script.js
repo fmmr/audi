@@ -601,25 +601,79 @@ function renderGallery() {
     const root = $('#view-gallery');
     const rows = [];
 
-    rows.push(renderLegendBar());
     rows.push('<h2>Bildegalleri</h2>');
     rows.push('<p class="lead">Alle dokumentasjonsbilder og -videoer gruppert etter kategori. Klikk på et bilde for å se det i full størrelse.</p>');
 
-    Object.entries(CATEGORIES).forEach(([key, cat]) => {
-        const items = [];
-        FAULTS.filter(f => f.category === key).forEach(f => {
-            (f.images || []).forEach(img => {
-                items.push({
-                    ...img,
-                    title: f.title,
-                    date: f.displayDate || formatDate(f.date)
-                });
+    // Samle bilder fra alle kilder. Nøkkel = full filnavn, verdi = første observerte metadata.
+    const byCategory = {};
+    Object.keys(CATEGORIES).forEach(k => byCategory[k] = []);
+    const seen = new Set();
+
+    const push = (categoryKey, img) => {
+        if (!img || !img.full || seen.has(img.full)) return;
+        seen.add(img.full);
+        (byCategory[categoryKey] || (byCategory[categoryKey] = [])).push(img);
+    };
+
+    // 1) FAULTS - kategori kommer fra feilen
+    FAULTS.forEach(f => {
+        (f.images || []).forEach(img => push(f.category, {
+            ...img, title: f.title, date: f.displayDate || formatDate(f.date)
+        }));
+    });
+
+    // 2) CONTACTS - kategori fra filnavn-prefix eller diverse
+    if (typeof CONTACTS !== 'undefined') {
+        CONTACTS.forEach(c => {
+            (c.images || []).forEach(img => push(_catFromFilename(img.full) || 'diverse', {
+                ...img, title: c.title, date: c.displayDate || formatDate(c.date)
+            }));
+        });
+    }
+
+    // 3) SOFTWARE_VERSIONS
+    if (typeof SOFTWARE_VERSIONS !== 'undefined') {
+        SOFTWARE_VERSIONS.forEach(v => {
+            (v.images || []).forEach(img => push('diverse', {
+                ...img, title: `Programvareversjon${v.version ? ' ' + v.version : ''} (${v.car})`, date: formatDate(v.date)
+            }));
+        });
+    }
+
+    // 4) Foreldreløse filer i manifest - kategori fra filnavn eller diverse
+    if (typeof IMAGE_MANIFEST !== 'undefined') {
+        IMAGE_MANIFEST.forEach(fn => {
+            if (seen.has(fn)) return;
+            const isVideo = /\.(mp4|mov)$/i.test(fn);
+            const thumb = 'thumbs/' + (isVideo ? fn.replace(/\.(mp4|mov)$/i, '.png') : fn);
+            const cat = _catFromFilename(fn) || 'diverse';
+            const dateFromName = _dateFromFilename(fn);
+            push(cat, {
+                thumb, full: fn, type: isVideo ? 'video' : 'image',
+                title: '(ikke lenket til feil)',
+                date: dateFromName ? formatDate(dateFromName) : ''
             });
         });
+    }
+
+    // Kategori-navigasjon (chips) - hopp til seksjon
+    const navChips = [];
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const cnt = (byCategory[key] || []).length;
+        if (cnt === 0) return;
+        navChips.push(`<a href="#gal-${key}" class="cat-nav-chip cat-${key}">${esc(cat.short)} <span>${cnt}</span></a>`);
+    });
+    rows.push(`<nav class="cat-nav">${navChips.join('')}</nav>`);
+
+    // Sett opp per-kategori
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const items = byCategory[key] || [];
         if (items.length === 0) return;
+        // Sorter nyeste først (tomme datoer til slutt)
+        items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
         rows.push(`
-            <div class="gallery-cat" style="--cat: ${cat.color}">
+            <div class="gallery-cat" id="gal-${key}" style="--cat: ${cat.color}">
                 <h3>${esc(cat.label)} <span class="count-inline">${items.length}</span></h3>
                 <div class="gallery-grid">
                     ${items.map(img => `
@@ -627,7 +681,7 @@ function renderGallery() {
                                 data-full="${esc(img.full)}" data-type="${esc(img.type)}"
                                 aria-label="Åpne ${esc(img.title)}">
                             <img src="${esc(img.thumb)}" alt="" loading="lazy">
-                            <div class="caption">${esc(img.date)}<br>${esc(img.title)}</div>
+                            <div class="caption">${esc(img.date)}${img.title ? '<br>' + esc(img.title) : ''}</div>
                         </button>
                     `).join('')}
                 </div>
@@ -636,6 +690,19 @@ function renderGallery() {
     });
 
     root.innerHTML = rows.join('');
+}
+
+function _catFromFilename(fn) {
+    if (!fn) return null;
+    const m = fn.match(/^\d{8}_([a-z]+)_/i);
+    if (!m) return null;
+    const slug = m[1].toLowerCase();
+    return CATEGORIES[slug] ? slug : null;
+}
+
+function _dateFromFilename(fn) {
+    const m = fn && fn.match(/^(\d{4})(\d{2})(\d{2})_/);
+    return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
 }
 
 // ============ LIGHTBOX MODAL ============
