@@ -1,5 +1,5 @@
 // Feildatabase for Audi Q4 e-tron (EH8XXXX)
-// Kategorier: lading | mmi | hud | app | klima | nokkel | diverse
+// Kategorier: lading | mmi | hud | app | klima | nokkel | tilkobling | versjon | fix | diverse
 // Kilder:     observation (egen observasjon) | mail-YYYYMMDD (rapportert i mail) | verksted (verkstedrapport)
 
 // Statusbanner øverst på "Siste status"-fanen.
@@ -20,9 +20,9 @@ const CATEGORIES = {
     klima:   { label: 'Klima & Komfort',       color: '#06b6d4', short: 'Klima' },
     nokkel:  { label: 'Nøkkel & Adgang',       color: '#a855f7', short: 'Nøkkel' },
     tilkobling: { label: 'Nettverk & tilkobling', color: '#0891b2', short: 'Nett' },
-    diverse: { label: 'Diverse (motor, ledningsnett m.m.)', color: '#737373', short: 'Diverse' },
     versjon: { label: 'Programvareversjoner',  color: '#7c3aed', short: 'Versjon' },
-    fix:     { label: 'Verksted-fikser (3./4. sept 2026)', color: '#16a34a', short: 'Fix' }
+    fix:     { label: 'Verksted-fikser (3./4. sept 2026)', color: '#16a34a', short: 'Fix' },
+    diverse: { label: 'Diverse (motor, ledningsnett m.m.)', color: '#737373', short: 'Diverse' }
 };
 
 // Alle bilde-referanser peker mot filnavn under docs/. Videoer åpnes via video-parameter.

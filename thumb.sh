@@ -4,7 +4,7 @@
 #
 # Konvensjon: nye bilder skal navngis
 #     YYYYMMDD_[kategori_]beskrivelse.jpg
-# Kategorier: lading, mmi, hud, app, klima, nokkel, diverse
+# Kategorier: lading, mmi, hud, app, klima, nokkel, tilkobling, versjon, fix, diverse
 #
 # Videoer (.mp4/.mov) får automatisk et thumbnail-uttrekk hvis ffmpeg er
 # installert. Ellers vises de med et generisk video-ikon på siten.

@@ -36,10 +36,31 @@ function initNav() {
             window.scrollTo({ top: 0, behavior: 'instant' });
         });
     });
-    // Deep-link
+
+    // Deep-link: hash kan være en view (status/systems/timeline/gallery) eller
+    // en sub-anker (cat-*/gal-*) - i sistnevnte tilfelle finner vi hvilken view
+    // ankeret ligger inne i og aktiverer den, og lar nettleseren scrolle til ankeret.
     const hash = (location.hash || '#status').slice(1);
-    const target = document.querySelector(`.nav-btn[data-view="${hash}"]`) || buttons[0];
-    target?.click();
+    let viewBtn = document.querySelector(`.nav-btn[data-view="${hash}"]`);
+    let scrollTo = null;
+    if (!viewBtn && hash) {
+        const anchorEl = document.getElementById(hash);
+        if (anchorEl) {
+            const viewEl = anchorEl.closest('.view');
+            if (viewEl) {
+                const viewName = viewEl.id.replace(/^view-/, '');
+                viewBtn = document.querySelector(`.nav-btn[data-view="${viewName}"]`);
+                scrollTo = anchorEl;
+            }
+        }
+    }
+    (viewBtn || buttons[0])?.click();
+    if (scrollTo) {
+        // Etter view-bytte (som scroller til top) - hopp til ankeret
+        requestAnimationFrame(() => scrollTo.scrollIntoView({ block: 'start' }));
+        // Behold sub-ankeret i URL-en (click satte det til view-navn)
+        history.replaceState(null, '', '#' + hash);
+    }
 }
 
 // ============ SISTE STATUS ============
@@ -606,66 +627,43 @@ function renderGallery() {
     rows.push('<h2>Bildegalleri</h2>');
     rows.push('<p class="lead">Alle dokumentasjonsbilder og -videoer gruppert etter kategori. Klikk på et bilde for å se det i full størrelse.</p>');
 
-    // Samle bilder fra alle kilder. Nøkkel = full filnavn, verdi = første observerte metadata.
+    // Kategorisering: filnavn-prefix er sannheten (YYYYMMDD_kategori_...).
+    // Fallback til kildens egen kategori for filer uten prefix (typisk generics).
     const byCategory = {};
     Object.keys(CATEGORIES).forEach(k => byCategory[k] = []);
     const seen = new Set();
 
-    const push = (categoryKey, img) => {
+    const push = (img, sourceCategory) => {
         if (!img || !img.full || seen.has(img.full)) return;
         seen.add(img.full);
-        (byCategory[categoryKey] || (byCategory[categoryKey] = [])).push(img);
+        const key = _catFromFilename(img.full) || sourceCategory || 'diverse';
+        (byCategory[key] || (byCategory[key] = [])).push(img);
     };
 
-    // 1) FAULTS - kategori kommer fra feilen
-    FAULTS.forEach(f => {
-        (f.images || []).forEach(img => push(f.category, {
-            ...img, title: f.title, date: f.displayDate || formatDate(f.date)
-        }));
+    const addFrom = (source, catFn, titleFn, dateFn) => {
+        source.forEach(item => (item.images || []).forEach(img => push({
+            ...img, title: titleFn(item), date: dateFn(item)
+        }, catFn(item))));
+    };
+
+    addFrom(FAULTS,             f => f.category, f => f.title, f => f.displayDate || formatDate(f.date));
+    addFrom(RECURRING_FAULTS,   f => f.category, f => f.title, f => f.fixed ? 'Fikset ' + formatDate(f.fixed) : 'Vedvarende');
+    addFrom(CONTACTS,           () => 'diverse', c => c.title, c => c.displayDate || formatDate(c.date));
+    addFrom(SOFTWARE_VERSIONS,  () => 'versjon', v => `Programvareversjon${v.version ? ' ' + v.version : ''} (${v.car})`, v => formatDate(v.date));
+
+    // Filer i manifest som ikke er lenket noe sted - kategori kun fra filnavn (eller diverse)
+    IMAGE_MANIFEST.forEach(fn => {
+        if (seen.has(fn)) return;
+        const isVideo = /\.(mp4|mov)$/i.test(fn);
+        const date = _dateFromFilename(fn);
+        push({
+            thumb: 'thumbs/' + (isVideo ? fn.replace(/\.(mp4|mov)$/i, '.png') : fn),
+            full: fn,
+            type: isVideo ? 'video' : 'image',
+            title: '(ikke lenket til feil)',
+            date: date ? formatDate(date) : ''
+        });
     });
-
-    // 1b) RECURRING_FAULTS - kategori kommer fra feilen
-    if (typeof RECURRING_FAULTS !== 'undefined') {
-        RECURRING_FAULTS.forEach(f => {
-            (f.images || []).forEach(img => push(f.category, {
-                ...img, title: f.title, date: f.fixed ? 'Fikset ' + formatDate(f.fixed) : 'Vedvarende'
-            }));
-        });
-    }
-
-    // 2) CONTACTS - kategori fra filnavn-prefix eller diverse
-    if (typeof CONTACTS !== 'undefined') {
-        CONTACTS.forEach(c => {
-            (c.images || []).forEach(img => push(_catFromFilename(img.full) || 'diverse', {
-                ...img, title: c.title, date: c.displayDate || formatDate(c.date)
-            }));
-        });
-    }
-
-    // 3) SOFTWARE_VERSIONS
-    if (typeof SOFTWARE_VERSIONS !== 'undefined') {
-        SOFTWARE_VERSIONS.forEach(v => {
-            (v.images || []).forEach(img => push(_catFromFilename(img.full) || 'versjon', {
-                ...img, title: `Programvareversjon${v.version ? ' ' + v.version : ''} (${v.car})`, date: formatDate(v.date)
-            }));
-        });
-    }
-
-    // 4) Foreldreløse filer i manifest - kategori fra filnavn eller diverse
-    if (typeof IMAGE_MANIFEST !== 'undefined') {
-        IMAGE_MANIFEST.forEach(fn => {
-            if (seen.has(fn)) return;
-            const isVideo = /\.(mp4|mov)$/i.test(fn);
-            const thumb = 'thumbs/' + (isVideo ? fn.replace(/\.(mp4|mov)$/i, '.png') : fn);
-            const cat = _catFromFilename(fn) || 'diverse';
-            const dateFromName = _dateFromFilename(fn);
-            push(cat, {
-                thumb, full: fn, type: isVideo ? 'video' : 'image',
-                title: '(ikke lenket til feil)',
-                date: dateFromName ? formatDate(dateFromName) : ''
-            });
-        });
-    }
 
     // Kategori-navigasjon (chips) - hopp til seksjon
     const navChips = [];
