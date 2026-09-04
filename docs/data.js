@@ -6,10 +6,10 @@
 // severity styrer farge: kritisk (rød) | høy (oransje) | middels (gul) | lav (blå/grå) | info (blå)
 // Sett STATUS = null for å skjule banneret helt.
 const STATUS = {
-    header:   'Bilen til verksted 3. september - kabellås-feil funnet',
-    body:     'Møller ringte 2. sep og tilbød time neste morgen. Møtte 07:30 den 3. sep. Verkstedet fant feil ved kabellåsen (kabelen låser seg ikke) - antas å være kilden til både AC- og DC-feilene. I tillegg kjøres en softwareoppgradering (4+ timer). Fikk leiebil. Fortsatt planlagt større verkstedtime 21. september for oppfølging av øvrige feil.',
-    severity: 'høy',
-    date:     '2026-09-03',
+    header:   'Bilen tilbake fra verksted 4. september - flere feil løst',
+    body:     'Verkstedet byttet låsemekanismen for ladekabelen (forventet fiks for både AC- og DC-ladefeilene) og kjørte en softwareoppgradering. Servicen ble også tatt samtidig, så den planlagte timen 21. september utgår. Flere av de vedvarende feilene er verifisert løst av oppgraderingen.',
+    severity: 'ok',
+    date:     '2026-09-04',
 };
 
 const CATEGORIES = {
@@ -858,7 +858,7 @@ const RECURRING_FAULTS = [
     { category: 'hud', title: 'Filskifteassistent (lane change assist) virker ikke - IKKE forveksles med filholder',
       description: 'Filskifteassistenten aktiveres ved å slå på blinklys på flerfeltsvei - bilen skal da selv skifte fil. Symptom: pilene i displayet forblir grå selv på veier bilen sier støtter funksjonen (f.eks. E18 Sandvika, E16, E6). En bekjent har funnet ut at grensen for aktivering kan være satt alt for høyt (150 km/h), mens instruksjonsboka sier 90 km/h.',
       note: 'OBS: dette gjelder AKTIV filskifteassistent (bilen skifter fil på kommando via blinklys), IKKE filholderfunksjonen ("lane keep assist") under adaptiv cruise control. Verkstedet har tidligere misforstått dette.',
-      swFix: true },
+      swFix: true, fixed: '2026-09-04' },
     { category: 'mmi', title: 'CarPlay overtar - kan ikke velge favoritter i MMI',
       description: 'Hvis iPhone/CarPlay er koblet til går det ikke an å velge favoritter i MMI. Den hopper rett tilbake til CarPlay.',
       swFix: true },
@@ -867,10 +867,10 @@ const RECURRING_FAULTS = [
       swFix: true },
     { category: 'hud', title: 'Fartsoverskridelse-varsling: må stille to ganger',
       description: 'Fartsoverskridelse-varsling 1: hvis man skal stille hastigheten for varsling hopper den tilbake til 3 km/t første gang. Man må gjøre det to ganger.',
-      swFix: true },
+      swFix: true, fixed: '2026-09-04' },
     { category: 'hud', title: 'Fartsoverskridelse-varsling: mangler hurtigknapp på ratt',
       description: 'Fartsoverskridelse-varsling 2: burde være mulig å bruke hurtigknappen på rattet til å skru av denne i stedet for å bla i menyer.',
-      swFix: true },
+      swFix: true, fixed: '2026-09-04' },
     { category: 'hud', title: 'HUD (head-up-display) forsvinner til stadighet under kjøring',
       description: 'Displayet slukker uten forvarsel og lar seg ikke slå på igjen via MMI - må starte bilen på nytt. Minst 17 dokumenterte tilfeller siden desember 2024 (se tidslinjen for datoer).' },
     { category: 'klima', title: 'Setevarme førersiden fungerer ikke',
@@ -890,12 +890,23 @@ const RECURRING_FAULTS = [
       description: 'En del tjenester er ikke tilgjengelig - automatisk fjernlys, skiltgjenkjennelse osv - uten at det er noen åpenbar siktbegrensning foran sladrspeilet. Antakelig sensorsikt-relatert, men gjør det vanskelig å vite hvor is bør fjernes.' },
     { category: 'lading', title: 'Batteriforvarming mangler egen funksjon - må fakes via navigasjon',
       description: 'For å få batteriforvarming før hurtiglading må man legge ladestopp i navigasjonssystemet. Burde vært en eksplisitt funksjon man kan starte når man vet at det er ca 15 min igjen til lading. Nå må man "fake" en ladestopp omtrent der man tror man skal lade, og det blir ofte feil.',
-      swFix: true },
+      swFix: true, fixed: '2026-09-04' },
 ];
 
 // Kontaktlogg (verksted, mail, telefon)
 // Se feltbeskrivelse under CONTACTS-arrayet - alle mailer er nå eksportert fra Mail.app
 const CONTACTS = [
+    { date: '2026-09-04', type: 'verksted',
+      title: 'Bilen tilbake fra verksted - fikser og service utført',
+      description: 'Verkstedet har (1) byttet låsemekanismen for ladekabelen, som forventes å løse både AC- og DC-ladefeilene, (2) tatt service (planlagt time 21. september utgår derfor), og (3) kjørt en softwareoppgradering. Flere av de vedvarende feilene er verifisert løst etter oppgraderingen. Bildene dokumenterer nye software-versjoner og verifiserte fikser (manuell batteriforvarming, fartsvarsel-hurtigknapp, filskifteassistent).',
+      images: [
+          { thumb: 'thumbs/20260904_IMG_3190.jpg', full: '20260904_IMG_3190.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_IMG_3191.jpg', full: '20260904_IMG_3191.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_IMG_3192.jpg', full: '20260904_IMG_3192.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_IMG_3193.jpg', full: '20260904_IMG_3193.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_IMG_3195.jpg', full: '20260904_IMG_3195.jpg', type: 'image' },
+          { thumb: 'thumbs/20260904_IMG_3197.jpg', full: '20260904_IMG_3197.jpg', type: 'image' }
+      ] },
     { date: '2026-09-03', type: 'verksted',
       title: 'Verkstedbesøk - kabellås-feil funnet, softwareoppgradering',
       description: 'Møtte 07:30, satt til ca 09:30. Verkstedet fant feil ved kabellåsen (kabelen låser seg ikke) - antas å være kilden til både AC- og DC-feilene. I tillegg kjørte de en softwareoppgradering som tok 4+ timer. Uklart om dette er samme oppgradering det tidligere ble sagt [at ikke var tilgjengelig for denne bilen](./mails/20260827_in_ref_bestilling_av_feilsoking_pa.txt). Fikk leiebil mens bilen er på verksted.' },
@@ -908,7 +919,7 @@ const CONTACTS = [
       from: 'Fredrik',
       to: 'Møller',
       link: './mails/202609101_ut_kritisk.txt',
-      featured: true, critical: true,
+      critical: true,
       summary: 'Forutsetningen for å vente med verkstedtime helt til 21. september har endret seg nå som bilen i praksis ikke tar til seg lading. Mitt forslag er derfor at jeg leverer bilen til dere nå...' },
     { date: '2026-08-31', type: 'mail-out',
       title: 'Re: Ref bestilling av feilsøking på EH8XXXX',
@@ -916,7 +927,7 @@ const CONTACTS = [
       from: 'Fredrik',
       to: 'Møller',
       link: './mails/20260831_ut_ref_bestilling_av_feilsoking_pa.txt',
-      featured: true, critical: true,
+      critical: true,
       summary: 'Kritisk melding: bilen lader ekstremt sakte (9% på 11 timer på 32A easee-lader), ladelys blinker mellom rødt og grønt, ladekabel sitter fast. Samme symptom på 2 forskjellige ladere på 2 lokasjoner. Nye feil de siste dagene: MMI krasjer, mangler dataforbindelse (Høvik, Hurum), bilen kun marginalt ladet.' },
     { date: '2026-08-28', type: 'mail-in',
       title: 'Sv: Ref bestilling av feilsøking på EH8XXXX',
@@ -936,7 +947,7 @@ const CONTACTS = [
       from: 'Møller',
       to: 'Fredrik',
       link: './mails/20260827_in_ref_bestilling_av_feilsoking_pa.txt',
-      featured: true, critical: false,
+      critical: false,
       summary: 'Solberg: "Det eksisterer ingen nyere software til din bil som ikke allerede er installert." Ny signeringslink sendt. Kontrakt signert samme dag av meg. Jeg svarer 28. aug: "OK - da håper jeg dere får fikset feilene på en annen måte. Jeg kan ikke ha en bil med alle disse feilene."' },
     { date: '2026-08-26', type: 'mail-out',
       title: 'Ref bestilling av feilsøking på EH8XXXX',
@@ -944,7 +955,7 @@ const CONTACTS = [
       from: 'Fredrik',
       to: 'Møller',
       link: './mails/20260826_ut_ref_bestilling_av_feilsoking_pa.txt',
-      featured: true, critical: false,
+      critical: false,
       summary: 'Omfattende mail: (1) signeringslink ugyldig, (2) håp om softwareoppdatering som andre Q4 2024 har fått, (3) kontinuerlige feil (CarPlay/favoritter, klima, fartsvarsel, filskifte), (4) konkrete feil siden forrige verksted - 30+ datoer fra mai 2025 til august 2026 dekkende HUD, MMI, app, klima, lading, keyless.' },
     { date: '2026-08-19', type: 'mail-in',
       title: 'Bekreftelse 584773/2026 ,EH8XXXX',

@@ -108,23 +108,39 @@ function renderStatus() {
     }
 
     // Vedvarende feil
-    rows.push('<h2 style="margin-top:36px">Vedvarende feil</h2>');
-    rows.push('<p class="lead">Feil/bugs som er der hele tiden — ikke enkelthendelser. Dokumentert i mailen 26. august 2026.</p>');
-    RECURRING_FAULTS.forEach(f => {
+    const activeRecurring = RECURRING_FAULTS.filter(f => !f.fixed);
+    const fixedRecurring  = RECURRING_FAULTS.filter(f =>  f.fixed);
+
+    const renderRecurringCard = (f) => {
         const cat = CATEGORIES[f.category];
-        rows.push(`
+        return `
             <div class="card">
                 <div class="meta">
                     <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
                     <span class="recurring-tag">Vedvarende</span>
-                    ${f.swFix ? '<span class="swfix-tag">Ventes SW-fikset</span>' : ''}
+                    ${f.fixed ? `<span class="fixed-tag">Fikset ${esc(f.fixed)}</span>` : (f.swFix ? '<span class="swfix-tag">Ventes SW-fikset</span>' : '')}
                 </div>
                 <h3>${esc(f.title)}</h3>
                 ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
                 <p>${esc(f.description)}</p>
             </div>
+        `;
+    };
+
+    rows.push('<h2 style="margin-top:36px">Vedvarende feil</h2>');
+    rows.push('<p class="lead">Feil/bugs som er der hele tiden — ikke enkelthendelser. Dokumentert i mailen 26. august 2026.</p>');
+    activeRecurring.forEach(f => rows.push(renderRecurringCard(f)));
+
+    if (fixedRecurring.length > 0) {
+        rows.push(`
+            <details class="resolved-section">
+                <summary>Løste feil (${fixedRecurring.length}) - klikk for å vise</summary>
+                <div class="resolved-body">
+                    ${fixedRecurring.map(renderRecurringCard).join('')}
+                </div>
+            </details>
         `);
-    });
+    }
 
     root.innerHTML = rows.join('');
 }
@@ -159,7 +175,7 @@ function renderSystems() {
     const navChips = [];
     Object.entries(CATEGORIES).forEach(([key, cat]) => {
         const cnt = FAULTS.filter(f => f.category === key).length
-                  + RECURRING_FAULTS.filter(f => f.category === key).length;
+                  + RECURRING_FAULTS.filter(f => f.category === key && !f.fixed).length;
         if (cnt === 0) return;
         navChips.push(`<a href="#cat-${key}" class="cat-nav-chip cat-${key}">${esc(cat.short)} <span>${cnt}</span></a>`);
     });
@@ -170,31 +186,29 @@ function renderSystems() {
         </nav>
     `);
 
-    // Sett opp per-kategori
+    const renderRecurringSysCard = (f, cat) => `
+        <div class="card card-fault">
+            <div class="meta">
+                <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
+                <span class="recurring-tag">Vedvarende</span>
+                ${f.fixed ? `<span class="fixed-tag">Fikset ${esc(f.fixed)}</span>` : (f.swFix ? '<span class="swfix-tag">Ventes SW-fikset</span>' : '')}
+            </div>
+            <h3>${esc(f.title)}</h3>
+            ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
+            <p>${esc(f.description)}</p>
+        </div>
+    `;
+
+    // Sett opp per-kategori (kun aktive vedvarende + alle dateret feil)
     Object.entries(CATEGORIES).forEach(([key, cat]) => {
         const faults = FAULTS.filter(f => f.category === key)
                              .sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
-        const recurring = RECURRING_FAULTS.filter(f => f.category === key);
+        const recurring = RECURRING_FAULTS.filter(f => f.category === key && !f.fixed);
         const totalCount = faults.length + recurring.length;
         if (totalCount === 0) return;
 
         const items = [];
-
-        recurring.forEach(f => {
-            items.push(`
-                <div class="card card-fault">
-                    <div class="meta">
-                        <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
-                        <span class="recurring-tag">Vedvarende</span>
-                        ${f.swFix ? '<span class="swfix-tag">Ventes SW-fikset</span>' : ''}
-                    </div>
-                    <h3>${esc(f.title)}</h3>
-                    ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
-                    <p>${esc(f.description)}</p>
-                </div>
-            `);
-        });
-
+        recurring.forEach(f => items.push(renderRecurringSysCard(f, cat)));
         faults.forEach(f => items.push(renderFaultCard(f)));
 
         rows.push(`
@@ -210,6 +224,19 @@ function renderSystems() {
             </div>
         `);
     });
+
+    // Løste vedvarende feil nederst - kollapset
+    const fixedRecurring = RECURRING_FAULTS.filter(f => f.fixed);
+    if (fixedRecurring.length > 0) {
+        rows.push(`
+            <details class="resolved-section">
+                <summary>Løste feil (${fixedRecurring.length}) - klikk for å vise</summary>
+                <div class="resolved-body">
+                    ${fixedRecurring.map(f => renderRecurringSysCard(f, CATEGORIES[f.category])).join('')}
+                </div>
+            </details>
+        `);
+    }
 
     root.innerHTML = rows.join('');
 
@@ -348,7 +375,7 @@ function generateFaultList(fromISO, toISO) {
         .sort((a, b) => a.key.localeCompare(b.key))
         .map(f => `${f.key} - ${f.title}`);
 
-    const persistent = RECURRING_FAULTS.map(f => `- ${f.title}`);
+    const persistent = RECURRING_FAULTS.filter(f => !f.fixed).map(f => `- ${f.title}`);
 
     let out = dated.join('\n');
     if (persistent.length > 0) {
@@ -488,6 +515,7 @@ function renderTimelineItem(e) {
                 <h3>${esc(c.title)}</h3>
                 ${fromToLine}
                 <p>${escLinks(c.description)}</p>
+                ${(c.images && c.images.length) ? renderThumbs(c.images) : ''}
                 ${c.link ? `<div class="mail-link"><a href="${esc(c.link)}" target="_blank" rel="noopener">Åpne mail</a></div>` : ''}
             </div>
         </div>
@@ -630,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof applyAutoDiscovery === 'function') applyAutoDiscovery();
 
     // Fyll inn counts på nav-knapper
-    document.querySelector('.nav-btn[data-view="status"] .count').textContent = CONTACTS.filter(c => c.featured).length;
+    document.querySelector('.nav-btn[data-view="status"] .count').textContent = RECURRING_FAULTS.filter(f => !f.fixed).length;
     document.querySelector('.nav-btn[data-view="systems"] .count').textContent = Object.keys(CATEGORIES).length;
     document.querySelector('.nav-btn[data-view="timeline"] .count').textContent = FAULTS.length + CONTACTS.length;
     document.querySelector('.nav-btn[data-view="gallery"] .count').textContent = allImages().length;
