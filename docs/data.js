@@ -7,7 +7,7 @@
 // Sett STATUS = null for å skjule banneret helt.
 const STATUS = {
     header:   'Bilen tilbake fra verksted 4. september - flere feil løst',
-    body:     'Verkstedet byttet låsemekanismen for ladekabelen (forventet fiks for både AC- og DC-ladefeilene) og kjørte en softwareoppgradering. Servicen ble også tatt samtidig, så den planlagte timen 21. september utgår. Flere av de vedvarende feilene er verifisert løst av oppgraderingen.',
+    body:     'Verkstedet har byttet kabel-låsemekanismen (forventet fiks for AC/DC-ladefeil) og gjennomført en omfattende programvareoppdatering. Flere vedvarende programvaremangler (bl.a. aktiv filskifteassistent og manuell batteriforvarming) er bekreftet løst. Servicen ble utført samtidig, slik at timen 21. september utgår. Bilen observeres nå for å verifisere total stabilitet.',
     severity: 'ok',
     date:     '2026-09-04',
 };
