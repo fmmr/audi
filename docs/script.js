@@ -76,6 +76,28 @@ function renderStatus() {
         </div>
     `);
 
+    // Refleksjoner - vises like under nøkkeltall
+    const reflections = CONTACTS
+        .filter(c => c.type === 'refleksjon')
+        .sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
+    if (reflections.length > 0) {
+        rows.push('<h2 style="margin-top:36px">Refleksjoner</h2>');
+        rows.push('<p class="lead">Egne betraktninger rundt hendelser og kommunikasjon i saken.</p>');
+        reflections.forEach(r => {
+            const paragraphs = r.description.split(/\n\n+/).map(p => `<p>${escLinks(p)}</p>`).join('');
+            rows.push(`
+                <div class="card card-reflection">
+                    <div class="meta">
+                        <span class="badge badge-date">${esc(r.displayDate || formatDate(r.date))}</span>
+                        <span class="badge badge-type type-refleksjon">Refleksjon</span>
+                    </div>
+                    <h3>${esc(r.title)}</h3>
+                    ${paragraphs}
+                </div>
+            `);
+        });
+    }
+
     // Featured e-poster (kontakter med featured: true) - sortert nyeste øverst
     const featuredMails = CONTACTS
         .filter(c => c.featured)
@@ -294,7 +316,7 @@ function renderThumbs(images) {
 }
 
 // ============ TIDSLINJE ============
-let timelineFilter = { types: new Set(['fault', 'email', 'workshop', 'phone', 'other']) };
+let timelineFilter = { types: new Set(['fault', 'email', 'workshop', 'phone', 'reflection', 'other']) };
 
 function renderTimeline() {
     const root = $('#view-timeline');
@@ -335,6 +357,7 @@ function renderTimeline() {
             <button class="filter-btn active" data-filter="email">E-post</button>
             <button class="filter-btn active" data-filter="workshop">Verksted</button>
             <button class="filter-btn active" data-filter="phone">Telefon</button>
+            <button class="filter-btn active" data-filter="reflection">Refleksjon</button>
             <button class="filter-btn active" data-filter="other">Annet</button>
             <span class="timeline-count" id="timeline-count"></span>
         </div>
@@ -436,6 +459,7 @@ function renderTimelineList() {
         const kind = (c.type === 'verksted') ? 'workshop'
                    : (c.type === 'mail-in' || c.type === 'mail-out') ? 'email'
                    : (c.type === 'telefon') ? 'phone'
+                   : (c.type === 'refleksjon') ? 'reflection'
                    : 'other';
         events.push({
             kind,
@@ -498,6 +522,21 @@ function renderTimelineItem(e) {
     }
     // Kontakt
     const c = e.data;
+    if (e.kind === 'reflection') {
+        const paragraphs = c.description.split(/\n\n+/).map(p => `<p>${escLinks(p)}</p>`).join('');
+        return `
+            <div class="timeline-item item-reflection">
+                <div class="card card-reflection">
+                    <div class="meta">
+                        <span class="badge badge-date">${esc(e.date)}</span>
+                        <span class="badge badge-type type-refleksjon">Refleksjon</span>
+                    </div>
+                    <h3>${esc(c.title)}</h3>
+                    ${paragraphs}
+                </div>
+            </div>
+        `;
+    }
     const cardClass = e.kind === 'email' ? 'card-email'
                     : e.kind === 'workshop' ? 'card-workshop'
                     : e.kind === 'phone' ? 'card-phone'
@@ -523,7 +562,7 @@ function renderTimelineItem(e) {
 }
 
 function typeLabel(t) {
-    return { 'mail-out': 'Mail ut', 'mail-in': 'Mail inn', 'verksted': 'Verksted', 'telefon': 'Telefon', 'annet': 'Annet' }[t] || t;
+    return { 'mail-out': 'Mail ut', 'mail-in': 'Mail inn', 'verksted': 'Verksted', 'telefon': 'Telefon', 'refleksjon': 'Refleksjon', 'annet': 'Annet' }[t] || t;
 }
 
 // ============ BILDEGALLERI ============

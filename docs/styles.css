@@ -225,6 +225,14 @@ main {
 .card-phone    { border-left: 5px solid var(--phone-border); background: var(--phone-bg); }
 .card-other    { border-left: 5px solid var(--border-strong); background: var(--surface-2); }
 .card-critical { border-left-width: 6px; border-left-color: var(--accent-2); background: #fff5f5; }
+.card-reflection {
+    border-left: 5px solid #7c3aed;
+    background: #faf5ff;
+    font-style: italic;
+}
+.card-reflection h3 { font-style: normal; color: #4c1d95; }
+.card-reflection p { color: #3b0764; margin: 8px 0; }
+.badge.type-refleksjon { background: #ede9fe; color: #5b21b6; border-color: #c4b5fd; }
 
 /* Badges */
 .badge {
