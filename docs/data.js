@@ -61,7 +61,8 @@ const FAULTS = [
             { thumb: 'thumbs/20260902_lading_IMG_3158.jpg', full: '20260902_lading_IMG_3158.jpg', type: 'image' },
             { thumb: 'thumbs/20260903_lading_IMG_3170.png', full: '20260903_lading_IMG_3170.png', type: 'image' },
             { thumb: 'thumbs/20260903_lading_IMG_3171.png', full: '20260903_lading_IMG_3171.png', type: 'image' },
-            { thumb: 'thumbs/20260903_lading_IMG_3172.png', full: '20260903_lading_IMG_3172.png', type: 'image' }
+            { thumb: 'thumbs/20260903_lading_IMG_3172.png', full: '20260903_lading_IMG_3172.png', type: 'image' },
+            { thumb: 'thumbs/20260902_lading_IMG_3165.jpg', full: '20260902_lading_IMG_3165.jpg', type: 'image' }
         ]
     },
     {

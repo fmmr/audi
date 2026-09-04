@@ -147,6 +147,7 @@ const IMAGE_MANIFEST = [
     "20260902_lading_IMG_3158.jpg",
     "20260902_lading_IMG_3160.jpg",
     "20260902_lading_IMG_3161.jpg",
+    "20260902_lading_IMG_3165.jpg",
     "20260903_lading_IMG_3170.png",
     "20260903_lading_IMG_3171.png",
     "20260903_lading_IMG_3172.png",
