@@ -180,7 +180,7 @@ function computeStats() {
     return {
         totalFaults: FAULTS.length + RECURRING_FAULTS.length,
         faults2026: FAULTS.filter(f => sortKey(f.date).startsWith('2026')).length,
-        workshopVisits: CONTACTS.filter(c => c.type === 'verksted').length,
+        workshopVisits: CONTACTS.filter(c => c.type === 'verksted' && !c.partOfVisit).length,
         contacts: CONTACTS.filter(c => c.type === 'mail-out' || c.type === 'mail-in' || c.type === 'telefon').length
     };
 }
@@ -544,12 +544,16 @@ function renderTimelineItem(e) {
     const fromToLine = (c.from || c.to)
         ? `<div class="card-fromto">${c.from ? 'Fra: <b>' + esc(c.from) + '</b>' : ''}${c.from && c.to ? ' &nbsp;→&nbsp; ' : ''}${c.to ? 'Til: <b>' + esc(c.to) + '</b>' : ''}</div>`
         : '';
+    const partOfBadge = c.partOfVisit
+        ? `<span class="badge badge-partofvisit" title="Denne oppføringen telles ikke som eget verkstedbesøk">Del av besøk ${esc(formatDate(c.partOfVisit))}</span>`
+        : '';
     return `
-        <div class="timeline-item item-${e.kind}">
+        <div class="timeline-item item-${e.kind}${c.partOfVisit ? ' is-partof' : ''}">
             <div class="card ${cardClass}">
                 <div class="meta">
                     <span class="badge badge-date">${esc(e.date)}</span>
                     <span class="badge badge-type type-${esc(c.type)}">${esc(typeLabel(c.type))}</span>
+                    ${partOfBadge}
                 </div>
                 <h3>${esc(c.title)}</h3>
                 ${fromToLine}

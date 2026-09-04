@@ -233,6 +233,16 @@ main {
 .card-reflection h3 { font-style: normal; color: #4c1d95; }
 .card-reflection p { color: #3b0764; margin: 8px 0; }
 .badge.type-refleksjon { background: #ede9fe; color: #5b21b6; border-color: #c4b5fd; }
+.badge.badge-partofvisit {
+    background: #fef3c7;
+    color: #78350f;
+    border: 1px solid #fcd34d;
+    font-style: italic;
+}
+.timeline-item.is-partof .card {
+    border-left-style: dashed;
+    opacity: .82;
+}
 
 /* Badges */
 .badge {
