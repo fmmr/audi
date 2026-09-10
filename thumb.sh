@@ -12,9 +12,9 @@
 
 set -e
 
-DIR="/Users/fmr/Jottacloud/FMR_DOCS/202501_Audi_fail/docs"
+DIR="/Users/fmr/Jottacloud/FMR_DOCS/202501_Audi_fail/docs/images"
 THUMB_DIR="$DIR/thumbs"
-MANIFEST="$DIR/manifest.js"
+MANIFEST="/Users/fmr/Jottacloud/FMR_DOCS/202501_Audi_fail/docs/js/manifest.js"
 
 # Størrelser
 IMG_SIZE="300x300"   # gallery-tiles trenger dette for å ikke bli grumsete

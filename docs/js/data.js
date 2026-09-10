@@ -35,8 +35,8 @@ const FAULTS = [
         title: 'DC-lading-feil fra 10.-26. aug er tilbake',
         description: 'Feilmeldingen "DC-lading ikke mulig" fra 10.-26. august er tilbake. 2. sep: kjørt 4 små turer, varselet på under 3 av dem, ikke på den siste. 3. sep: feilmeldinger dukket opp igjen.',
         images: [
-            { thumb: 'thumbs/20260903_lading_IMG_3175.jpg', full: '20260903_lading_IMG_3175.jpg', type: 'image' },
-            { thumb: 'thumbs/20260903_lading_IMG_3176.jpg', full: '20260903_lading_IMG_3176.jpg', type: 'image' }
+            { thumb: 'images/thumbs/20260903_lading_IMG_3175.jpg', full: 'images/20260903_lading_IMG_3175.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20260903_lading_IMG_3176.jpg', full: 'images/20260903_lading_IMG_3176.jpg', type: 'image' }
         ]
     },
     {
@@ -50,9 +50,9 @@ const FAULTS = [
         title: 'AC-lading feiler flere netter på rad',
         description: 'Natt 1-2. sep: koblet til på 64% (1. sep 22:36) til 80% (2. sep 13:27) - ca 15 timer for 16% (13,97 kWh), snittladeeffekt 1,09 kW. Natt 2-3. sep: ny mislykket ladeøkt. Bilen sto med melding "lading startes" i timevis (skal normalt kun vises i 30 sek mens lading initialiseres). Smartlading var av fordi bilen ikke rakk fastsatt tid i Tibber.',
         images: [
-            { thumb: 'thumbs/20260903_lading_IMG_3170.png', full: '20260903_lading_IMG_3170.png', type: 'image' },
-            { thumb: 'thumbs/20260903_lading_IMG_3171.png', full: '20260903_lading_IMG_3171.png', type: 'image' },
-            { thumb: 'thumbs/20260903_lading_IMG_3172.png', full: '20260903_lading_IMG_3172.png', type: 'image' }]
+            { thumb: 'images/thumbs/20260903_lading_IMG_3170.png', full: 'images/20260903_lading_IMG_3170.png', type: 'image' },
+            { thumb: 'images/thumbs/20260903_lading_IMG_3171.png', full: 'images/20260903_lading_IMG_3171.png', type: 'image' },
+            { thumb: 'images/thumbs/20260903_lading_IMG_3172.png', full: 'images/20260903_lading_IMG_3172.png', type: 'image' }]
     },
     {
         date: '2026-09-01',
@@ -105,8 +105,8 @@ const FAULTS = [
         title: 'Feilmelding: DC-lading ikke mulig',
         description: 'Vedvarende feilmelding om at DC-lading ikke er mulig.',
         images: [
-            { thumb: 'thumbs/20260812_lading_IMG_2947.jpg', full: '20260812_lading_IMG_2947.jpg', type: 'image' },
-            { thumb: 'thumbs/20260812_lading_IMG_2948.jpg', full: '20260812_lading_IMG_2948.jpg', type: 'image' }
+            { thumb: 'images/thumbs/20260812_lading_IMG_2947.jpg', full: 'images/20260812_lading_IMG_2947.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20260812_lading_IMG_2948.jpg', full: 'images/20260812_lading_IMG_2948.jpg', type: 'image' }
         ]
     },
     {
@@ -170,13 +170,13 @@ const FAULTS = [
         title: 'App feiler: "midlertidig deaktivert"',
         description: 'App feiler: "midlertidig deaktivert" (pågikk 21.-30. juni).',
         images: [
-            { thumb: 'thumbs/20260621_app_IMG_1676.jpg', full: '20260621_app_IMG_1676.jpg', type: 'image' },
-            { thumb: 'thumbs/20260628_app_IMG_1737.jpg', full: '20260628_app_IMG_1737.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_app_IMG_1767.jpg', full: '20260630_app_IMG_1767.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_app_IMG_1768.jpg', full: '20260630_app_IMG_1768.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_app_IMG_1769.jpg', full: '20260630_app_IMG_1769.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_app_IMG_1770.jpg', full: '20260630_app_IMG_1770.jpg', type: 'image' },
-            { thumb: 'thumbs/20260630_app_IMG_1771.jpg', full: '20260630_app_IMG_1771.jpg', type: 'image' }
+            { thumb: 'images/thumbs/20260621_app_IMG_1676.jpg', full: 'images/20260621_app_IMG_1676.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20260628_app_IMG_1737.jpg', full: 'images/20260628_app_IMG_1737.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20260630_app_IMG_1767.jpg', full: 'images/20260630_app_IMG_1767.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20260630_app_IMG_1768.jpg', full: 'images/20260630_app_IMG_1768.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20260630_app_IMG_1769.jpg', full: 'images/20260630_app_IMG_1769.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20260630_app_IMG_1770.jpg', full: 'images/20260630_app_IMG_1770.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20260630_app_IMG_1771.jpg', full: 'images/20260630_app_IMG_1771.jpg', type: 'image' }
         ]
     },
     {
@@ -334,7 +334,7 @@ const FAULTS = [
         title: '"Motor: Feil! Oppsøk verksted" - cruise control ute',
         description: '"Motor: Feil! Oppsøk verksted" kommer i displayet hver gang bilen brukes. Denne feilen går ikke bort. Det går fint an å kjøre med bilen, men adaptiv kjøreassistent/cruise control virker ikke. (Fikset hos Møller Rud 20250428.)',
         images: [
-            { thumb: 'thumbs/20250413_diverse_IMG_8294.jpg', full: '20250413_diverse_IMG_8294.jpg', type: 'image' }
+            { thumb: 'images/thumbs/20250413_diverse_IMG_8294.jpg', full: 'images/20250413_diverse_IMG_8294.jpg', type: 'image' }
         ]
     },
     {
@@ -363,23 +363,23 @@ const FAULTS = [
         title: 'Stadig bortfall av nettilgang - selv i tettbygde strøk',
         description: 'Stadig bortfall av nettilgang, selv i tettbygde strøk, f.eks. Oslo Sentrum, rundt Sandvika, utenfor Møller Billingstad, langs E16, langs E6, langs RV3. Skjer så og si på hver eneste biltur av en viss varighet. Noen ganger fra start, andre ganger etter hvert. Nettilgangen kommer typisk omsider tilbake. Har skjedd mange ganger, som f.eks.: 20250122, 20250124, 20250129, 20250130, 20250206, 20250208, 20250214, 20250215, 20250218, 20250222, 20250222, 20250225, 20250228, 20250316, 20250318, 20250411 og 20250414.',
         images: [
-            { thumb: 'thumbs/20250122_tilkobling_IMG_7623.jpg', full: '20250122_tilkobling_IMG_7623.jpg', type: 'image' },
-            { thumb: 'thumbs/20250122_tilkobling_IMG_7630.jpg', full: '20250122_tilkobling_IMG_7630.jpg', type: 'image' },
-            { thumb: 'thumbs/20250124_tilkobling_IMG_7658.jpg', full: '20250124_tilkobling_IMG_7658.jpg', type: 'image' },
-            { thumb: 'thumbs/20250129_tilkobling_IMG_7701.jpg', full: '20250129_tilkobling_IMG_7701.jpg', type: 'image' },
-            { thumb: 'thumbs/20250130_tilkobling_IMG_7704.jpg', full: '20250130_tilkobling_IMG_7704.jpg', type: 'image' },
-            { thumb: 'thumbs/20250206_tilkobling_IMG_7784.jpg', full: '20250206_tilkobling_IMG_7784.jpg', type: 'image' },
-            { thumb: 'thumbs/20250208_tilkobling_IMG_7794.jpg', full: '20250208_tilkobling_IMG_7794.jpg', type: 'image' },
-            { thumb: 'thumbs/20250214_tilkobling_IMG_7857.jpg', full: '20250214_tilkobling_IMG_7857.jpg', type: 'image' },
-            { thumb: 'thumbs/20250215_tilkobling_IMG_7872.jpg', full: '20250215_tilkobling_IMG_7872.jpg', type: 'image' },
-            { thumb: 'thumbs/20250218_tilkobling_IMG_7889.jpg', full: '20250218_tilkobling_IMG_7889.jpg', type: 'image' },
-            { thumb: 'thumbs/20250222_tilkobling_IMG_7912.jpg', full: '20250222_tilkobling_IMG_7912.jpg', type: 'image' },
-            { thumb: 'thumbs/20250222_tilkobling_IMG_7913.jpg', full: '20250222_tilkobling_IMG_7913.jpg', type: 'image' },
-            { thumb: 'thumbs/20250225_tilkobling_IMG_7960.jpg', full: '20250225_tilkobling_IMG_7960.jpg', type: 'image' },
-            { thumb: 'thumbs/20250228_tilkobling_IMG_7973.jpg', full: '20250228_tilkobling_IMG_7973.jpg', type: 'image' },
-            { thumb: 'thumbs/20250316_tilkobling_IMG_4261.jpg', full: '20250316_tilkobling_IMG_4261.jpg', type: 'image' },
-            { thumb: 'thumbs/20250411_tilkobling_IMG_8269.jpg', full: '20250411_tilkobling_IMG_8269.jpg', type: 'image' },
-            { thumb: 'thumbs/20250414_tilkobling_IMG_8315.jpg', full: '20250414_tilkobling_IMG_8315.jpg', type: 'image' }
+            { thumb: 'images/thumbs/20250122_tilkobling_IMG_7623.jpg', full: 'images/20250122_tilkobling_IMG_7623.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250122_tilkobling_IMG_7630.jpg', full: 'images/20250122_tilkobling_IMG_7630.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250124_tilkobling_IMG_7658.jpg', full: 'images/20250124_tilkobling_IMG_7658.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250129_tilkobling_IMG_7701.jpg', full: 'images/20250129_tilkobling_IMG_7701.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250130_tilkobling_IMG_7704.jpg', full: 'images/20250130_tilkobling_IMG_7704.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250206_tilkobling_IMG_7784.jpg', full: 'images/20250206_tilkobling_IMG_7784.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250208_tilkobling_IMG_7794.jpg', full: 'images/20250208_tilkobling_IMG_7794.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250214_tilkobling_IMG_7857.jpg', full: 'images/20250214_tilkobling_IMG_7857.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250215_tilkobling_IMG_7872.jpg', full: 'images/20250215_tilkobling_IMG_7872.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250218_tilkobling_IMG_7889.jpg', full: 'images/20250218_tilkobling_IMG_7889.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250222_tilkobling_IMG_7912.jpg', full: 'images/20250222_tilkobling_IMG_7912.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250222_tilkobling_IMG_7913.jpg', full: 'images/20250222_tilkobling_IMG_7913.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250225_tilkobling_IMG_7960.jpg', full: 'images/20250225_tilkobling_IMG_7960.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250228_tilkobling_IMG_7973.jpg', full: 'images/20250228_tilkobling_IMG_7973.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250316_tilkobling_IMG_4261.jpg', full: 'images/20250316_tilkobling_IMG_4261.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250411_tilkobling_IMG_8269.jpg', full: 'images/20250411_tilkobling_IMG_8269.jpg', type: 'image' },
+            { thumb: 'images/thumbs/20250414_tilkobling_IMG_8315.jpg', full: 'images/20250414_tilkobling_IMG_8315.jpg', type: 'image' }
         ]
     },
     {
@@ -413,7 +413,7 @@ const FAULTS = [
         title: 'Klimatisering fra app fungerte ikke - iskald bil ved avreise',
         description: 'ca 07:30: Satt avreisetid i app-en (klimatisering) til 08:15. ca 07:50: Sjekket at klimatiseringen startet. Da jeg kom ut til bilen 08:14 gikk ikke klimatiseringen, rutene var ikke tint, og bilen var iskald. Bildene av rutene er tatt 08:14.',
         images: [
-            { thumb: 'thumbs/times.jpg', full: 'times.jpg', type: 'image' }
+            { thumb: 'images/thumbs/times.jpg', full: 'images/times.jpg', type: 'image' }
         ]
     },
     {
@@ -467,9 +467,9 @@ const FAULTS = [
         title: 'App - ukjent feil, "Serveren har sendt et ugyldig svar"',
         description: 'Feil med app-en - Det var ikke mulig å sette på klimaanlegget. "ukjent feil" og "Serveren har sendt et ugyldig svar". Det hjelper ikke å prøve igjen (som feilmeldingen sier).',
         images: [
-            { thumb: 'thumbs/app_igjen_igjen_1.jpg', full: 'app_igjen_igjen_1.jpg', type: 'image' },
-            { thumb: 'thumbs/app_igjen_igjen_2.jpg', full: 'app_igjen_igjen_2.jpg', type: 'image' },
-            { thumb: 'thumbs/app_igjen_igjen_3.jpg', full: 'app_igjen_igjen_3.jpg', type: 'image' }
+            { thumb: 'images/thumbs/app_igjen_igjen_1.jpg', full: 'images/app_igjen_igjen_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/app_igjen_igjen_2.jpg', full: 'images/app_igjen_igjen_2.jpg', type: 'image' },
+            { thumb: 'images/thumbs/app_igjen_igjen_3.jpg', full: 'images/app_igjen_igjen_3.jpg', type: 'image' }
         ]
     },
     {
@@ -478,11 +478,11 @@ const FAULTS = [
         title: 'App - "ukjent feil" og "bilen svarer ikke"',
         description: 'Feil med app-en - Det var ikke mulig å sette på klimaanlegget. "ukjent feil" og "bilen svarer ikke". Det hjelper ikke å prøve igjen (som feilmeldingen sier).',
         images: [
-            { thumb: 'thumbs/app_igjen_1.jpg', full: 'app_igjen_1.jpg', type: 'image' },
-            { thumb: 'thumbs/app_igjen_2.jpg', full: 'app_igjen_2.jpg', type: 'image' },
-            { thumb: 'thumbs/app_igjen_3.jpg', full: 'app_igjen_3.jpg', type: 'image' },
-            { thumb: 'thumbs/app_igjen_4.jpg', full: 'app_igjen_4.jpg', type: 'image' },
-            { thumb: 'thumbs/app_igjen_5.jpg', full: 'app_igjen_5.jpg', type: 'image' }
+            { thumb: 'images/thumbs/app_igjen_1.jpg', full: 'images/app_igjen_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/app_igjen_2.jpg', full: 'images/app_igjen_2.jpg', type: 'image' },
+            { thumb: 'images/thumbs/app_igjen_3.jpg', full: 'images/app_igjen_3.jpg', type: 'image' },
+            { thumb: 'images/thumbs/app_igjen_4.jpg', full: 'images/app_igjen_4.jpg', type: 'image' },
+            { thumb: 'images/thumbs/app_igjen_5.jpg', full: 'images/app_igjen_5.jpg', type: 'image' }
         ]
     },
     // ============ 2024 (fra HTML "Feil etter 13. desember") ============
@@ -501,7 +501,7 @@ const FAULTS = [
         category: 'mmi', source: 'observation', severity: 'middels',
         title: '"Velkommen. Laster brukerinformasjon" hele turen',
         description: '"Velkommen. Laster brukerinformasjon. Vent litt..." melding i MMI hele bilturen (20 min).',
-        images: [{ thumb: 'thumbs/velkommen.jpg', full: 'velkommen.jpg', type: 'image' }]
+        images: [{ thumb: 'images/thumbs/velkommen.jpg', full: 'images/velkommen.jpg', type: 'image' }]
     },
     {
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
@@ -509,9 +509,9 @@ const FAULTS = [
         title: 'Alle online-tjenester "grået ut" i MMI',
         description: 'Alle online-tjenester (for eksempel trafikk) "grået ut" i MMI. Hvis vi prøver å aktivere kommer "Tilpasser privatsfæreinnstillingene" og forsvinner etter noen sekunder, uten at noen av tjenestene virker. Har skjedd 2 ganger.',
         images: [
-            { thumb: 'thumbs/online_1.jpg', full: 'online_1.jpg', type: 'image' },
-            { thumb: 'thumbs/online_2.jpg', full: 'online_2.jpg', type: 'image' },
-            { thumb: 'thumbs/online_3.jpg', full: 'online_3.jpg', type: 'image' }
+            { thumb: 'images/thumbs/online_1.jpg', full: 'images/online_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/online_2.jpg', full: 'images/online_2.jpg', type: 'image' },
+            { thumb: 'images/thumbs/online_3.jpg', full: 'images/online_3.jpg', type: 'image' }
         ]
     },
     {
@@ -519,35 +519,35 @@ const FAULTS = [
         category: 'mmi', source: 'observation', severity: 'middels',
         title: 'Klokka 82 minutter feil - umulig å stille',
         description: 'Klokka var plutselig 82 minutter feil, uten at det gikk an å få stilt den eller skru av automatisk oppdatering av klokke.',
-        images: [{ thumb: 'thumbs/klokke.jpg', full: 'klokke.jpg', type: 'image' }]
+        images: [{ thumb: 'images/thumbs/klokke.jpg', full: 'images/klokke.jpg', type: 'image' }]
     },
     {
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
         category: 'mmi', source: 'observation', severity: 'middels',
         title: '"Sperren for registrerte brukeren - forbereder gjestebruker"',
         description: 'Fikk plutselig meldingen: "Sperren for den registrerte brukeren er ikke opphevet enda. Forbereder å bytte til gjestebruker".',
-        images: [{ thumb: 'thumbs/sperre.jpg', full: 'sperre.jpg', type: 'image' }]
+        images: [{ thumb: 'images/thumbs/sperre.jpg', full: 'images/sperre.jpg', type: 'image' }]
     },
     {
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
         category: 'mmi', source: 'observation', severity: 'middels',
         title: '"Rettighetskontroll pågår"',
         description: 'Fikk plutselig meldingen: "Rettighetskontroll pågår".',
-        images: [{ thumb: 'thumbs/rettighetskontroll.jpg', full: 'rettighetskontroll.jpg', type: 'image' }]
+        images: [{ thumb: 'images/thumbs/rettighetskontroll.jpg', full: 'images/rettighetskontroll.jpg', type: 'image' }]
     },
     {
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
         category: 'mmi', source: 'observation', severity: 'middels',
         title: 'Talekontrollen låst i "hva kan jeg hjelpe med"',
         description: 'Talekontrollen låst i "hva kan jeg hjelpe med" hele bilturen.',
-        images: [{ thumb: 'thumbs/hva.png', full: 'hva.mp4', type: 'video' }]
+        images: [{ thumb: 'images/thumbs/hva.png', full: 'images/hva.mp4', type: 'video' }]
     },
     {
         date: '2024-12-13..2024-12-31', displayDate: 'Etter 13. desember 2024',
         category: 'app', source: 'observation', severity: 'høy',
         title: 'App melder "sikkerhetssytem: Feil" uten mer info',
         description: 'Appen melder om "sikkerhetssytem: Feil" uten at det er noe mer info eller info i bilen om dette.',
-        images: [{ thumb: 'thumbs/feil.jpg', full: 'feil.jpg', type: 'image' }]
+        images: [{ thumb: 'images/thumbs/feil.jpg', full: 'images/feil.jpg', type: 'image' }]
     },
 
     // ============ 2024 (fra HTML "Nye feil meldt i mail 13. desember") ============
@@ -577,8 +577,8 @@ const FAULTS = [
         title: 'Umulig å sette i gang varme fra myAudi APP-en',
         description: 'Umulig å sette i gang varme fra myAudi APP-en (saksnummer 0003198748 hos "Audi Digitale Tjenester").',
         images: [
-            { thumb: 'thumbs/park_1.jpg', full: 'park_1.jpg', type: 'image' },
-            { thumb: 'thumbs/park_2.jpg', full: 'park_2.jpg', type: 'image' }
+            { thumb: 'images/thumbs/park_1.jpg', full: 'images/park_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/park_2.jpg', full: 'images/park_2.jpg', type: 'image' }
         ]
     },
     {
@@ -587,9 +587,9 @@ const FAULTS = [
         title: 'Umulig å stille lademål fra myAudi APP-en',
         description: 'Umulig å stille lademål fra myAudi APP-en (saksnummer 0003198748 hos "Audi Digitale Tjenester").',
         images: [
-            { thumb: 'thumbs/lade_1.jpg', full: 'lade_1.jpg', type: 'image' },
-            { thumb: 'thumbs/lade_2.jpg', full: 'lade_2.jpg', type: 'image' },
-            { thumb: 'thumbs/lade_3.jpg', full: 'lade_3.jpg', type: 'image' }
+            { thumb: 'images/thumbs/lade_1.jpg', full: 'images/lade_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/lade_2.jpg', full: 'images/lade_2.jpg', type: 'image' },
+            { thumb: 'images/thumbs/lade_3.jpg', full: 'images/lade_3.jpg', type: 'image' }
         ]
     },
     {
@@ -598,8 +598,8 @@ const FAULTS = [
         title: 'Umulig å sende tidsur fra myAudi APP-en',
         description: 'Umulig å sende tidsur fra myAudi APP-en.',
         images: [
-            { thumb: 'thumbs/tidsur_1.jpg', full: 'tidsur_1.jpg', type: 'image' },
-            { thumb: 'thumbs/tidsur_2.jpg', full: 'tidsur_2.jpg', type: 'image' }
+            { thumb: 'images/thumbs/tidsur_1.jpg', full: 'images/tidsur_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/tidsur_2.jpg', full: 'images/tidsur_2.jpg', type: 'image' }
         ]
     },
     {
@@ -608,8 +608,8 @@ const FAULTS = [
         title: 'Umulig å sette hovedbruker på bilen',
         description: 'Umulig å sette hovedbruker på bilen (feilsøkt live med "Audi Digitale Tjenester"). (audi.com & app har meg som hovedbruker.)',
         images: [
-            { thumb: 'thumbs/bruker_1.jpg', full: 'bruker_1.jpg', type: 'image' },
-            { thumb: 'thumbs/bruker_2.jpg', full: 'bruker_2.jpg', type: 'image' }
+            { thumb: 'images/thumbs/bruker_1.jpg', full: 'images/bruker_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/bruker_2.jpg', full: 'images/bruker_2.jpg', type: 'image' }
         ]
     },
     {
@@ -617,7 +617,7 @@ const FAULTS = [
         category: 'nokkel', source: 'mail-20241128', severity: 'høy',
         title: 'Keyless virker ikke med mindre man nettopp har kjørt bilen',
         description: 'Keyless virker ikke med mindre man nettopp har kjørt bilen.',
-        images: [{ thumb: 'thumbs/door.png', full: 'door.mp4', type: 'video' }]
+        images: [{ thumb: 'images/thumbs/door.png', full: 'images/door.mp4', type: 'video' }]
     },
     {
         date: '2024-11-28', displayDate: 'Meldt i mail 28. november 2024',
@@ -625,11 +625,11 @@ const FAULTS = [
         title: '"Ledningsnett: begrenset for øyeblikket" - 7-8 ganger',
         description: '"Ledningsnett: begrenset for øyeblikket. Det er mulig å kjøre forsiktig videre" - har dukket opp 7-8 ganger.',
         images: [
-            { thumb: 'thumbs/ledning_1.jpg', full: 'ledning_1.jpg', type: 'image' },
-            { thumb: 'thumbs/ledning_2.jpg', full: 'ledning_2.jpg', type: 'image' },
-            { thumb: 'thumbs/ledning_3.jpg', full: 'ledning_3.jpg', type: 'image' },
-            { thumb: 'thumbs/ledning_4.jpg', full: 'ledning_4.jpg', type: 'image' },
-            { thumb: 'thumbs/ledning_5.jpg', full: 'ledning_5.jpg', type: 'image' }
+            { thumb: 'images/thumbs/ledning_1.jpg', full: 'images/ledning_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ledning_2.jpg', full: 'images/ledning_2.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ledning_3.jpg', full: 'images/ledning_3.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ledning_4.jpg', full: 'images/ledning_4.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ledning_5.jpg', full: 'images/ledning_5.jpg', type: 'image' }
         ]
     },
     {
@@ -643,16 +643,16 @@ const FAULTS = [
         title: 'App: "Lading ikke mulig. Det har oppstått en teknisk feil"',
         description: 'Appen sier stadig at "Lading ikke er mulig. Det har oppstått en teknisk feil".',
         images: [
-            { thumb: 'thumbs/ladeapp_1.jpg', full: 'ladeapp_1.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_2.jpg', full: 'ladeapp_2.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_3.jpg', full: 'ladeapp_3.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_4.jpg', full: 'ladeapp_4.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_5.jpg', full: 'ladeapp_5.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_6.jpg', full: 'ladeapp_6.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_7.jpg', full: 'ladeapp_7.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_8.jpg', full: 'ladeapp_8.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_9.jpg', full: 'ladeapp_9.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeapp_10.jpg', full: 'ladeapp_10.jpg', type: 'image' }
+            { thumb: 'images/thumbs/ladeapp_1.jpg', full: 'images/ladeapp_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_2.jpg', full: 'images/ladeapp_2.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_3.jpg', full: 'images/ladeapp_3.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_4.jpg', full: 'images/ladeapp_4.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_5.jpg', full: 'images/ladeapp_5.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_6.jpg', full: 'images/ladeapp_6.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_7.jpg', full: 'images/ladeapp_7.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_8.jpg', full: 'images/ladeapp_8.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_9.jpg', full: 'images/ladeapp_9.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeapp_10.jpg', full: 'images/ladeapp_10.jpg', type: 'image' }
         ]
     },
     {
@@ -661,9 +661,9 @@ const FAULTS = [
         title: 'Bilen sier "Ladesystem feil!"',
         description: 'Bilen sier "Ladesystem feil!"',
         images: [
-            { thumb: 'thumbs/ladebil_1.jpg', full: 'ladebil_1.jpg', type: 'image' },
-            { thumb: 'thumbs/ladebil_2.jpg', full: 'ladebil_2.jpg', type: 'image' },
-            { thumb: 'thumbs/ladebil_3.jpg', full: 'ladebil_3.jpg', type: 'image' }
+            { thumb: 'images/thumbs/ladebil_1.jpg', full: 'images/ladebil_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladebil_2.jpg', full: 'images/ladebil_2.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladebil_3.jpg', full: 'images/ladebil_3.jpg', type: 'image' }
         ]
     },
     {
@@ -672,8 +672,8 @@ const FAULTS = [
         title: 'Ladeluke rødt lys uten feil',
         description: 'Feilen med ladeluka som stadig viser rødt lys uten at det er noe feil.',
         images: [
-            { thumb: 'thumbs/ladeluke_1.jpg', full: 'ladeluke_1.jpg', type: 'image' },
-            { thumb: 'thumbs/ladeluke_2.jpg', full: 'ladeluke_2.jpg', type: 'image' }
+            { thumb: 'images/thumbs/ladeluke_1.jpg', full: 'images/ladeluke_1.jpg', type: 'image' },
+            { thumb: 'images/thumbs/ladeluke_2.jpg', full: 'images/ladeluke_2.jpg', type: 'image' }
         ]
     }
 ];
@@ -688,7 +688,7 @@ const RECURRING_FAULTS = [
       description: 'Filskifteassistenten aktiveres ved å slå på blinklys på flerfeltsvei - bilen skal da selv skifte fil. Symptom: pilene i displayet forblir grå selv på veier bilen sier støtter funksjonen (f.eks. E18 Sandvika, E16, E6). En bekjent har funnet ut at grensen for aktivering kan være satt alt for høyt (150 km/h), mens instruksjonsboka sier 90 km/h.',
       note: 'OBS: dette gjelder AKTIV filskifteassistent (bilen skifter fil på kommando via blinklys), IKKE filholderfunksjonen ("lane keep assist") under adaptiv cruise control. Verkstedet har tidligere misforstått dette.',
       swFix: true, fixed: '2026-09-04',
-      images: [{ thumb: 'thumbs/lane_change.jpg', full: 'lane_change.jpg', type: 'image' }] },
+      images: [{ thumb: 'images/thumbs/lane_change.jpg', full: 'images/lane_change.jpg', type: 'image' }] },
     { category: 'mmi', title: 'CarPlay overtar - kan ikke velge favoritter i MMI',
       description: 'Hvis iPhone/CarPlay er koblet til går det ikke an å velge favoritter i MMI. Den hopper rett tilbake til CarPlay.' },
     { category: 'klima', title: 'Klimaanlegg kommer på i tilfeldig innstilling - ofte helt av',
@@ -731,18 +731,18 @@ const RECURRING_FAULTS = [
 const SOFTWARE_VERSIONS = [
     { date: '2025-01-02', car: 'Lånebil (2025-modell)', version: '4325', note: 'Ifm verkstedbesøk 2. januar 2025',
       images: [
-          { thumb: 'thumbs/20250102_versjon_IMG_7391.jpg', full: '20250102_versjon_IMG_7391.jpg', type: 'image' },
-          { thumb: 'thumbs/20250102_versjon_IMG_7392.jpg', full: '20250102_versjon_IMG_7392.jpg', type: 'image' }
+          { thumb: 'images/thumbs/20250102_versjon_IMG_7391.jpg', full: 'images/20250102_versjon_IMG_7391.jpg', type: 'image' },
+          { thumb: 'images/thumbs/20250102_versjon_IMG_7392.jpg', full: 'images/20250102_versjon_IMG_7392.jpg', type: 'image' }
       ] },
     { date: '2025-01-13', car: 'Min bil (EH8XXXX)', version: '4145', note: 'Egen bil før oppdateringen',
       images: [
-          { thumb: 'thumbs/20250113_versjon_IMG_7502.jpg', full: '20250113_versjon_IMG_7502.jpg', type: 'image' },
-          { thumb: 'thumbs/20250113_versjon_IMG_7503.jpg', full: '20250113_versjon_IMG_7503.jpg', type: 'image' }
+          { thumb: 'images/thumbs/20250113_versjon_IMG_7502.jpg', full: 'images/20250113_versjon_IMG_7502.jpg', type: 'image' },
+          { thumb: 'images/thumbs/20250113_versjon_IMG_7503.jpg', full: 'images/20250113_versjon_IMG_7503.jpg', type: 'image' }
       ] },
     { date: '2026-09-04', car: 'Min bil (EH8XXXX)', version: '4373', note: 'Etter storoppdatering under verkstedbesøket 3./4. september',
       images: [
-          { thumb: 'thumbs/20260904_versjon_IMG_3190.jpg', full: '20260904_versjon_IMG_3190.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_versjon_IMG_3191.jpg', full: '20260904_versjon_IMG_3191.jpg', type: 'image' }
+          { thumb: 'images/thumbs/20260904_versjon_IMG_3190.jpg', full: 'images/20260904_versjon_IMG_3190.jpg', type: 'image' },
+          { thumb: 'images/thumbs/20260904_versjon_IMG_3191.jpg', full: 'images/20260904_versjon_IMG_3191.jpg', type: 'image' }
       ] }
 ];
 
@@ -762,12 +762,12 @@ const CONTACTS = [
       title: 'Bilen tilbake fra verksted - fikser og service utført',
       description: 'Verkstedet har (1) byttet låsemekanismen for ladekabelen, som forventes å løse både AC- og DC-ladefeilene, (2) tatt service (planlagt time 21. september utgår derfor), og (3) kjørt en softwareoppgradering. Flere av de vedvarende feilene er verifisert løst etter oppgraderingen. Bildene dokumenterer nye software-versjoner og verifiserte fikser (manuell batteriforvarming, fartsvarsel-hurtigknapp, filskifteassistent).',
       images: [
-          { thumb: 'thumbs/20260904_versjon_IMG_3190.jpg', full: '20260904_versjon_IMG_3190.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_versjon_IMG_3191.jpg', full: '20260904_versjon_IMG_3191.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_fix_IMG_3192.jpg', full: '20260904_fix_IMG_3192.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_fix_IMG_3193.jpg', full: '20260904_fix_IMG_3193.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_fix_IMG_3195.jpg', full: '20260904_fix_IMG_3195.jpg', type: 'image' },
-          { thumb: 'thumbs/20260904_fix_IMG_3197.jpg', full: '20260904_fix_IMG_3197.jpg', type: 'image' }
+          { thumb: 'images/thumbs/20260904_versjon_IMG_3190.jpg', full: 'images/20260904_versjon_IMG_3190.jpg', type: 'image' },
+          { thumb: 'images/thumbs/20260904_versjon_IMG_3191.jpg', full: 'images/20260904_versjon_IMG_3191.jpg', type: 'image' },
+          { thumb: 'images/thumbs/20260904_fix_IMG_3192.jpg', full: 'images/20260904_fix_IMG_3192.jpg', type: 'image' },
+          { thumb: 'images/thumbs/20260904_fix_IMG_3193.jpg', full: 'images/20260904_fix_IMG_3193.jpg', type: 'image' },
+          { thumb: 'images/thumbs/20260904_fix_IMG_3195.jpg', full: 'images/20260904_fix_IMG_3195.jpg', type: 'image' },
+          { thumb: 'images/thumbs/20260904_fix_IMG_3197.jpg', full: 'images/20260904_fix_IMG_3197.jpg', type: 'image' }
       ] },
     { date: '2026-09-03', type: 'verksted',
       title: 'Verkstedbesøk - kabellås-feil funnet, softwareoppgradering',
@@ -1274,11 +1274,14 @@ function formatDate(dateStr) {
 // -------------------------------------------------------------------------
 // Samle alle filnavn som er MANUELT tildelt en fault (via images: [...] i data).
 // Disse skal aldri shotgun-attaches til andre faults via auto-discovery.
+// IMAGE_MANIFEST lagrer bare filnavn (uten "images/"-prefix), så vi stripper her.
+function _stripImagesPrefix(p) { return p ? p.replace(/^images\//, '') : p; }
+
 function _collectManuallyClaimed() {
     const claimed = new Set();
     FAULTS.forEach(f => {
         if (f.images && f.images.length > 0) {
-            f.images.forEach(img => { if (img && img.full) claimed.add(img.full); });
+            f.images.forEach(img => { if (img && img.full) claimed.add(_stripImagesPrefix(img.full)); });
         }
     });
     return claimed;
@@ -1297,7 +1300,7 @@ function autoDiscoverImages(fault) {
     const catSlugs = Object.keys(CATEGORIES);
     // "claimed" = filer manuelt satt på ANDRE faults, som ikke skal shotgun-attaches hit
     const claimed = _manualClaimsSnapshot || _collectManuallyClaimed();
-    const ownManual = new Set((fault.images || []).map(i => i.full));
+    const ownManual = new Set((fault.images || []).map(i => _stripImagesPrefix(i.full)));
 
     const discovered = IMAGE_MANIFEST
         .filter(f => !claimed.has(f) || ownManual.has(f))
@@ -1314,8 +1317,8 @@ function autoDiscoverImages(fault) {
         .map(f => {
             const isVideo = /\.(mp4|mov)$/i.test(f);
             return {
-                thumb: 'thumbs/' + (isVideo ? f.replace(/\.(mp4|mov)$/i, '.png') : f),
-                full:  f,
+                thumb: 'images/thumbs/' + (isVideo ? f.replace(/\.(mp4|mov)$/i, '.png') : f),
+                full:  'images/' + f,
                 type:  isVideo ? 'video' : 'image'
             };
         });

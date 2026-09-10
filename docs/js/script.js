@@ -655,13 +655,15 @@ function renderGallery() {
     addFrom(SOFTWARE_VERSIONS,  () => 'versjon', v => `Programvareversjon${v.version ? ' ' + v.version : ''} (${v.car})`, v => formatDate(v.date));
 
     // Filer i manifest som ikke er lenket noe sted - kategori kun fra filnavn (eller diverse)
+    // IMAGE_MANIFEST lagrer bare filnavn (uten "images/"-prefix); vi må også sjekke
+    // om filen allerede er brukt via manuell "images/xxx"-referanse i seen-settet.
     IMAGE_MANIFEST.forEach(fn => {
-        if (seen.has(fn)) return;
+        if (seen.has(fn) || seen.has('images/' + fn)) return;
         const isVideo = /\.(mp4|mov)$/i.test(fn);
         const date = _dateFromFilename(fn);
         push({
-            thumb: 'thumbs/' + (isVideo ? fn.replace(/\.(mp4|mov)$/i, '.png') : fn),
-            full: fn,
+            thumb: 'images/thumbs/' + (isVideo ? fn.replace(/\.(mp4|mov)$/i, '.png') : fn),
+            full: 'images/' + fn,
             type: isVideo ? 'video' : 'image',
             title: '(ikke lenket til feil)',
             date: date ? formatDate(date) : ''
