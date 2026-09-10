@@ -1,0 +1,826 @@
+// Audi Q4 EH8XXXX - Feildokumentasjon
+// Rendrer alle visninger fra data.js og styrer navigasjon + lightbox.
+
+'use strict';
+
+// ============ UTILITIES ============
+const $  = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Escape HTML + støtt markdown-lenker [tekst](url)
+const escLinks = (s) => esc(s).replace(/\[([^\]]+)\]\(([^)]+)\)/g,
+    (_, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`);
+
+// Kompakt fargekoding-linje øverst på undersidene
+function renderLegendBar() {
+    return `
+        <div class="legend-inline">
+            <span class="legend-item"><span class="swatch sw-fault"></span>Feil</span>
+            <span class="legend-item"><span class="swatch sw-email"></span>E-post</span>
+            <span class="legend-item"><span class="swatch sw-workshop"></span>Verksted</span>
+            <span class="legend-item"><span class="swatch sw-phone"></span>Telefon</span>
+            <span class="legend-item"><span class="swatch sw-other"></span>Annet</span>
+        </div>
+    `;
+}
+
+// ============ NAVIGATION ============
+function initNav() {
+    const buttons = $$('.nav-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.dataset.view;
+            buttons.forEach(b => b.classList.toggle('active', b === btn));
+            $$('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + target));
+            history.replaceState(null, '', '#' + target);
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        });
+    });
+
+    // Deep-link: hash kan være en view (status/systems/timeline/gallery) eller
+    // en sub-anker (cat-*/gal-*) - i sistnevnte tilfelle finner vi hvilken view
+    // ankeret ligger inne i og aktiverer den, og lar nettleseren scrolle til ankeret.
+    const hash = (location.hash || '#status').slice(1);
+    let viewBtn = document.querySelector(`.nav-btn[data-view="${hash}"]`);
+    let scrollTo = null;
+    if (!viewBtn && hash) {
+        const anchorEl = document.getElementById(hash);
+        if (anchorEl) {
+            const viewEl = anchorEl.closest('.view');
+            if (viewEl) {
+                const viewName = viewEl.id.replace(/^view-/, '');
+                viewBtn = document.querySelector(`.nav-btn[data-view="${viewName}"]`);
+                scrollTo = anchorEl;
+            }
+        }
+    }
+    (viewBtn || buttons[0])?.click();
+    if (scrollTo) {
+        // Etter view-bytte (som scroller til top) - hopp til ankeret
+        requestAnimationFrame(() => scrollTo.scrollIntoView({ block: 'start' }));
+        // Behold sub-ankeret i URL-en (click satte det til view-navn)
+        history.replaceState(null, '', '#' + hash);
+    }
+}
+
+// ============ SISTE STATUS ============
+function renderStatus() {
+    const root = $('#view-status');
+    const rows = [];
+
+    // Statusbanner (datadrevet fra STATUS i data.js)
+    if (typeof STATUS !== 'undefined' && STATUS && STATUS.header) {
+        const sev = STATUS.severity || 'info';
+        const dateLine = STATUS.date
+            ? `<div class="status-date">Oppdatert ${esc(formatDate(STATUS.date))}</div>`
+            : '';
+        rows.push(`
+            <div class="alert alert-${esc(sev)}">
+                <div class="icon">${sev === 'kritisk' ? '!' : sev === 'info' || sev === 'lav' ? 'i' : '⚠'}</div>
+                <div>
+                    <h3>${esc(STATUS.header)}</h3>
+                    <p>${esc(STATUS.body || '')}</p>
+                    ${dateLine}
+                </div>
+            </div>
+        `);
+    }
+
+    // Nøkkeltall
+    const stats = computeStats();
+    rows.push(`
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px">
+            ${statTile('Registrerte feil totalt', stats.totalFaults)}
+            ${statTile('Feil i 2026 (siste rapport)', stats.faults2026)}
+            ${statTile('Verkstedbesøk', stats.workshopVisits)}
+            ${statTile('E-poster/telefonkontakt', stats.contacts)}
+        </div>
+    `);
+
+    // Refleksjoner - vises like under nøkkeltall
+    const reflections = CONTACTS
+        .filter(c => c.type === 'refleksjon')
+        .sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
+    if (reflections.length > 0) {
+        rows.push('<h2 style="margin-top:36px">Refleksjoner</h2>');
+        rows.push('<p class="lead">Egne betraktninger rundt hendelser og kommunikasjon i saken.</p>');
+        reflections.forEach(r => {
+            const paragraphs = r.description.split(/\n\n+/).map(p => `<p>${escLinks(p)}</p>`).join('');
+            rows.push(`
+                <div class="card card-reflection">
+                    <div class="meta">
+                        <span class="badge badge-date">${esc(r.displayDate || formatDate(r.date))}</span>
+                        <span class="badge badge-type type-refleksjon">Refleksjon</span>
+                    </div>
+                    <h3>${esc(r.title)}</h3>
+                    ${paragraphs}
+                </div>
+            `);
+        });
+    }
+
+    // Featured e-poster (kontakter med featured: true) - sortert nyeste øverst
+    const featuredMails = CONTACTS
+        .filter(c => c.featured)
+        .sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
+    if (featuredMails.length > 0) {
+        rows.push('<h2>Uthevede e-poster</h2>');
+        rows.push('<p class="lead">Aktuelle e-poster i saken. Full tekst er tilgjengelig via lenken på hvert kort.</p>');
+        featuredMails.forEach(mail => {
+            const text = mail.summary || mail.description || '';
+            const fromLine = mail.from
+                ? `<p class="from">Fra: ${esc(mail.from)}${mail.to ? ' → ' + esc(mail.to) : ''}</p>`
+                : '';
+            const linkBtn = mail.link
+                ? `<div class="actions"><a href="${esc(mail.link)}" target="_blank" rel="noopener">Les full mail</a></div>`
+                : '';
+            rows.push(`
+                <div class="email-card ${mail.critical ? 'critical' : ''}">
+                    <div class="meta">
+                        <span class="badge badge-date">${esc(mail.displayDate || mail.date)}</span>
+                        <span class="badge badge-type type-${esc(mail.type)}">${esc(typeLabel(mail.type))}</span>
+                        ${mail.critical ? '<span class="badge badge-severity sev-kritisk">Kritisk</span>' : ''}
+                    </div>
+                    <h3>${esc(mail.title)}</h3>
+                    ${fromLine}
+                    <p class="summary">${esc(text)}</p>
+                    ${linkBtn}
+                </div>
+            `);
+        });
+    }
+
+    // Vedvarende feil
+    const activeRecurring = RECURRING_FAULTS.filter(f => !f.fixed);
+    const fixedRecurring  = RECURRING_FAULTS.filter(f =>  f.fixed);
+
+    const renderRecurringCard = (f) => {
+        const cat = CATEGORIES[f.category];
+        return `
+            <div class="card">
+                <div class="meta">
+                    <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
+                    <span class="recurring-tag">Vedvarende</span>
+                    ${f.fixed ? `<span class="fixed-tag">Fikset ${esc(f.fixed)}</span>` : (f.observing ? '<span class="observing-tag">Observeres</span>' : (f.swFix ? '<span class="swfix-tag">Ventes SW-fikset</span>' : '<span class="notfixed-tag">Ikke fikset</span>'))}
+                </div>
+                <h3>${esc(f.title)}</h3>
+                ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
+                <p>${esc(f.description)}</p>
+                ${(f.images && f.images.length) ? renderThumbs(f.images, {title: f.title, date: f.fixed ? 'Fikset ' + formatDate(f.fixed) : 'Vedvarende'}) : ''}
+            </div>
+        `;
+    };
+
+    rows.push('<h2 style="margin-top:36px">Vedvarende feil</h2>');
+    rows.push('<p class="lead">Feil/bugs som er der hele tiden — ikke enkelthendelser. Dokumentert i mailen 26. august 2026.</p>');
+    activeRecurring.forEach(f => rows.push(renderRecurringCard(f)));
+
+    if (fixedRecurring.length > 0) {
+        rows.push(`
+            <details class="resolved-section">
+                <summary>Løste feil (${fixedRecurring.length}) - klikk for å vise</summary>
+                <div class="resolved-body">
+                    ${fixedRecurring.map(renderRecurringCard).join('')}
+                </div>
+            </details>
+        `);
+    }
+
+    // Programvareversjoner - liten tabell nederst
+    if (typeof SOFTWARE_VERSIONS !== 'undefined' && SOFTWARE_VERSIONS.length > 0) {
+        const sorted = [...SOFTWARE_VERSIONS].sort((a, b) => a.date.localeCompare(b.date));
+        rows.push(`
+            <h2 style="margin-top:48px">Programvareversjoner dokumentert</h2>
+            <p class="lead">Bilder som viser programvareversjoner på ulike tidspunkter - nyttig for å se hva som faktisk ble endret ved verkstedbesøk og oppdateringer.</p>
+            <div class="sw-versions">
+                <table class="sw-version-table">
+                    <thead>
+                        <tr><th>Dato</th><th>Bil</th><th>Versjon</th><th>Notat</th><th>Bilder</th></tr>
+                    </thead>
+                    <tbody>
+                        ${sorted.map(v => `
+                            <tr>
+                                <td class="sw-date">${esc(formatDate(v.date))}</td>
+                                <td>${esc(v.car)}</td>
+                                <td class="sw-version">${v.version ? esc(v.version) : '<span class="sw-version-missing">–</span>'}</td>
+                                <td class="sw-note">${esc(v.note || '')}</td>
+                                <td>${renderThumbs(v.images, {title: `Programvareversjon ${v.version || ''} (${v.car})`, date: formatDate(v.date)})}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `);
+    }
+
+    root.innerHTML = rows.join('');
+}
+
+function statTile(label, value) {
+    return `
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-sm)">
+            <div style="font-size:.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;font-weight:600">${esc(label)}</div>
+            <div style="font-family:Georgia,serif;font-size:2rem;color:var(--brand);font-weight:700;margin-top:2px">${esc(value)}</div>
+        </div>
+    `;
+}
+
+function computeStats() {
+    return {
+        totalFaults: FAULTS.length + RECURRING_FAULTS.length,
+        faults2026: FAULTS.filter(f => sortKey(f.date).startsWith('2026')).length,
+        workshopVisits: CONTACTS.filter(c => c.type === 'verksted' && !c.partOfVisit).length,
+        contacts: CONTACTS.filter(c => c.type === 'mail-out' || c.type === 'mail-in' || c.type === 'telefon').length
+    };
+}
+
+// ============ SYSTEMFEIL (KATEGORISERT) ============
+function renderSystems() {
+    const root = $('#view-systems');
+    const rows = [];
+
+    rows.push('<h2>Feil gruppert etter system</h2>');
+    rows.push('<p class="lead">For verksted: feilene er kategorisert etter berørt bilsystem for å hjelpe med diagnose av rotårsaker.</p>');
+
+    // Kategori-navigasjon (chips) - hopp til seksjon
+    const navChips = [];
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const cnt = FAULTS.filter(f => f.category === key).length
+                  + RECURRING_FAULTS.filter(f => f.category === key && !f.fixed).length;
+        if (cnt === 0) return;
+        navChips.push(`<a href="#cat-${key}" class="cat-nav-chip cat-${key}">${esc(cat.short)} <span>${cnt}</span></a>`);
+    });
+    rows.push(`
+        <nav class="cat-nav">
+            ${navChips.join('')}
+            <button type="button" class="cat-collapse-btn" id="cat-collapse-btn">Slå sammen alle</button>
+        </nav>
+    `);
+
+    const renderRecurringSysCard = (f, cat) => `
+        <div class="card card-fault">
+            <div class="meta">
+                <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
+                <span class="recurring-tag">Vedvarende</span>
+                ${f.fixed ? `<span class="fixed-tag">Fikset ${esc(f.fixed)}</span>` : (f.observing ? '<span class="observing-tag">Observeres</span>' : (f.swFix ? '<span class="swfix-tag">Ventes SW-fikset</span>' : '<span class="notfixed-tag">Ikke fikset</span>'))}
+            </div>
+            <h3>${esc(f.title)}</h3>
+            ${f.note ? `<div class="fault-note">${esc(f.note)}</div>` : ''}
+            <p>${esc(f.description)}</p>
+            ${(f.images && f.images.length) ? renderThumbs(f.images, {title: f.title, date: f.fixed ? 'Fikset ' + formatDate(f.fixed) : 'Vedvarende'}) : ''}
+        </div>
+    `;
+
+    // Sett opp per-kategori (kun aktive vedvarende + alle dateret feil)
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const faults = FAULTS.filter(f => f.category === key)
+                             .sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
+        const recurring = RECURRING_FAULTS.filter(f => f.category === key && !f.fixed);
+        const totalCount = faults.length + recurring.length;
+        if (totalCount === 0) return;
+
+        const items = [];
+        recurring.forEach(f => items.push(renderRecurringSysCard(f, cat)));
+        faults.forEach(f => items.push(renderFaultCard(f)));
+
+        rows.push(`
+            <div class="category-section" id="cat-${key}" style="--cat: ${cat.color}">
+                <div class="category-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                    <h3>${esc(cat.label)}</h3>
+                    <span class="category-count">${totalCount}</span>
+                    <span class="category-chevron">▾</span>
+                </div>
+                <div class="category-body">
+                    ${items.join('') || '<p style="color:var(--text-subtle)">Ingen registrerte feil.</p>'}
+                </div>
+            </div>
+        `);
+    });
+
+    // Løste vedvarende feil nederst - kollapset
+    const fixedRecurring = RECURRING_FAULTS.filter(f => f.fixed);
+    if (fixedRecurring.length > 0) {
+        rows.push(`
+            <details class="resolved-section">
+                <summary>Løste feil (${fixedRecurring.length}) - klikk for å vise</summary>
+                <div class="resolved-body">
+                    ${fixedRecurring.map(f => renderRecurringSysCard(f, CATEGORIES[f.category])).join('')}
+                </div>
+            </details>
+        `);
+    }
+
+    root.innerHTML = rows.join('');
+
+    // Collapse-all-knapp
+    const btn = $('#cat-collapse-btn');
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const sections = $$('#view-systems .category-section');
+            const anyOpen = sections.some(s => !s.classList.contains('collapsed'));
+            sections.forEach(s => s.classList.toggle('collapsed', anyOpen));
+            btn.textContent = anyOpen ? 'Åpne alle' : 'Slå sammen alle';
+        });
+    }
+}
+
+function renderFaultCard(f) {
+    const cat = CATEGORIES[f.category];
+    const dateLabel = f.displayDate || formatDate(f.date);
+    return `
+        <div class="card card-fault">
+            <div class="meta">
+                <span class="badge badge-date">${esc(dateLabel)}</span>
+                <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
+                ${f.severity ? `<span class="badge badge-severity sev-${f.severity}">${esc(f.severity)}</span>` : ''}
+                <span class="badge badge-source">${esc(formatSource(f.source))}</span>
+            </div>
+            <h3>${esc(f.title)}</h3>
+            <p>${esc(f.description)}</p>
+            ${renderThumbs(f.images, {title: f.title, date: dateLabel})}
+        </div>
+    `;
+}
+
+function formatSource(src) {
+    if (!src) return '';
+    if (src === 'observation') return 'Egen observasjon';
+    if (src === 'workshop') return 'Verksted';
+    const m = src.match(/^mail-(\d{4})(\d{2})(\d{2})$/);
+    if (m) return `Mail ${m[3]}.${m[2]}.${m[1]}`;
+    return src;
+}
+
+function renderThumbs(images, ctx) {
+    if (!images || images.length === 0) {
+        return '<div class="no-images">Ingen bilder</div>';
+    }
+    const title = ctx && ctx.title ? ctx.title : '';
+    const date  = ctx && ctx.date  ? ctx.date  : '';
+    const thumbs = images.map(img => `
+        <button class="thumb ${img.type === 'video' ? 'is-video' : ''}"
+                data-full="${esc(img.full)}" data-type="${esc(img.type)}"
+                data-title="${esc(title)}" data-date="${esc(date)}"
+                aria-label="Åpne ${esc(img.type === 'video' ? 'video' : 'bilde')}${title ? ' - ' + esc(title) : ''}">
+            <img src="${esc(img.thumb)}" alt="" loading="lazy">
+        </button>
+    `).join('');
+    return `<div class="thumbs">${thumbs}</div>`;
+}
+
+// ============ TIDSLINJE ============
+let timelineFilter = { types: new Set(['fault', 'email', 'workshop', 'phone', 'reflection', 'other']) };
+
+function renderTimeline() {
+    const root = $('#view-timeline');
+    const rows = [];
+
+    rows.push(renderLegendBar());
+    rows.push('<h2>Kronologisk tidslinje</h2>');
+
+    // Mail-liste-generator (kollapsbar)
+    rows.push(`
+        <details class="mail-gen">
+            <summary>Generer feilliste for mail (fra dato)</summary>
+            <div class="mail-gen-body">
+                <div class="mail-gen-controls">
+                    <label>Fra dato:
+                        <input type="date" id="mailgen-from" value="2026-01-01">
+                    </label>
+                    <label>Til dato (valgfri):
+                        <input type="date" id="mailgen-to">
+                    </label>
+                    <button id="mailgen-generate" class="filter-btn active">Oppdater</button>
+                    <button id="mailgen-copy" class="filter-btn">Kopier til utklippstavlen</button>
+                    <span id="mailgen-status" class="mailgen-status"></span>
+                </div>
+                <textarea id="mailgen-output" rows="12" spellcheck="false"
+                    placeholder="Klikk 'Oppdater' for å generere liste..."></textarea>
+                <div class="mail-gen-hint">Redigèr fritt før du limer inn i mail.</div>
+            </div>
+        </details>
+    `);
+    rows.push('<p class="lead">Alle feil, verkstedbesøk, telefonsamtaler og e-poster i kronologisk rekkefølge (nyeste øverst).</p>');
+
+    // Filterkontroller
+    rows.push(`
+        <div class="timeline-controls">
+            <label>Vis:</label>
+            <button class="filter-btn active" data-filter="fault">Feil</button>
+            <button class="filter-btn active" data-filter="email">E-post</button>
+            <button class="filter-btn active" data-filter="workshop">Verksted</button>
+            <button class="filter-btn active" data-filter="phone">Telefon</button>
+            <button class="filter-btn active" data-filter="reflection">Refleksjon</button>
+            <button class="filter-btn active" data-filter="other">Annet</button>
+            <span class="timeline-count" id="timeline-count"></span>
+        </div>
+    `);
+
+    rows.push('<div class="timeline" id="timeline-list"></div>');
+
+    root.innerHTML = rows.join('');
+
+    // Filter-events (kun ekte filter-knapper, ikke generatorens knapper)
+    $$('#view-timeline .timeline-controls .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('active');
+            const key = btn.dataset.filter;
+            if (btn.classList.contains('active')) timelineFilter.types.add(key);
+            else timelineFilter.types.delete(key);
+            renderTimelineList();
+        });
+    });
+
+    // Mail-generator events
+    initMailGenerator();
+
+    renderTimelineList();
+}
+
+// ============ MAIL-LISTE-GENERATOR ============
+function generateFaultList(fromISO, toISO) {
+    const fromKey = fromISO ? fromISO.replace(/-/g, '') : '00000000';
+    const toKey   = toISO   ? toISO.replace(/-/g, '')   : '99999999';
+    const dated = FAULTS
+        .map(f => ({
+            key: sortKey(f.date).replace(/-/g, ''),
+            date: f.date,
+            title: f.title
+        }))
+        .filter(f => f.key !== '00000000' && f.key >= fromKey && f.key <= toKey)
+        .sort((a, b) => a.key.localeCompare(b.key))
+        .map(f => `${f.key} - ${f.title}`);
+
+    const persistent = RECURRING_FAULTS.filter(f => !f.fixed).map(f => `- ${f.title}`);
+
+    let out = dated.join('\n');
+    if (persistent.length > 0) {
+        out += '\n\nVedvarende feil (bugs/mangler som er der hele tiden):\n' + persistent.join('\n');
+    }
+    return out;
+}
+
+function initMailGenerator() {
+    const from = $('#mailgen-from');
+    const to = $('#mailgen-to');
+    const out = $('#mailgen-output');
+    const status = $('#mailgen-status');
+    if (!from || !out) return;
+
+    const countFaults = (text) => text.split('\n').filter(l => /^(\d{8} - |- )/.test(l)).length;
+    const update = () => {
+        out.value = generateFaultList(from.value, to.value);
+        status.textContent = `${countFaults(out.value)} feil funnet`;
+    };
+
+    $('#mailgen-generate').addEventListener('click', update);
+    from.addEventListener('change', update);
+    to.addEventListener('change', update);
+
+    $('#mailgen-copy').addEventListener('click', async () => {
+        if (!out.value) update();
+        try {
+            await navigator.clipboard.writeText(out.value);
+            status.textContent = 'Kopiert til utklippstavlen ✓';
+            setTimeout(() => { status.textContent = `${countFaults(out.value)} feil funnet`; }, 2000);
+        } catch (e) {
+            out.select();
+            document.execCommand('copy');
+            status.textContent = 'Kopiert (fallback)';
+        }
+    });
+
+    // Kjør en initial fylling
+    update();
+}
+
+function renderTimelineList() {
+    const list = $('#timeline-list');
+    if (!list) return;
+
+    // Samle alle hendelser til én liste
+    const events = [];
+    FAULTS.forEach(f => {
+        events.push({
+            kind: 'fault',
+            sort: sortKey(f.date),
+            date: f.displayDate || formatDate(f.date),
+            data: f
+        });
+    });
+    CONTACTS.forEach(c => {
+        const kind = (c.type === 'verksted') ? 'workshop'
+                   : (c.type === 'mail-in' || c.type === 'mail-out') ? 'email'
+                   : (c.type === 'telefon') ? 'phone'
+                   : (c.type === 'refleksjon') ? 'reflection'
+                   : 'other';
+        events.push({
+            kind,
+            sort: sortKey(c.date),
+            date: c.displayDate || formatDate(c.date),
+            data: c
+        });
+    });
+
+    // Filter
+    const filtered = events.filter(e => timelineFilter.types.has(e.kind));
+    filtered.sort((a, b) => b.sort.localeCompare(a.sort));
+
+    // Grupper per år
+    const html = [];
+    let currentYear = null;
+    filtered.forEach(e => {
+        const year = e.sort.slice(0, 4);
+        if (year !== currentYear) {
+            html.push(`<div class="timeline-year">${year === '0000' ? 'Uten dato' : year}</div>`);
+            currentYear = year;
+        }
+        html.push(renderTimelineItem(e));
+    });
+
+    if (filtered.length === 0) {
+        html.push('<p style="color:var(--text-subtle)">Ingen hendelser med valgte filter.</p>');
+    }
+
+    list.innerHTML = html.join('');
+
+    // Oppdater telleren "X av Y viste"
+    const countEl = $('#timeline-count');
+    if (countEl) {
+        countEl.textContent = filtered.length === events.length
+            ? `${events.length} hendelser`
+            : `${filtered.length} av ${events.length} viste`;
+    }
+}
+
+function renderTimelineItem(e) {
+    if (e.kind === 'fault') {
+        const f = e.data;
+        const cat = CATEGORIES[f.category];
+        return `
+            <div class="timeline-item item-fault">
+                <div class="card card-fault">
+                    <div class="meta">
+                        <span class="badge badge-date">${esc(e.date)}</span>
+                        <span class="badge badge-category cat-${f.category}">${esc(cat.short)}</span>
+                        ${f.severity ? `<span class="badge badge-severity sev-${f.severity}">${esc(f.severity)}</span>` : ''}
+                        <span class="badge badge-source">${esc(formatSource(f.source))}</span>
+                    </div>
+                    <h3>${esc(f.title)}</h3>
+                    <p>${esc(f.description)}</p>
+                    ${renderThumbs(f.images, {title: f.title, date: e.date})}
+                </div>
+            </div>
+        `;
+    }
+    // Kontakt
+    const c = e.data;
+    if (e.kind === 'reflection') {
+        const paragraphs = c.description.split(/\n\n+/).map(p => `<p>${escLinks(p)}</p>`).join('');
+        return `
+            <div class="timeline-item item-reflection">
+                <div class="card card-reflection">
+                    <div class="meta">
+                        <span class="badge badge-date">${esc(e.date)}</span>
+                        <span class="badge badge-type type-refleksjon">Refleksjon</span>
+                    </div>
+                    <h3>${esc(c.title)}</h3>
+                    ${paragraphs}
+                </div>
+            </div>
+        `;
+    }
+    const cardClass = e.kind === 'email' ? 'card-email'
+                    : e.kind === 'workshop' ? 'card-workshop'
+                    : e.kind === 'phone' ? 'card-phone'
+                    : 'card-other';
+    const fromToLine = (c.from || c.to)
+        ? `<div class="card-fromto">${c.from ? 'Fra: <b>' + esc(c.from) + '</b>' : ''}${c.from && c.to ? ' &nbsp;→&nbsp; ' : ''}${c.to ? 'Til: <b>' + esc(c.to) + '</b>' : ''}</div>`
+        : '';
+    const partOfBadge = c.partOfVisit
+        ? `<span class="badge badge-partofvisit" title="Denne oppføringen telles ikke som eget verkstedbesøk">Del av besøk ${esc(formatDate(c.partOfVisit))}</span>`
+        : '';
+    return `
+        <div class="timeline-item item-${e.kind}${c.partOfVisit ? ' is-partof' : ''}">
+            <div class="card ${cardClass}">
+                <div class="meta">
+                    <span class="badge badge-date">${esc(e.date)}</span>
+                    <span class="badge badge-type type-${esc(c.type)}">${esc(typeLabel(c.type))}</span>
+                    ${partOfBadge}
+                </div>
+                <h3>${esc(c.title)}</h3>
+                ${fromToLine}
+                <p>${escLinks(c.description)}</p>
+                ${(c.images && c.images.length) ? renderThumbs(c.images, {title: c.title, date: e.date}) : ''}
+                ${c.link ? `<div class="mail-link"><a href="${esc(c.link)}" target="_blank" rel="noopener">Åpne mail</a></div>` : ''}
+            </div>
+        </div>
+    `;
+}
+
+function typeLabel(t) {
+    return { 'mail-out': 'Mail ut', 'mail-in': 'Mail inn', 'verksted': 'Verksted', 'telefon': 'Telefon', 'refleksjon': 'Refleksjon', 'annet': 'Annet' }[t] || t;
+}
+
+// ============ BILDEGALLERI ============
+function renderGallery() {
+    const root = $('#view-gallery');
+    const rows = [];
+
+    rows.push('<h2>Bildegalleri</h2>');
+    rows.push('<p class="lead">Alle dokumentasjonsbilder og -videoer gruppert etter kategori. Klikk på et bilde for å se det i full størrelse.</p>');
+
+    // Kategorisering: filnavn-prefix er sannheten (YYYYMMDD_kategori_...).
+    // Fallback til kildens egen kategori for filer uten prefix (typisk generics).
+    const byCategory = {};
+    Object.keys(CATEGORIES).forEach(k => byCategory[k] = []);
+    const seen = new Set();
+
+    const push = (img, sourceCategory) => {
+        if (!img || !img.full || seen.has(img.full)) return;
+        seen.add(img.full);
+        const key = _catFromFilename(img.full) || sourceCategory || 'diverse';
+        (byCategory[key] || (byCategory[key] = [])).push(img);
+    };
+
+    const addFrom = (source, catFn, titleFn, dateFn) => {
+        source.forEach(item => (item.images || []).forEach(img => push({
+            ...img, title: titleFn(item), date: dateFn(item)
+        }, catFn(item))));
+    };
+
+    addFrom(FAULTS,             f => f.category, f => f.title, f => f.displayDate || formatDate(f.date));
+    addFrom(RECURRING_FAULTS,   f => f.category, f => f.title, f => f.fixed ? 'Fikset ' + formatDate(f.fixed) : 'Vedvarende');
+    addFrom(CONTACTS,           () => 'diverse', c => c.title, c => c.displayDate || formatDate(c.date));
+    addFrom(SOFTWARE_VERSIONS,  () => 'versjon', v => `Programvareversjon${v.version ? ' ' + v.version : ''} (${v.car})`, v => formatDate(v.date));
+
+    // Filer i manifest som ikke er lenket noe sted - kategori kun fra filnavn (eller diverse)
+    IMAGE_MANIFEST.forEach(fn => {
+        if (seen.has(fn)) return;
+        const isVideo = /\.(mp4|mov)$/i.test(fn);
+        const date = _dateFromFilename(fn);
+        push({
+            thumb: 'thumbs/' + (isVideo ? fn.replace(/\.(mp4|mov)$/i, '.png') : fn),
+            full: fn,
+            type: isVideo ? 'video' : 'image',
+            title: '(ikke lenket til feil)',
+            date: date ? formatDate(date) : ''
+        });
+    });
+
+    // Kategori-navigasjon (chips) - hopp til seksjon
+    const navChips = [];
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const cnt = (byCategory[key] || []).length;
+        if (cnt === 0) return;
+        navChips.push(`<a href="#gal-${key}" class="cat-nav-chip cat-${key}">${esc(cat.short)} <span>${cnt}</span></a>`);
+    });
+    rows.push(`<nav class="cat-nav">${navChips.join('')}</nav>`);
+
+    // Sett opp per-kategori
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const items = byCategory[key] || [];
+        if (items.length === 0) return;
+        // Sorter nyeste først (tomme datoer til slutt)
+        items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+        rows.push(`
+            <div class="gallery-cat" id="gal-${key}" style="--cat: ${cat.color}">
+                <h3>${esc(cat.label)} <span class="count-inline">${items.length}</span></h3>
+                <div class="gallery-grid">
+                    ${items.map(img => `
+                        <button class="gallery-item ${img.type === 'video' ? 'is-video' : ''}"
+                                data-full="${esc(img.full)}" data-type="${esc(img.type)}"
+                                data-title="${esc(img.title || '')}" data-date="${esc(img.date || '')}"
+                                aria-label="Åpne ${esc(img.title)}">
+                            <img src="${esc(img.thumb)}" alt="" loading="lazy">
+                            <div class="caption">${esc(img.date)}${img.title ? '<br>' + esc(img.title) : ''}</div>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        `);
+    });
+
+    root.innerHTML = rows.join('');
+}
+
+function _catFromFilename(fn) {
+    if (!fn) return null;
+    const m = fn.match(/^\d{8}_([a-z]+)_/i);
+    if (!m) return null;
+    const slug = m[1].toLowerCase();
+    return CATEGORIES[slug] ? slug : null;
+}
+
+function _dateFromFilename(fn) {
+    const m = fn && fn.match(/^(\d{4})(\d{2})(\d{2})_/);
+    return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
+}
+
+// ============ LIGHTBOX MODAL ============
+let modalItems = [];
+let modalIndex = -1;
+
+function collectModalItems() {
+    modalItems = [];
+    $$('button[data-full]').forEach(el => {
+        modalItems.push({
+            full: el.dataset.full,
+            type: el.dataset.type || 'image',
+            title: el.dataset.title || '',
+            date: el.dataset.date || ''
+        });
+    });
+}
+
+function initModal() {
+    // Delegert klikk-håndtering (fungerer for elementer som renderes dynamisk)
+    document.body.addEventListener('click', (ev) => {
+        const btn = ev.target.closest('button[data-full]');
+        if (btn) {
+            collectModalItems();
+            const key = btn.dataset.full;
+            modalIndex = modalItems.findIndex(m => m.full === key);
+            if (modalIndex >= 0) openModalAt(modalIndex);
+        }
+    });
+
+    $('.modal-close').addEventListener('click', closeModal);
+    $('.modal-nav.prev').addEventListener('click', () => nav(-1));
+    $('.modal-nav.next').addEventListener('click', () => nav(1));
+    $('#modal').addEventListener('click', (ev) => {
+        if (ev.target.id === 'modal') closeModal();
+    });
+    window.addEventListener('keydown', (ev) => {
+        if (!$('#modal').classList.contains('open')) return;
+        if (ev.key === 'Escape')     closeModal();
+        if (ev.key === 'ArrowLeft')  nav(-1);
+        if (ev.key === 'ArrowRight') nav(1);
+    });
+
+    // Touch swipe
+    let startX = 0;
+    const m = $('#modal');
+    m.addEventListener('touchstart', (ev) => { startX = ev.changedTouches[0].screenX; });
+    m.addEventListener('touchend',   (ev) => {
+        const dx = ev.changedTouches[0].screenX - startX;
+        if (Math.abs(dx) > 60) nav(dx < 0 ? 1 : -1);
+    });
+}
+
+function openModalAt(i) {
+    modalIndex = (i + modalItems.length) % modalItems.length;
+    const item = modalItems[modalIndex];
+    const modal = $('#modal');
+    const img = $('#modal-image');
+    const vid = $('#modal-video');
+    const meta = $('#modal-meta');
+
+    if (item.type === 'video') {
+        img.style.display = 'none';
+        vid.style.display = 'block';
+        vid.src = item.full;
+    } else {
+        vid.style.display = 'none';
+        vid.pause?.();
+        vid.src = '';
+        img.style.display = 'block';
+        img.src = item.full;
+    }
+    const label = [item.date, item.title].filter(Boolean).join(' - ') || 'Åpne ' + (item.type === 'video' ? 'video' : 'bilde');
+    meta.textContent = `${label}  ·  ${modalIndex + 1}/${modalItems.length}`;
+    modal.classList.add('open');
+}
+function closeModal() {
+    const modal = $('#modal');
+    modal.classList.remove('open');
+    $('#modal-video').pause?.();
+    $('#modal-video').src = '';
+    $('#modal-image').src = '';
+}
+function nav(delta) {
+    if (modalIndex < 0) return;
+    openModalAt(modalIndex + delta);
+}
+
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', () => {
+    // Kjør auto-discovery av bilder basert på filnavn + manifest
+    if (typeof applyAutoDiscovery === 'function') applyAutoDiscovery();
+
+    // Fyll inn counts på nav-knapper
+    document.querySelector('.nav-btn[data-view="status"] .count').textContent = RECURRING_FAULTS.filter(f => !f.fixed).length;
+    document.querySelector('.nav-btn[data-view="systems"] .count').textContent = Object.keys(CATEGORIES).length;
+    document.querySelector('.nav-btn[data-view="timeline"] .count').textContent = FAULTS.length + CONTACTS.length;
+    document.querySelector('.nav-btn[data-view="gallery"] .count').textContent = allImages().length;
+
+    // Rendre alle visninger opp front (billig - all HTML lever i minnet uansett)
+    renderStatus();
+    renderSystems();
+    renderTimeline();
+    renderGallery();
+
+    initNav();
+    initModal();
+});

@@ -1,0 +1,28 @@
+Date: Monday, 31 August 2026 at 09:46:01
+From: Fredrik
+To: Møller;[Møller verkstedbestilling];
+Subject: Re: Ref bestilling av feilsøking på EH8XXXX
+
+Hei igjen.
+
+Ref sericeavtale 21. september samt tidligere sendte mailer.
+
+1. Nå begynner det å blir kritisk her:
+DC-lading-varslingen har ikke vært tilstede de siste dagene, og har ikke prøvd DC-lading, 
+MEN: nå virker ikke AC-lading.  Symptomer:
+- bilen lader ekstremt sakte (ca 1 kw iflg app-en til easee, 9% på 11 timer)
+- varsellampen blinker mellom lading (grønt, pulserende) og rødt
+- ladekabelen sitter fast og må frigjøres ved å dra i snoren i bagasjerommet
+- eks lading fra 60-69% på 11 timer koblet til en 32A easee lader
+- samme symptom på 2 forskjellige ladere på 2 forskjellige lokasjoner.  Vi har brukt begge laderene siden bilen var ny, så ingen ny-installasjon.
+
+2. Nye feil siden sist mail:
+20240830 - mangler dataforbindelse på hovedvei Høvik, Bærum
+20240830 - ladekabel sitter fast på Hurum, kun ladet marginalt på 5 timer (se 1 over)
+20240830 - MMI kortslutter helt - innstillinger mistet (favoritter+++)
+20240830 - mangler dataforbindelse på hovedvei Hurum
+20240830 - Bilen kun ladet marginalt på 11 timer (9% på 32A) (se 1 over)
+
+Med hilsen,
+
+Fredrik

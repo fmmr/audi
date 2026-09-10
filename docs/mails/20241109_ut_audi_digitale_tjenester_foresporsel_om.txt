@@ -1,0 +1,69 @@
+Date: Saturday, 9 November 2024 at 00:41:23
+From: Fredrik
+To: [Audi Digital Support];
+Subject: Re: Audi Digitale Tjenester: Forespørsel om informasjon -  Saksnummer: - 0003198748
+
+Kontoen min er:
+fredrik 
+iPhone 14 med iOS 18.2
+Skjermdumpene som ble sendt med den opprinnelig mailen ble tatt 7. nov ca kl 10:30
+
+
+
+Tidl mail:
+I am not able to send actions from the myAudi app to my car 
+
+Audi Q4 Norwegian regno: EH8XXXX, vin: WAUZZZFZXRP056133
+
+I’ve tried many days and at least three different locations which have not been a problem in the past.
+
+I’m not able to send neither “start climatization” nor “set charging target”.
+
+I’ve sent you multiple emails in the past, but not got any answers.  The only thing I’ve got back from you is to send the same pictures/info already given in this email.
+
+I’m using the latest version of the myAudi app (4.28)
+
+Attached are the two errors I get in the myAudi app when trying to send commands to my car.  All screen dumps are from this morning.
+
+F
+
+
+--
+
+Fredrik Rødland               Cell:    +47 99 21 98 17
+Maisen Pedersens vei 1        Twitter: <at>fredrikr
+NO-1363 Høvik, NORWAY         http://rodland.no
+
+On 8 Nov 2024, at 16:40, Audi connect NO wrote:
+
+           Hei Fredrik!
+
+Takk for henvendelsen din vedrørende Audi Digitale Tjenester.
+
+Saksnummeret ditt er: 0003198748 - (Vennligst lagre dette saksnummeret for raskere oppfølging).
+
+Vi takker for tilbakemeldingen din, og for ytterligere innsendt informasjon. 
+
+Siden du fortsatt opplever ustabiliteter i kommunikasjonen mellom bilen din og myAudi-appen, ønsker vi å sende saken videre til vår tekniske avdeling for videre feilsøking.
+
+For at teknisk avdeling skal kunne feilsøke, behøver vi et skjermbilde av feilmeldingen du får i myAudi-appen, samt datoen og klokkeslettet skjermbildet ble tatt.
+Skjermbildet kan ikke være mer enn syv dager gammelt. 
+
+Vi vil også trenge følgene informasjon for å kune videresende til ekspert teamet: 
+
+   • Hvilken mobilleverandør du bruker (eks. Apple, Samsung)
+   • Hvilken mobil modell du har (eks. Iphone 15)
+   • Hvilken OS versjon mobilen din har (eks. 17.5.1)
+   • Hvilken OS versjon du har av appen (eks. 4.28.)
+   • Hvilken epost adresse du er registrert med i MyAudi appen
+   • Skjermbilde av alle funksjonene du vil bruke
+
+Vennligst svar oss på denne eposten med skjermbilde og tidspunkt, så skal vi snarest sende saken videre til vår tekniske avdeling.          Har du flere spørsmål, ta gjerne kontakt med oss direkte på telefon 800 12123 (mandag-søndag kl. 08:00-20:00).
+
+Vi ønsker deg en fin dag i din Audi!
+
+Med vennlig hilsen
+Sigrid
+
+Audi Digitale Tjenester      
+

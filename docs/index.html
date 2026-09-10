@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://audi.rodland.no/">
+    <title>Feil med Audi Q4 e-tron EH8XXXX - Feillogg og dokumentasjon</title>
+    <meta name="description" content="Dokumentasjon av vedvarende feil på Audi Q4 e-tron 2024 (EH8XXXX). Verkstedslogg, kronologisk tidslinje og bildegalleri.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap">
+        <div>
+            <h1>Audi Q4 e-tron 2024 - EH8XXXX</h1>
+            <p class="subtitle">Løpende dokumentasjon av programvare- og maskinvarefeil. Bruk fanene under for
+                verkstedgruppert oversikt, kronologisk tidslinje, eller det samlede bildegalleriet.</p>
+            <div class="stat-row" id="header-stats"></div>
+        </div>
+        <img class="car-img" src="audi.jpg" alt="Audi Q4 e-tron EH8XXXX">
+    </div>
+</header>
+
+<nav class="nav" aria-label="Hovedmeny">
+    <div class="nav-wrap">
+        <button class="nav-btn" data-view="status">
+            Siste status (aug 2026) <span class="count">0</span>
+        </button>
+        <button class="nav-btn" data-view="systems">
+            Systemfeil (verksted) <span class="count">0</span>
+        </button>
+        <button class="nav-btn" data-view="timeline">
+            Tidslinje <span class="count">0</span>
+        </button>
+        <button class="nav-btn" data-view="gallery">
+            Bildegalleri <span class="count">0</span>
+        </button>
+    </div>
+</nav>
+
+<main>
+    <section id="view-status"   class="view"></section>
+    <section id="view-systems"  class="view"></section>
+    <section id="view-timeline" class="view"></section>
+    <section id="view-gallery"  class="view"></section>
+
+</main>
+
+<footer class="site-footer">
+    <div>Feildokumentasjon for Audi Q4 e-tron EH8XXXX &middot; <a href="https://audi.rodland.no/">audi.rodland.no</a></div>
+</footer>
+
+<!-- Lightbox -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="Bildevisning">
+    <button class="modal-close" aria-label="Lukk">&times;</button>
+    <button class="modal-nav prev" aria-label="Forrige">‹</button>
+    <button class="modal-nav next" aria-label="Neste">›</button>
+    <img id="modal-image" class="modal-content" alt="" style="display:none">
+    <video id="modal-video" class="modal-content" controls style="display:none"></video>
+    <div id="modal-meta" class="modal-meta"></div>
+</div>
+
+<script src="manifest.js"></script>
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

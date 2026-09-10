@@ -1,0 +1,59 @@
+Date: Monday, 1 September 2025 at 10:25:45
+From: Fredrik
+To: Møller;
+Subject: Re: EH8XXXX
+
+Hei Ricard.
+
+Det meste tidligere er dokumentert på http://audi.rodland.no <http://audi.rodland.no/>
+
+Det som har dukket opp etter forrige verkstedsbesøk er:
+
+
+22. Mai - feil I appen:
+
+
+
+
+24. Mai og 14. Juli (og flere andre ganger)
+
+
+12. Juli - umulig å starte klima fra app-en (12v melding?):
+
+
+
+Juli: bare tull med innstilling av lademål fra app-en.  Den sier at den er oppdatert, selv om bilen sier noe annet.  Løst etter noen uker.
+
+23. August: umulig å koble til telefonen med bluetooth/apple CarPlay, selv om det har funket både før og senere med samme telefon.  Funka dagen etter.
+
+
+27. August - MMI låst med følgende skjerm:
+
+
+
+
+F
+
+
+--
+
+Fredrik Rødland               Cell:    +47 99 21 98 17
+Maisen Pedersens vei 1        Twitter: <at>fredrikr
+NO-1363 Høvik, NORWAY         http://rodland.no
+
+On 1 Sep 2025, at 09:03, Møller wrote:
+
+Hei.
+Hvis du har mulighet å sende meg bildene du har av feilmeldingene så hadde det vært flott.
+Med vennlig hilsen
+Møller
+Serviceleder Audi
+<image001.png> + 47 902 65 541
+Møller
+<image002.png> Billingstadsletta 2, 1396 Asker
++ 47 24 03 25 00
+mollerbil.no/aogb
+https://www.facebook.com/mollerbilaogb/
+Verkstedbestilling online
+
+
